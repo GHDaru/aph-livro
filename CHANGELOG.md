@@ -6,6 +6,13 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 
 ### Added
 
+- **Fase 2 — texto completo dos 12 capítulos** (specs 004–015): prosa integral no esqueleto v3, em três ondas com commit por capítulo; caps. 00/05/07/08 com ciência ✓ no corpo; edição 0.02 no `livro/HISTORICO.md`.
+- Bibliografia validada: 7 papers ✓ com dupla evidência e ⭐ nos âncoras (spec 016).
+
+### Fixed
+
+- Achados das revisões independentes das ondas 1–3 (Princípio I): status ✓/⏳ consistente entre capítulos e bibliografia; "verificação de `idempotency_key`/`context_hash` na confirmação" corrigida para "desenhado, não verificado" (refutada pelo código, caps. 04/05/11); atribuição da taxonomia de classes de risco à pesquisa de origem; τ-bench atribuído também ao cap. 05; aspas só para citação verbatim; siglas expandidas; endpoint de cancelamento com path e parâmetro corretos.
+
 - Fundação do repositório: constituição v1.0.0, CLAUDE.md, README, estrutura de diretórios, ADRs 0001–0003 (spec 001).
 - Pesquisa profunda registrada em `estudos/`: fonte-base em código (ghdaru × nexxussai, com paths), panorama da indústria (AG-UI, MCP/MCP Apps, ACP, Vercel AI SDK, OpenAI, Anthropic, OWASP) e candidatos a bibliografia ⏳ (spec 002).
 - Estrutura do livro: sumário oficial com 12 capítulos e fronteiras explícitas, guia normativo de capítulo (esqueleto v3 adaptado), HISTORICO com registro de expiração, glossário e bibliografia (spec 003).

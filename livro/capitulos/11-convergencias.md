@@ -72,7 +72,7 @@ A simetria da honestidade: quatro lacunas, nomeadas com a mesma precisão do nú
 | # | Lacuna | Situação em 2026-07 | Onde o livro a demonstra |
 |---|---|---|---|
 | L1 | **Contexto de tela padronizado** | Nenhum protocolo externo o cobre como vocabulário próprio (AG-UI chega perto com `StateSnapshot`/`StateDelta`); os laboratórios têm o desenho mais completo (snapshot em níveis, sanitização, registry) | `estudos/panorama-industria.md` §"Lacunas e incertezas"; caps. [04](04-contexto-de-tela.md), [10](10-estado-da-arte-externo.md) |
-| L2 | **Classes de risco como taxonomia padrão** | Cada base tem a sua (8 classes previstas/2 implementadas no `ghdaru`; `RiskLevel` + `requires_confirmation` no `nexxussai-monorepo`); a indústria só oferece o binário aprovar/negar | cap. [05](05-acoes-governadas.md); coluna "indústria" vazia em `estudos/fonte-base-codigo.md` §4 |
+| L2 | **Classes de risco como taxonomia padrão** | Cada base tem a sua (taxonomia ampliada prevista/2 implementadas no `ghdaru`; `RiskLevel` + `requires_confirmation` no `nexxussai-monorepo`); a indústria só oferece o binário aprovar/negar | cap. [05](05-acoes-governadas.md); coluna "indústria" vazia em `estudos/fonte-base-codigo.md` §4 |
 | L3 | **Traço de execução interoperável e confirmação com integridade verificada** | O traço existe por produto, sem formato comum que permita auditoria cruzada; `idempotency_key`/`context_hash` desenhados sem verificação na confirmação | caps. [05](05-acoes-governadas.md), [07](07-seguranca.md); `estudos/fonte-base-codigo.md` §4; Apêndice do cap. [04](04-contexto-de-tela.md) |
 | L4 | **Ponte catálogo→tools (tool calling)** | As duas bases têm catálogo *pronto para* tools (input schema em JSON Schema) sem *usar* tools — a mesma lacuna, espelhada | cap. [08](08-porta-do-modelo.md); Apêndice deste capítulo |
 
@@ -127,7 +127,7 @@ Lacunas declaradas, em ordem de dependência:
 - **MCP**: previsto na constituição do laboratório (Princípio VI) e o catálogo "desenhado para virar tools MCP" (`specs/001-fundacao-shell-chat/plan.md`) — zero código.
 - **Slot filling**: `ui.form.patch` e `user.input.required` definidos, não implementados.
 - **Federação**: handshake `ghd.*` inteiramente especificado (`docs/integration/manifesto-aplicacao.md`, `docs/integration/manifest.schema.json`) sem código.
-- **Risco (L2)**: das 8 classes previstas, só `read|confirm` implementadas (`RiskClass` em `apps/api/src/ghdaru_api/conversation/domain/models.py`).
+- **Risco (L2)**: da taxonomia ampliada prevista, só `read|confirm` implementadas (`RiskClass` em `apps/api/src/ghdaru_api/conversation/domain/models.py`).
 - **Contexto (L1)**: snapshot nível interface incompleto — hoje só `screen.id`/`route`.
 - Divergência de nomenclatura constituição (`ToolCallRequest/Confirmation/Response`) × código (`action_proposal`/`action_result`).
 

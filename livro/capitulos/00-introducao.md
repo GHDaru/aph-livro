@@ -80,14 +80,14 @@ Todo o resto do livro compõe sete conceitos. Aqui eles são apenas nomeados —
 | Evento tipado | a unidade do que a IA fala: tipo + payload, em stream | `EventKind` (`thought, content, …`) | eventos SSE canônicos (`text_delta, …`) |
 | Proposta de ação | a ação que nasce pedindo permissão, com estado próprio | Proposta de Ação (FSM) | `ActionProposal` (FSM) |
 | Comando de UI | a instrução declarativa que muda a interface | Comando de UI (`ui.navigate`) | ações `navigate / fill_fields / focus_field` |
-| Classe de risco | a gravidade declarada que calibra o gate humano | Classe de Risco (8 níveis; 2 impl.) | `RiskLevel` + `requires_confirmation` |
+| Classe de risco | a gravidade declarada que calibra o gate humano | Classe de Risco (taxonomia ampliada; 2 impl.) | `RiskLevel` + `requires_confirmation` |
 | Traço de execução | o registro auditável do que foi de fato executado | Traço de Execução | `ExecutionTrace` / tool-results |
 
 FSM abrevia *Finite State Machine* (máquina de estados finitos) — a proposta de ação não é uma mensagem, é uma entidade com estados e transições validadas em código, nas duas bases. Essa tabela é a semente da linguagem ubíqua do livro: nos capítulos seguintes, os termos da coluna "Conceito" são usados como nomes canônicos, e os vocabulários dos laboratórios aparecem como dialetos.
 
 ### Convergência independente: dois laboratórios, uma topologia
 
-As duas bases não poderiam ter origens mais distintas. O `ghdaru` é uma fundação multi-tenant em que o chat nasceu como interface transversal *governada por contrato*: a Constituição do produto (`.specify/memory/constitution.md`, Princípio IV, não-negociável) fixa eventos tipados, FSM de ação, catálogo obrigatório e autorização fora do LLM antes de qualquer feature. O `nexxussai-monorepo` é uma plataforma de produto (chat com RAG, knowledge base, admin) em que o chat lateral com contexto de tela nasceu de uma spec de produto (`specs/014-chat-lateral-contexto/`) respondendo à pergunta "como o chat sabe o que está na tela e o que pode chamar?". Um partiu do contrato; o outro, do caso de uso. E chegaram ao mesmo lugar (tabela-síntese completa em `estudos/fonte-base-codigo.md`, §1):
+As duas bases não poderiam ter origens mais distintas. O `ghdaru` é uma fundação multi-tenant em que o chat nasceu como interface transversal *governada por contrato*: a Constituição do produto (`.specify/memory/constitution.md`, Princípio IV, não-negociável) fixa eventos tipados, FSM de ação, catálogo obrigatório e autorização fora do LLM antes de qualquer feature. O `nexxussai-monorepo` é uma plataforma de produto (chat com RAG — Retrieval-Augmented Generation —, knowledge base, admin) em que o chat lateral com contexto de tela nasceu de uma spec de produto (`specs/014-chat-lateral-contexto/`) respondendo à pergunta — como o chat sabe o que está na tela e o que pode chamar? —. Um partiu do contrato; o outro, do caso de uso. E chegaram ao mesmo lugar (tabela-síntese completa em `estudos/fonte-base-codigo.md`, §1):
 
 | Dimensão | ghdaru | nexxussai-monorepo |
 |---|---|---|
@@ -174,7 +174,7 @@ Evidência de **convergência e panorama** pertinente a este capítulo, extraíd
 - `apps/api/app/ai_chat/infrastructure/persistence/screen_registry_seed.py` + `apps/web/src/features/conversation/model/screenRegistry.ts` — registry de telas compartilhado backend/frontend: a aplicação se descreve, a IA nunca infere a UI.
 - `specs/014-chat-lateral-contexto/research.md` — decisões formais que definem a topologia: introspecção do DOM rejeitada; execução automática de tool calls rejeitada.
 - `specs/014-chat-lateral-contexto/contracts/chat-lateral-api.yaml` — o protocolo com contexto de tela como OpenAPI (telas, mensagens SSE, confirmação de ações).
-- `references/newchatshell/Chat with Context - Spec.md` — a spec de produto original ("a tela é a fonte da verdade"; "nenhuma mutação escondida") e a pergunta que originou o desenho: "como o chat sabe o que chamar?".
+- `references/newchatshell/Chat with Context - Spec.md` — a spec de produto original — "a tela é a fonte da verdade" e o princípio de nenhuma mutação escondida (no original: "Toda mutação aparece na UI. O chat nunca grava em segredo") — e a pergunta que originou o desenho: como o chat sabe o que chamar.
 - Lacunas declaradas que espelham o outro laboratório: tool calling real só em spec (`docs/backend-ai-chat-interface.md`, porta `ILLMCompletion` com `tools` não implementada); MCP só superfície (`apps/api/app/mcp/server.py`, protótipo desconectado).
 
 ### Divergências
