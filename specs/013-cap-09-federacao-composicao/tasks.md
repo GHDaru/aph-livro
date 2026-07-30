@@ -5,3 +5,4 @@
 - [x] T003 — Montar "Fundamentos científicos" (declaração explícita de ausência de ciência validada + lacuna registrada) e "Fontes da indústria" (fichas com URL: MCP Apps/SEP-1865, MCP-UI, OpenAI Apps SDK, A2A Agent Card) (CA-3)
 - [x] T004 — Esqueleto de H3 do estado da arte (níveis → manifesto → handshake → "um contrato, não dois" → MCP como projeção → movimento inverso → conformidade; 2–4 frases cada) + rascunho da Leitura executiva + perguntas de Verificação alinhadas 1:1 aos objetivos (CA-2, CA-6)
 - [x] T005 — Popular o Apêndice (`### ghdaru`, `### nexxussai-monorepo`, `### Divergências`) com paths de `estudos/fonte-base-codigo.md`, incluindo as lacunas espelhadas como evidência, e conferir os CAs um a um (CA-4, CA-1..CA-6)
+- [x] T006 — Fase 2: prosa integral do capítulo
