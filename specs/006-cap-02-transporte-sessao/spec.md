@@ -1,6 +1,6 @@
 # Spec 006 — Capítulo 02: Transporte e sessão
 
-**Status**: Implementada (estrutura) · **Data**: 2026-07-30 · **Raia**: plena
+**Status**: Implementada (texto completo) · **Data**: 2026-07-30 · **Raia**: plena
 
 ## O quê
 

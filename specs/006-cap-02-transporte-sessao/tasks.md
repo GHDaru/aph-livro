@@ -5,3 +5,4 @@
 - [x] T003 — Montar "Fundamentos científicos" (declaração de ausência) e "Fontes da indústria" (fichas AG-UI, Vercel, ACP, Anthropic com URL + tradução para decisão). (CA-4)
 - [x] T004 — Esqueletar o estado da arte em H3 (2–4 frases cada: SSE×WebSocket×polling, entrega confiável, cancelamento cooperativo, envelope de erro, sessão e reconexão) + rascunhar a Leitura executiva + Verificação alinhada aos objetivos. (CA-3)
 - [x] T005 — Popular o Apêndice (`### ghdaru`, `### nexxussai-monorepo`, `### Divergências`) e conferir as fronteiras com os caps. 03 e 05. (CA-5, CA-6)
+- [x] T006 — Fase 2: prosa integral + siglas expandidas (pendência da revisão)
