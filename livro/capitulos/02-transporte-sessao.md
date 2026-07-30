@@ -130,8 +130,8 @@ O transporte do protocolo app↔harness em 2026-07 tem um default claro e duas m
 
 ## Verificação
 
-1. Sua equipe propõe WebSocket "porque é mais moderno" para o chat embutido. Quais das quatro tensões de "O problema" o WebSocket alivia e quais ele agrava — e que pergunta sobre o *fluxo* decide a escolha? (Dica: o fluxo é assimétrico? Objetivos 1 e 5.)
-2. Por que o cliente das duas bases não usa `EventSource`, e onde esse custo fica confinado? (Dica: qual verbo HTTP o `EventSource` suporta — e o que o protocolo precisa enviar no corpo? Objetivo 1.)
+1. Sua equipe propõe WebSocket "porque é mais moderno" para o chat embutido. Quais das quatro tensões de "O problema" o WebSocket alivia e quais ele agrava — e que pergunta sobre o *fluxo* decide a escolha? (Dica: o fluxo é assimétrico? Objetivo 5.)
+2. Por que o cliente das duas bases não usa `EventSource`, e onde esse custo fica confinado? (Dica: qual verbo HTTP o `EventSource` suporta — e o que o protocolo precisa enviar no corpo? Objetivo 1, o custo do transporte escolhido.)
 3. A conexão caiu no meio de uma resposta. Descreva, com os três mecanismos do ghdaru, como o cliente retoma sem perder nem duplicar eventos. (Dica: quem atribui o `seq`, o que o cliente guarda, e o que `?after=N` devolve. Objetivo 3.)
 4. O usuário clicou em "parar" durante uma geração. Explique a diferença entre cancelar o *stream* (este capítulo) e cancelar uma *ação proposta* (capítulo 05), e por que o cancelamento de stream precisa ser cooperativo e ter um código estável no envelope de erro. (Dica: a sessão sobrevive? O que o cliente discrimina — mensagem ou código? Objetivos 2 e 4.)
 

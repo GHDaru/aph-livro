@@ -86,7 +86,7 @@ O ciclo fecha com o **resultado**: no ghdaru, ações de leitura executam imedia
 
 Confirmar tudo é tão errado quanto não confirmar nada. O terceiro movimento é a **classe de risco declarada**, que determina o gate:
 
-- No ghdaru, a Constituição do produto define uma taxonomia de **8 classes** (de leitura até "bloqueada para o agente"); a implementação atual usa o subconjunto `read | confirm` — `read` executa direto, `confirm` para no gate. A classe vive **no catálogo**, não na cabeça do modelo.
+- No ghdaru, a pesquisa de origem do produto define uma **taxonomia ampliada** de classes de risco, de leitura até "bloqueada para o agente" (`docs/research/resultado-pesquisa-chat-ai-first-avaliacao.md`), que a Constituição do produto exige sem fixar o número; a implementação atual usa o subconjunto `read | confirm` — `read` executa direto, `confirm` para no gate. A classe vive **no catálogo**, não na cabeça do modelo.
 - No nexxussai, uma política de domínio (`ActionProposalPolicyService`) **infere** o `RiskLevel` a partir do `ActionKind` e decide `requires_confirmation` — com duas regras duras: `submit` e `open_resource` sempre confirmam, e risco `high`/`critical` sempre confirma, independentemente do tipo.
 
 Os dois desenhos ensinam a mesma lição com ênfases diferentes: o risco pode ser *declarado por ação* (ghdaru) ou *derivado por política* (nexxussai), mas em ambos ele é decidido **fora do modelo e antes da conversa**. O modelo escolhe *qual* ação propor; nunca escolhe *quanto* de governança ela recebe. É a versão em código da recomendação do OWASP para *excessive agency* (LLM06): privilégio mínimo mais aprovação humana para o que é grave.
@@ -95,10 +95,10 @@ Os dois desenhos ensinam a mesma lição com ênfases diferentes: o risco pode s
 
 O laboratório B contribui com dois refinamentos que o laboratório A ainda não tem — e que resolvem os dois acidentes clássicos do gate humano:
 
-1. **O clique duplo**: entre a confirmação e a execução existe rede, retry e usuário ansioso. A **`idempotency_key`** — obrigatória antes de executar ações persistentes — garante que uma proposta confirmada execute **uma única vez**, não importa quantas vezes a confirmação chegue.
-2. **A tela que mudou**: o usuário confirma uma proposta feita sobre um estado de tela que já não existe (navegou, editou, outra aba). O **`context_hash`** — hash do snapshot de contexto que originou a proposta — permite detectar, no momento da confirmação, que o chão se moveu, e recusar ou repropor em vez de executar às cegas.
+1. **O clique duplo**: entre a confirmação e a execução existe rede, retry e usuário ansioso. A **`idempotency_key`** — obrigatória antes de executar ações persistentes — foi desenhada para garantir que uma proposta confirmada execute **uma única vez**, não importa quantas vezes a confirmação chegue (hoje o laboratório a armazena, e a segunda confirmação é barrada pela máquina de estados — transição inválida; a deduplicação pela chave é o passo previsto).
+2. **A tela que mudou**: o usuário confirma uma proposta feita sobre um estado de tela que já não existe (navegou, editou, outra aba). O **`context_hash`** — hash do snapshot de contexto que originou a proposta — foi desenhado para detectar, no momento da confirmação, que o chão se moveu, e recusar ou repropor em vez de executar às cegas.
 
-Ambos são protocolo, não UI: viajam nos contratos (`confirmActionProposal(..., idempotency_key)`; snapshot com `context_hash` de no mínimo 16 caracteres no JSON Schema) e são verificados no servidor. Nenhum dos cinco ecossistemas externos mapeados no capítulo 10 padroniza qualquer um dos dois — é uma das lacunas abertas da indústria.
+Ambos são protocolo, não UI: viajam nos contratos (`confirmActionProposal(..., idempotency_key)`; snapshot com `context_hash` de no mínimo 16 caracteres no JSON Schema) e são persistidos no servidor — a **verificação** de ambos no momento da confirmação ainda é lacuna aberta do laboratório (`confirm_action_proposal.py` não compara o hash; ver também a divergência tripla do `context_hash` no Apêndice do capítulo 04). Nenhum dos cinco ecossistemas externos mapeados no capítulo 10 padroniza qualquer um dos dois — é uma das lacunas abertas da indústria.
 
 ### O traço de execução
 
@@ -146,7 +146,7 @@ Ações governadas são o coração do protocolo app↔harness: o catálogo decl
 - `apps/api/src/ghdaru_api/http/chat_router.py` — `POST /chat/sessions/{id}/proposals/{proposal_id}` (confirmação).
 - `apps/api/tests/conversation/test_conversation.py` — testes que fixam a FSM e as transições inválidas.
 - Regra de aceite do traço: spec `specs/001-fundacao-shell-chat/spec.md` (FR-010 FSM + traço; SC-004: 100% das ações com `action_result` auditável).
-- Taxonomia de 8 classes de risco: `.specify/memory/constitution.md`, Princípio IV (implementadas: `read|confirm` — a lacuna que confirma a categoria).
+- Taxonomia ampliada de classes de risco: `docs/research/resultado-pesquisa-chat-ai-first-avaliacao.md` (a Constituição, Princípio IV, exige classes sem fixar o número; implementadas: `read|confirm` — a lacuna que confirma a categoria).
 - Frontend: `apps/web/src/features/conversation/ui/ChatPanel.tsx` (renderização de proposta e confirmação), objeto semântico `conversation.proposal-card` em `apps/web/src/shared/semantic/registry.ts`.
 
 ### nexxussai-monorepo
