@@ -2,8 +2,6 @@
 
 > **Estado da arte capturado em 2026-07** · última revisão 2026-07-30 · [histórico e registro de expiração](../HISTORICO.md)
 
-> **Fase da spec 004: estrutura.** As seções de estado da arte abaixo estão em esqueleto (o que cada uma demonstrará); a prosa integral é a fase 2.
-
 ## Objetivos de aprendizagem
 
 Ao final deste capítulo, você deve ser capaz de:
@@ -29,11 +27,12 @@ O protocolo vive sob restrições em tensão, que reaparecem capítulo a capítu
 
 ## Fundamentos científicos
 
-> **Nenhuma referência validada ainda.** Os papers abaixo são candidatos herdados de `estudos/candidatos-bibliografia.md`, todos com status **⏳ (a validar)**: a validação dupla (existência + leitura crítica) e a promoção a ✓ em [`bibliografia.md`](../bibliografia.md) são trabalho da fase 2 desta spec. Até lá, nenhum deles sustenta afirmação do corpo.
+A ciência deste capítulo caracteriza o **paradigma que o livro contrasta**: o agente de interface gráfica de usuário (GUI, Graphical User Interface) que opera a aplicação *de fora*, por pixels e cliques. Dois surveys validados mapeiam esse campo:
 
-- ⏳ **Toolformer** ([arXiv 2302.04761](https://arxiv.org/abs/2302.04761)) — candidato a ancestral científico do function calling: o modelo decide *quando/qual/como* chamar uma API; a aplicação executa. Base potencial para apresentar o catálogo de ações como interface natural modelo↔aplicação.
-- ⏳ **Not what you've signed up for** (indirect prompt injection, [arXiv 2302.12173](https://arxiv.org/abs/2302.12173)) — candidato a fundamento do porquê a fronteira precisa de protocolo: aplicações LLM-integradas apagam a fronteira entre dados e instruções, logo tudo que a tela envia ao modelo é canal de ataque.
-- ⏳ **GUI Agents: A Survey** ([arXiv 2412.13501](https://arxiv.org/abs/2412.13501)) — candidato a mapa do paradigma "pixels + cliques" que este livro contrasta com o protocolo declarativo (contraste apresentado aqui como panorama; o anti-padrão é aprofundado no cap. 07).
+- ✓ ⭐ *Large Language Model-Brained GUI Agents: A Survey* — Zhang et al. ([arXiv 2411.18279](https://arxiv.org/abs/2411.18279)) — o mapa de referência do paradigma visual: agentes que percebem a interface por screenshots e árvores de elementos, ancoram a intenção do usuário em componentes da tela e agem emulando entrada humana (cliques, digitação). O survey cataloga os desafios abertos do paradigma — ancorar (*grounding*) a intenção em uma tela que o agente só vê, latência de inferência, confiabilidade e segurança das ações. Tradução para decisão: esses custos são estruturais de operar *de fora* da aplicação, sem contrato — e são a base empírica da decisão fundadora dos dois laboratórios: mover a fronteira para *dentro*, onde a aplicação se descreve e declara ações tipadas, e o problema de grounding desaparece por construção.
+- ✓ *GUI Agents: A Survey* — Nguyen et al. ([arXiv 2412.13501](https://arxiv.org/abs/2412.13501), Findings of ACL 2025) — taxonomiza os agentes de GUI por forma de percepção (visual/screenshot, representações estruturadas como árvores de acessibilidade e HTML, híbridas) e por espaço de ação, além dos benchmarks do campo. Tradução para decisão: mesmo dentro do paradigma visual, a trajetória documentada é reduzir a dependência de pixels em favor de representações estruturadas da interface — o protocolo declarativo deste livro é o limite dessa trajetória: a estrutura não é *extraída* da tela pelo agente, é *declarada* pela própria aplicação.
+
+Os dois surveys sustentam o contraste; a ciência dos demais mecanismos vive nos capítulos que os tratam — governança de ações no cap. 05 (ToolEmu, AgentDojo), segurança no cap. 07 (prompt injection indireta), tool calling no cap. 08 (Toolformer, τ-bench). (Bibliografia completa e status de validação: [`bibliografia.md`](../bibliografia.md).)
 
 ## Fontes da indústria
 
@@ -46,42 +45,108 @@ Fichas extraídas de [`estudos/panorama-industria.md`](../../estudos/panorama-in
 
 ## O estado da arte
 
-*(Esqueleto da fase 1 — cada H3 indica o que a prosa da fase 2 demonstrará.)*
-
 ### As duas direções do protocolo
 
-Apresentará a assimetria fundadora: app→IA é *descrição* (a aplicação envia contexto sanitizado e declara capacidades), IA→app é *ação mediada* (stream de eventos tipados que a aplicação interpreta e executa). Mostrará, com um payload fictício mínimo de cada direção, que nenhuma das duas bases deixa a IA tocar a UI diretamente. Remeterá: direção app→IA aos caps. 04–05; direção IA→app aos caps. 02–03 e 06.
+A primeira coisa a enxergar no protocolo é a sua **assimetria**. As duas direções não são espelho uma da outra: a aplicação *descreve*, a IA *age por mediação*. Na direção app→IA não trafega intenção — trafega um retrato: o estado da tela, estruturado, sanitizado e acompanhado do inventário do que pode ser feito ali. Na direção IA→app não trafega interface — trafega um stream de eventos tipados que a aplicação interpreta e executa segundo suas próprias regras. Em nenhum momento, em nenhuma das duas bases-laboratório, a IA toca a UI: não há clique simulado, não há DOM lido, não há screenshot — exatamente o paradigma que a literatura de GUI agents descreve ([arXiv 2411.18279](https://arxiv.org/abs/2411.18279)) e que ambos os laboratórios rejeitaram por decisão formal (`specs/014-chat-lateral-contexto/research.md`, `nexxussai-monorepo`; Constituição, Princípio IV, `ghdaru`).
+
+Um fragmento fictício de cada direção torna a assimetria concreta. App→IA — a aplicação envia, junto com a mensagem do usuário, o snapshot do que está na tela (no espírito do `ScreenContextSnapshot` do `nexxussai-monorepo`, `specs/014-chat-lateral-contexto/contracts/screen-context.schema.json`):
+
+```json
+{
+  "screen_id": "usuarios.lista",
+  "route": "/usuarios",
+  "visible_fields": { "filtro": "ativos" },
+  "context_hash": "hash-ficticio-0123456789abcdef",
+  "captured_at": "2026-07-30T12:00:00Z"
+}
+```
+
+IA→app — a IA responde por eventos no envelope `{seq, kind, payload}` (o contrato do `ghdaru`, espelhado em TypeScript em `apps/web/src/features/conversation/domain/events.ts`); quando quer mudar a interface, emite um comando declarativo, nunca um clique:
+
+```json
+{ "seq": 7, "kind": "ui_command", "payload": { "command": "ui.navigate", "args": { "route": "/usuarios" } } }
+```
+
+O snapshot diz "é isto que existe e é isto que pode ser feito"; o evento diz "é isto que proponho fazer" — e a aplicação, dona da execução, decide como (e se) o efeito acontece. A direção app→IA é o assunto dos caps. [04](04-contexto-de-tela.md) (contexto de tela) e [05](05-acoes-governadas.md) (o catálogo como superfície executável); a direção IA→app, dos caps. [02](02-transporte-sessao.md)–[03](03-eventos-tipados.md) (canal e vocabulário) e [06](06-comandos-de-ui.md) (comandos de UI).
 
 ### Sete conceitos em uma frase cada
 
-Nomeará, sem aprofundar, os conceitos que o cap. 01 define formalmente: snapshot, catálogo, evento tipado, proposta de ação, comando de UI, classe de risco e traço de execução. Demonstrará que cada um existe nas duas bases com nomes diferentes (tabela terminológica de `estudos/fonte-base-codigo.md`, §4), preparando a linguagem ubíqua do livro.
+Todo o resto do livro compõe sete conceitos. Aqui eles são apenas nomeados — o cap. [01](01-fundamentos.md) os define formalmente — mas já com o fato que importa: **cada um existe nas duas bases, com nomes diferentes** (tabela terminológica completa em `estudos/fonte-base-codigo.md`, §4):
+
+| Conceito | Em uma frase | ghdaru | nexxussai-monorepo |
+|---|---|---|---|
+| Snapshot | o retrato estruturado e sanitizado da tela que viaja com a mensagem | Snapshot de Contexto (3 níveis) | `ScreenContextSnapshot` |
+| Catálogo | o inventário fechado do que a IA pode fazer | Catálogo de Ações (`ActionSpec`) | `ScreenRegistry` + `ActionKind` |
+| Evento tipado | a unidade do que a IA fala: tipo + payload, em stream | `EventKind` (`thought, content, …`) | eventos SSE canônicos (`text_delta, …`) |
+| Proposta de ação | a ação que nasce pedindo permissão, com estado próprio | Proposta de Ação (FSM) | `ActionProposal` (FSM) |
+| Comando de UI | a instrução declarativa que muda a interface | Comando de UI (`ui.navigate`) | ações `navigate / fill_fields / focus_field` |
+| Classe de risco | a gravidade declarada que calibra o gate humano | Classe de Risco (8 níveis; 2 impl.) | `RiskLevel` + `requires_confirmation` |
+| Traço de execução | o registro auditável do que foi de fato executado | Traço de Execução | `ExecutionTrace` / tool-results |
+
+FSM abrevia *Finite State Machine* (máquina de estados finitos) — a proposta de ação não é uma mensagem, é uma entidade com estados e transições validadas em código, nas duas bases. Essa tabela é a semente da linguagem ubíqua do livro: nos capítulos seguintes, os termos da coluna "Conceito" são usados como nomes canônicos, e os vocabulários dos laboratórios aparecem como dialetos.
 
 ### Convergência independente: dois laboratórios, uma topologia
 
-Contará a origem das duas bases (`ghdaru`: chat transversal governado numa fundação multi-tenant; `nexxussai-monorepo`: chat lateral com contexto de tela numa plataforma de produto) e demonstrará a convergência pela tabela-síntese de `estudos/fonte-base-codigo.md` §1 — vocabulários diferentes, topologia idêntica, e até as *lacunas* espelhadas (tool calling real e MCP ausentes em ambas). Argumentará por que isso é evidência de protocolo natural, não coincidência.
+As duas bases não poderiam ter origens mais distintas. O `ghdaru` é uma fundação multi-tenant em que o chat nasceu como interface transversal *governada por contrato*: a Constituição do produto (`.specify/memory/constitution.md`, Princípio IV, não-negociável) fixa eventos tipados, FSM de ação, catálogo obrigatório e autorização fora do LLM antes de qualquer feature. O `nexxussai-monorepo` é uma plataforma de produto (chat com RAG, knowledge base, admin) em que o chat lateral com contexto de tela nasceu de uma spec de produto (`specs/014-chat-lateral-contexto/`) respondendo à pergunta "como o chat sabe o que está na tela e o que pode chamar?". Um partiu do contrato; o outro, do caso de uso. E chegaram ao mesmo lugar (tabela-síntese completa em `estudos/fonte-base-codigo.md`, §1):
+
+| Dimensão | ghdaru | nexxussai-monorepo |
+|---|---|---|
+| Transporte | SSE sobre POST, `seq` monotônico + replay | SSE sobre POST, cancelamento cooperativo |
+| IA→app | `thought, content, action_proposal, action_result, citation, ui_command, finished, error` | `text_delta, thinking_delta, artifact_*, execution_*, tool_call, tool_result, action_proposal, done, error` |
+| App→IA | Snapshot de Contexto + Catálogo de Ações | `ScreenContextSnapshot` + `ScreenRegistry` |
+| Governança | FSM de proposta, classes de risco, traço obrigatório | FSM de proposta, `risk_level`, `idempotency_key`, `context_hash` |
+| Lacunas | tool calling real e MCP ausentes | tool calling real e MCP ausentes |
+
+Três leituras dessa tabela sustentam a tese. Primeira: **os vocabulários diferem em toda linha** — `thought` × `thinking_delta`, `ui_command` × `navigate/fill_fields` — o que descarta cópia e estabelece a independência das descobertas. Segunda: **a topologia é idêntica em toda linha** — duas direções, eventos tipados sobre SSE, contexto declarado, proposta + confirmação, autorização fora do modelo. Terceira, e a mais curiosa: **até as lacunas são espelhadas**. Ambas as bases têm catálogo com `input_schema` pronto para virar tools e nenhuma usa tool calling real; ambas preveem MCP e nenhuma o conecta (`specs/001-fundacao-shell-chat/plan.md` no `ghdaru`; `docs/backend-ai-chat-interface.md`, porta com `tools` não implementada, no `nexxussai-monorepo`). Dois times pararam, sem se falar, diante da *mesma* ponte — evidência de que a ponte é uma propriedade do terreno, não do viajante.
+
+As divergências que restam não enfraquecem o argumento — completam-no: são refinamentos complementares, não desenhos alternativos. O `ghdaru` formalizou a federação (Manifesto de Aplicação + handshake, `docs/integration/manifesto-aplicacao.md`); o `nexxussai-monorepo` blindou a confirmação com `idempotency_key` e `context_hash` (`apps/web/src/features/conversation/api/lateralChatService.ts`). Cada laboratório descobriu um pedaço que falta ao outro — e os caps. [05](05-acoes-governadas.md) e [09](09-federacao-composicao.md) tratam esses refinamentos como exportáveis.
 
 ### O mercado na mesma fronteira (panorama)
 
-Percorrerá em um parágrafo cada AG-UI, MCP Apps, ACP e Vercel AI SDK — o suficiente para mostrar que a fronteira é real e disputada — e apontará a lacuna aberta: nenhum deles padroniza contexto de tela (registro em `estudos/panorama-industria.md`). A matriz comparativa completa e a análise por dimensão são do cap. 10; aqui entra só o panorama.
+Se a fronteira é real, o mercado deveria estar disputando-a — e está. O **AG-UI** ([github.com/ag-ui-protocol/ag-ui](https://github.com/ag-ui-protocol/ag-ui)) é o precedente mais direto: um protocolo aberto de eventos tipados agente↔frontend, com SSE como transporte default, blocos em trincas `Start/Content/End`, estado sincronizado por `StateSnapshot`/`StateDelta` (JSON Patch) e integração oficial documentada pela Microsoft no Agent Framework ([Microsoft Learn](https://learn.microsoft.com/en-us/agent-framework/integrations/ag-ui/)). É, essencialmente, a direção IA→app deste livro padronizada por terceiros.
+
+O **MCP** atacou a fronteira pelo lado da federação: a extensão oficial **MCP Apps** ([anúncio, 2025-11-21](https://blog.modelcontextprotocol.io/posts/2025-11-21-mcp-apps/)) — escrita em conjunto por maintainers da OpenAI e da Anthropic — permite que servidores entreguem UI como recurso declarado (`ui://`), renderizada em iframes sandboxados, com mensagens auditáveis e aprovação explícita do usuário para tool calls iniciadas pela UI. É a confirmação, vinda de fora, de que interface gerada por agente precisa de template pré-declarado e gate humano — não de HTML livre.
+
+O **ACP** ([python-sdk](https://agentclientprotocol.github.io/python-sdk/)) formaliza a mesma conversa em outro domínio (editor↔coding agent): JSON-RPC sobre stdio, o agente notificando por `session/update` e pedindo autorização por `session/request_permission` — a aprovação vive no cliente, fora do LLM. E o **Vercel AI SDK** ([stream protocol](https://ai-sdk.dev/docs/ai-sdk-ui/stream-protocol)) impôs o formato de fato do ecossistema web: SSE com partes tipadas start/delta/end e aprovação de tool como estado do protocolo (`needsApproval`) — adotado até por frameworks concorrentes ([LlamaIndex chat-ui](https://github.com/run-llama/chat-ui)).
+
+Quatro ecossistemas, quatro pontos de partida, o mesmo destino — eventos tipados, confirmação humana como primitiva, execução fora do modelo. Mas nenhum deles padroniza o **contexto de tela**: o que a aplicação envia ao agente sobre o estado da UI segue sem vocabulário próprio em todos os protocolos pesquisados (registro em `estudos/panorama-industria.md`, "Lacunas e incertezas" — o AG-UI chega perto com `StateSnapshot`/`StateDelta`, mas sem semântica de tela). É exatamente a metade do protocolo que os dois laboratórios mais desenvolveram. A matriz comparativa completa, protocolo a protocolo e dimensão a dimensão, é do cap. [10](10-estado-da-arte-externo.md); aqui basta o panorama: a fronteira é real, é disputada, e está pela metade.
 
 ### O mapa do livro (capítulos 01–11)
 
-Apresentará o sumário como trajeto: fundamentos (01), o canal (02), a voz da IA (03), a voz da aplicação (04), ações governadas (05), comandos de UI (06), segurança (07), a porta do modelo (08), federação (09), o mercado externo (10) e a síntese normativa (11). Cada capítulo em 1–2 frases, com a fronteira entre vizinhos conforme `livro/README.md` §"Fronteiras entre capítulos".
+O livro percorre o protocolo de dentro para fora. A sequência é um trajeto, não um índice — cada capítulo assume os anteriores:
+
+- **[01 — Fundamentos e vocabulário](01-fundamentos.md)**: define as duas direções e os sete conceitos, com o fluxo completo do pedido ao traço e a tabela de equivalências entre os dialetos dos laboratórios.
+- **[02 — Transporte e sessão](02-transporte-sessao.md)**: o canal — por que SSE sobre POST venceu WebSocket nas duas bases, o preço do parser manual, entrega confiável por `seq` + replay, cancelamento cooperativo e o envelope de erro como parte do protocolo.
+- **[03 — A voz da IA: eventos tipados](03-eventos-tipados.md)**: o vocabulário fechado e versionado que trafega no canal — famílias de eventos, o padrão start/delta/end da indústria e a normalização multi-provider que protege o vocabulário.
+- **[04 — A voz da aplicação: contexto de tela](04-contexto-de-tela.md)**: a direção app→IA — snapshot em níveis, registro de telas compartilhado, camada semântica e sanitização server-side; descrever, nunca deixar inferir.
+- **[05 — Ações governadas](05-acoes-governadas.md)**: o catálogo como única superfície executável e a máquina de estados proposta→confirmação→execução→resultado, com risco proporcional, idempotência, `context_hash` e traço.
+- **[06 — Comandos de UI e slot filling](06-comandos-de-ui.md)**: a família de ações que muda a interface por comandos declarativos, o executor no host e a Coleta por Schema — com o anti-padrão pixels/cliques aprofundado.
+- **[07 — Segurança do protocolo](07-seguranca.md)**: o modelo de ameaça (prompt injection em quatro canais) e as quatro camadas de defesa arquitetural — separação de confiança, sanitização em profundidade, autorização fora do LLM, auditoria por traço.
+- **[08 — A porta do modelo e o tool calling](08-porta-do-modelo.md)**: a porta única que normaliza qualquer provedor em chunks tipados, e a ponte a atravessar — a lacuna espelhada do catálogo pronto para tools que não usa tools.
+- **[09 — Federação e composição](09-federacao-composicao.md)**: o contrato de integração de uma aplicação externa é o mesmo contrato da IA (manifesto + snapshot + catálogo); MCP como projeção do catálogo para fora.
+- **[10 — O estado da arte externo](10-estado-da-arte-externo.md)**: AG-UI, MCP (Apps/elicitation), ACP, Vercel AI SDK e OpenAI Apps SDK comparados na matriz por dimensão — o que já consolidou e o que segue aberto.
+- **[11 — Convergências: o protocolo unificado](11-convergencias.md)**: a síntese normativa — o núcleo de afirmações sustentadas, as lacunas nomeadas, o roadmap de adoção e as apostas datadas e pontuáveis do livro.
+
+As fronteiras finas entre vizinhos (o que entra no 02 e não no 03, no 05 e não no 06, e assim por diante) estão delimitadas no [sumário](../README.md), seção "Fronteiras entre capítulos".
 
 ### A relação com o livro-mãe Engenharia de Harness
 
-Delimitará a divisão de trabalho com o [Engenharia de Harness](https://github.com/GHDaru/harness_engineering): o cap. 13 (Interfaces) e o cap. 15 (Harness Embutido) cobrem o *interior* do harness, e o cap. 17 (Camada de Protocolos) cobre a fronteira *entre harnesses* (MCP/A2A/ACP em geral); este livro cobre a fronteira **app↔harness** — a conversa entre a aplicação de produto e o agente embutido nela. Explicará o que o leitor deve buscar lá e o que só existe aqui.
+Este livro é filho do [Engenharia de Harness](https://github.com/GHDaru/harness_engineering) — herda dele o formato editorial (esqueleto v3, livro vivo, evidência por path) — mas cobre uma fronteira que o livro-mãe delimita e não atravessa. A divisão de trabalho é por fronteira, não por tema. O cap. 13 do livro-mãe (Interfaces) e o cap. 15 (Harness Embutido) olham o *interior* do harness: como ele expõe interfaces e como se comporta quando embutido num produto. O cap. 17 (Camada de Protocolos) olha a fronteira *entre harnesses*: MCP, A2A e ACP como padrões de interoperabilidade agente↔agente e agente↔host em geral.
+
+Este livro ocupa o espaço entre os dois: a fronteira **app↔harness** — as mensagens que cruzam a linha entre a aplicação de produto e o agente embutido nela. Busque no livro-mãe a anatomia do agente (loop, contexto, tools, orquestração) e o panorama geral dos protocolos de interoperabilidade; busque aqui o que só aqui existe: o contrato bilateral com contexto de tela declarado, catálogo derivado da aplicação, propostas de ação com FSM e comandos de UI — o vocabulário da conversa, não a fisiologia dos interlocutores. Quando o cap. [10](10-estado-da-arte-externo.md) compara protocolos externos, ele cita o cap. 17 do livro-mãe em vez de reproduzi-lo (fronteira registrada no [sumário](../README.md), §"Fronteiras entre capítulos").
 
 ### Leitura executiva
 
-*(Rascunho da tese — a redigir em definitivo na fase 2.)* Existe um protocolo natural entre aplicação e agente embutido, com duas direções assimétricas: a aplicação se descreve (snapshot + catálogo), a IA age por eventos tipados sob confirmação humana. Duas bases de código o descobriram de forma independente — vocabulários diferentes, topologia idêntica — e quatro ecossistemas externos (AG-UI, MCP Apps, ACP, Vercel AI SDK) atacam a mesma fronteira sem ainda padronizar o conjunto; contexto de tela segue sem padrão externo. O que roubar: trate a fronteira app↔IA como protocolo de primeira classe, não como cola de feature. *Evento que invalida esta leitura: um protocolo externo padronizar contexto de tela com adoção relevante.*
+Existe um protocolo natural na fronteira entre a aplicação de produto e o agente de IA embutido nela, com duas direções assimétricas: a aplicação **se descreve** — snapshot de contexto sanitizado + catálogo fechado de capacidades — e a IA **age por eventos tipados** sob confirmação humana proporcional ao risco, sem jamais tocar a interface. Duas bases de código descobriram esse desenho de forma independente — vocabulários diferentes, topologia idêntica, até as lacunas espelhadas — e quatro ecossistemas externos (AG-UI, MCP Apps, ACP, Vercel AI SDK) atacam a mesma fronteira sem ainda padronizar o conjunto: contexto de tela, em particular, segue sem padrão externo. A literatura de GUI agents documenta o custo do caminho oposto — operar a interface de fora, por pixels e cliques, pagando grounding, latência e falibilidade ([arXiv 2411.18279](https://arxiv.org/abs/2411.18279)); o protocolo declarativo dissolve esses custos movendo a fronteira para dentro da aplicação. **O que roubar**: trate a fronteira app↔IA como protocolo de primeira classe — nomeie os sete conceitos, feche o vocabulário de eventos, declare o contexto e o catálogo — e não como cola de feature; e leia o livro como trajeto, porque cada mecanismo assume os anteriores. As apostas datadas sobre *para onde* a padronização caminha não são deste capítulo: estão no cap. [11](11-convergencias.md), registradas como previsões pontuáveis no [HISTORICO](../HISTORICO.md).
+
+*Contrato de frescor: esta leitura expira se um protocolo externo padronizar contexto de tela como vocabulário próprio com adoção relevante — nesse dia, a lacuna que este livro nomeia vira padrão a adotar, e a introdução (e o cap. 10) exigem revisão extraordinária.*
 
 ## Verificação
 
-1. Enuncie a tese central do livro em duas frases: o que existe na fronteira app↔IA e qual é a evidência empírica de que não é uma escolha de estilo? (Dica: "protocolo natural" + o que significa duas bases convergirem com vocabulários diferentes.)
-2. Nas duas direções do protocolo, o que trafega de app→IA e o que trafega de IA→app? Por que nenhuma delas envolve a IA tocando o DOM? (Dica: uma direção *descreve*, a outra *age por eventos* — e o computer use é o contraexemplo.)
-3. Por que vocabulários **diferentes** com topologia **idêntica** é evidência mais forte de protocolo natural do que se as duas bases usassem os mesmos nomes? (Dica: o que nomes iguais sugeririam sobre a independência das descobertas? E o que as lacunas espelhadas acrescentam?)
-4. Você quer entender (a) como uma proposta de ação é confirmada, (b) como se defende de prompt injection e (c) como o MCP conversa com outros harnesses — em que capítulo deste livro, ou do livro-mãe, está cada resposta? (Dica: mapa dos capítulos + fronteira com os caps. 13/15/17 do Engenharia de Harness.)
+1. Enuncie a tese central do livro em duas frases: o que existe na fronteira app↔IA e qual é a evidência empírica de que não é uma escolha de estilo? (Objetivo 1; dica: "protocolo natural" + o que significa duas bases convergirem com vocabulários diferentes.)
+2. Nas duas direções do protocolo, o que trafega de app→IA e o que trafega de IA→app? Por que nenhuma delas envolve a IA tocando o DOM? (Objetivo 2; dica: uma direção *descreve*, a outra *age por eventos* — e o paradigma pixels + cliques dos surveys de GUI agents é o contraexemplo.)
+3. Por que vocabulários **diferentes** com topologia **idêntica** é evidência mais forte de protocolo natural do que se as duas bases usassem os mesmos nomes? (Objetivo 3; dica: o que nomes iguais sugeririam sobre a independência das descobertas? E o que as lacunas espelhadas acrescentam?)
+4. Você quer entender (a) como uma proposta de ação é confirmada, (b) como se defende de prompt injection e (c) como o MCP conversa com outros harnesses — em que capítulo deste livro, ou do livro-mãe, está cada resposta? (Objetivo 4; dica: mapa dos capítulos + fronteira com os caps. 13/15/17 do Engenharia de Harness.)
 
 ---
 
@@ -97,6 +162,7 @@ Evidência de **convergência e panorama** pertinente a este capítulo, extraíd
 - `apps/api/src/ghdaru_api/conversation/domain/catalog.py` — Catálogo v1 (docstring: "a IA nunca enxerga rota desabilitada"); a regra "o que não está declarado, a IA não faz" está em `docs/integration/instrucoes-construcao.md` e `docs/integration/guia-integracao.md`.
 - `apps/api/src/ghdaru_api/http/chat_router.py` — transporte SSE sobre POST com `seq` + replay (`GET .../events?after=N`).
 - `apps/web/src/features/conversation/domain/events.ts` + `ports/chat-port.ts` — espelho TypeScript do contrato no frontend (`ChatEvent {seq, kind, payload}`).
+- `apps/web/src/features/conversation/adapters/fake-chat.ts` — adaptador demo que espelha o contrato inteiro sem backend: uma spec executável do protocolo.
 - `docs/adr/0003-modelos-integracao-aplicacoes.md` — decisão negativa estruturante: um protocolo de integração *separado* do snapshot/catálogo foi descartado ("duplicaria conceitos que a IA já usa") — semente do cap. 09.
 - Lacunas declaradas que espelham o outro laboratório: tool calling real e servidor MCP previstos e ausentes (`specs/001-fundacao-shell-chat/plan.md`: catálogo "desenhado para virar tools MCP", zero código).
 
@@ -108,9 +174,11 @@ Evidência de **convergência e panorama** pertinente a este capítulo, extraíd
 - `apps/api/app/ai_chat/infrastructure/persistence/screen_registry_seed.py` + `apps/web/src/features/conversation/model/screenRegistry.ts` — registry de telas compartilhado backend/frontend: a aplicação se descreve, a IA nunca infere a UI.
 - `specs/014-chat-lateral-contexto/research.md` — decisões formais que definem a topologia: introspecção do DOM rejeitada; execução automática de tool calls rejeitada.
 - `specs/014-chat-lateral-contexto/contracts/chat-lateral-api.yaml` — o protocolo com contexto de tela como OpenAPI (telas, mensagens SSE, confirmação de ações).
+- `references/newchatshell/Chat with Context - Spec.md` — a spec de produto original ("a tela é a fonte da verdade"; "nenhuma mutação escondida") e a pergunta que originou o desenho: "como o chat sabe o que chamar?".
 - Lacunas declaradas que espelham o outro laboratório: tool calling real só em spec (`docs/backend-ai-chat-interface.md`, porta `ILLMCompletion` com `tools` não implementada); MCP só superfície (`apps/api/app/mcp/server.py`, protótipo desconectado).
 
 ### Divergências
 
 - **Vocabulário** — mesmo conceito, nomes distintos: `thought` (ghdaru) × `thinking_delta` (nexxussai); `ui_command` (ghdaru) × ações `navigate/fill_fields/focus_field` (nexxussai, `apps/api/app/ai_chat/domain/value_objects/action_kind.py`). A divergência é a evidência de descoberta independente.
 - **Refinamentos únicos de cada lado** — ghdaru formalizou federação (manifesto + handshake em `docs/integration/manifesto-aplicacao.md`, sem código); nexxussai adicionou `idempotency_key` e `context_hash` à confirmação (`apps/web/src/features/conversation/api/lateralChatService.ts`, `specs/014-chat-lateral-contexto/contracts/screen-context.schema.json`) — refinamentos exportáveis um para o outro, tratados nos caps. 05 e 09.
+- **Ponto de partida** — ghdaru partiu do contrato (Constituição, Princípio IV, antes de qualquer feature); nexxussai partiu do caso de uso (spec 014 de produto). Convergiram na mesma topologia — o argumento central deste capítulo.

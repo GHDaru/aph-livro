@@ -5,3 +5,4 @@
 - [x] T003 — Montar "Fundamentos científicos" (candidatos ⏳ com ID arXiv + declaração de validação na fase 2) e "Fontes da indústria" (fichas URL + tradução para decisão, do panorama) (CA-3)
 - [x] T004 — Esqueleto de H3 do estado da arte (2–4 frases por seção) + rascunho da Leitura executiva + perguntas de Verificação alinhadas 1:1 aos objetivos (CA-1, CA-4)
 - [x] T005 — Popular o Apêndice (`### ghdaru`, `### nexxussai-monorepo`, `### Divergências`) com paths e fatos do `estudos/fonte-base-codigo.md` e conferir os CAs um a um (CA-2, CA-1..CA-6)
+- [x] T006 — Fase 2: prosa integral + ciência ✓ no corpo

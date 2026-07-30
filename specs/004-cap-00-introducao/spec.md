@@ -1,6 +1,6 @@
 # Spec 004 — Capítulo 00: Introdução — a fronteira aplicação↔IA
 
-**Status**: Implementada (estrutura) · **Data**: 2026-07-30 · **Raia**: plena
+**Status**: Implementada (texto completo) · **Data**: 2026-07-30 · **Raia**: plena
 
 ## O quê
 
