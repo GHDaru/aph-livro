@@ -1,6 +1,6 @@
 # Spec 005 — Capítulo 01: Fundamentos e vocabulário (fase 1: estrutura)
 
-**Status**: Implementada (estrutura) · **Data**: 2026-07-30 · **Raia**: plena
+**Status**: Implementada (texto completo) · **Data**: 2026-07-30 · **Raia**: plena
 
 ## O quê
 
@@ -23,6 +23,6 @@ O capítulo 01 é a linguagem ubíqua do livro: os capítulos 02–11 pressupõe
 
 ## Fora de escopo
 
-- **Texto completo do capítulo** (prosa integral dos H3 do estado da arte) — fase 2, nesta mesma spec ou continuação, após aprovação da estrutura.
-- Validação ✓ de papers e promoção a `livro/bibliografia.md` (feita pela fase 2, primeira a citar no corpo).
+- ~~Texto completo do capítulo~~ — **entregue na fase 2** (prosa integral dos H3 do estado da arte, respeitando a estrutura aprovada na fase 1).
+- Atribuição de paper ✓ ao capítulo 01 em `livro/bibliografia.md`: a validação da rodada 2026-07-30 (spec 016) atribuiu os papers aos caps. 00/05/07/08 — o corpo do cap. 01 segue sem apoio científico, com declaração explícita de ausência na seção "Fundamentos científicos" (candidatos ⏳ não sustentam afirmação do corpo).
 - Edição de `CHANGELOG.md`, `livro/HISTORICO.md`, `livro/README.md`, `livro/glossario.md`, `livro/bibliografia.md` e arquivos de outros capítulos/specs (registro do lote é do orquestrador).

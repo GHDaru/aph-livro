@@ -5,3 +5,4 @@
 - [x] T003 — Seções "Fundamentos científicos" (candidatos ⏳ pertinentes, declaração de não-validação) e "Fontes da indústria" (fichas com URL em formato tradução para decisão) (CA-3)
 - [x] T004 — "O estado da arte" em esqueleto de H3 (2–4 frases cada): assimetria, diagrama textual do fluxo completo, tabela dos sete conceitos consistente com `livro/glossario.md`, duas direções, governança transversal e rascunho da `### Leitura executiva`; ponteiros para caps. 02/03/05 nas fronteiras (CA-1, CA-5, CA-6)
 - [x] T005 — "Verificação" (perguntas ↔ objetivos 1:1, com dica) e Apêndice com `### ghdaru`, `### nexxussai-monorepo` e `### Divergências` populados com paths e lacunas; conferência final de siglas por extenso e de fronteiras (CA-2, CA-4, CA-5)
+- [x] T006 — Fase 2: prosa integral do capítulo
