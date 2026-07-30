@@ -5,3 +5,4 @@
 - [x] T003 — Esqueleto do estado da arte: H3 com 1–2 frases cada, tabela do vocabulário das duas bases × indústria, Leitura executiva; seções de Fundamentos científicos (declarando ausência de ✓ + candidatos ⏳) e Fontes da indústria (fichas candidatas com URL) (CA-3)
 - [x] T004 — Apêndice por laboratório com paths + fatos concretos, incluindo `### Divergências` (nomenclatura Constituição×código; granularidade dos vocabulários) e as lacunas que confirmam categorias (CA-4)
 - [x] T005 — Conferência final das fronteiras (02×03, 03×05–06, 03×08 remetidas no texto) e das regras de evidência (siglas, payloads fictícios, sem absolutos atemporais) contra os CAs da spec (CA-5, CA-6)
+- [x] T006 — Fase 2: prosa integral do capítulo
