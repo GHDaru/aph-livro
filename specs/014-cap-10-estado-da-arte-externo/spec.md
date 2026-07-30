@@ -1,6 +1,6 @@
 # Spec 014 — Capítulo 10: O estado da arte externo
 
-**Status**: Implementada (estrutura) · **Data**: 2026-07-30 · **Raia**: plena
+**Status**: Implementada (texto completo) · **Data**: 2026-07-30 · **Raia**: plena
 
 ## O quê
 
