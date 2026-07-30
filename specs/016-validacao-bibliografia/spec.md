@@ -1,6 +1,6 @@
 # Spec 016 — Validação da bibliografia científica
 
-**Status**: Em implementação · **Data**: 2026-07-30 · **Raia**: plena
+**Status**: Implementada · **Data**: 2026-07-30 · **Raia**: plena
 
 ## O quê
 
@@ -12,10 +12,10 @@ A Constituição (Princípio I) só permite que um paper sustente afirmação no
 
 ## Critérios de aceite
 
-- [ ] **CA-1**: cada candidato foi conferido na página de abstract do arXiv (ID, título, autores, ano) via acesso direto.
-- [ ] **CA-2**: cada candidato tem ≥1 menção independente verificada (página de venue, Semantic Scholar, repositório oficial do benchmark, ou citação em survey) com URL.
-- [ ] **CA-3**: `livro/bibliografia.md` atualizada — confirmados com ✓ (com as duas evidências de validação), não confirmados permanecem ⏳ com o motivo.
-- [ ] **CA-4**: `estudos/candidatos-bibliografia.md` atualizado com o resultado por paper.
+- [x] **CA-1**: cada candidato foi conferido na página de abstract do arXiv (ID, título, autores, ano) via acesso direto.
+- [x] **CA-2**: cada candidato tem ≥1 menção independente verificada (página de venue, Semantic Scholar, repositório oficial do benchmark, ou citação em survey) com URL.
+- [x] **CA-3**: `livro/bibliografia.md` atualizada — confirmados com ✓ (com as duas evidências de validação), não confirmados permanecem ⏳ com o motivo.
+- [x] **CA-4**: `estudos/candidatos-bibliografia.md` atualizado com o resultado por paper.
 
 ## Fora de escopo
 
