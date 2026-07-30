@@ -103,7 +103,7 @@ O espelho invertido: **código embrionário de MCP, sem especificação de feder
 
 - `docs/proposta-chat-lateral.md` — roadmap de maturidade em 6 fases; **fase 6: "expor telas como MCP tools"** — a mesma projeção do catálogo para fora, formulada de forma independente.
 - `apps/api/app/mcp/server.py` — protótipo FastMCP isolado, **desconectado da aplicação** (nenhum caminho do chat lateral ou do registry de telas chega até ele).
-- `mcp_registry_adapter.py` — superfície `GET /api/mcp/servers` com registry vazio (`list_servers()` → `[]`): o endpoint existe, o conteúdo não.
+- `apps/api/app/ai_chat/infrastructure/mcp/mcp_registry_adapter.py` — superfície `GET /api/mcp/servers` com registry vazio (`list_servers()` → `[]`): o endpoint existe, o conteúdo não.
 - **Lacunas declaradas**: MCP só superfície; não há manifesto, handshake ou níveis de integração especificados para apps de terceiros.
 
 ### Divergências

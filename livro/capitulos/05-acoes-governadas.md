@@ -47,7 +47,7 @@ As restrições em tensão:
 
 ### O catálogo como única superfície executável
 
-O primeiro movimento da governança acontece antes de qualquer mensagem: a aplicação **declara** o que o agente pode fazer. No laboratório A (ghdaru), isso é o **Catálogo de Ações** — cada ação é um `ActionSpec` com identificador, título, palavras-chave de intenção, classe de risco, `input_schema` (JSON Schema) e rota de UI associada. A regra é literal: *"a IA só invoca ações do catálogo — o que não está declarado, ela não faz"*. No laboratório B (nexxussai-monorepo), o equivalente é o **ScreenRegistry** com a taxonomia `ActionKind` (`navigate`, `fill_fields`, `focus_field`, `submit`, `open_resource`, `clarify`): o registro de telas, compartilhado entre frontend e backend, delimita quais telas, campos e ações existem — o modelo não pode propor o que o registro não conhece.
+O primeiro movimento da governança acontece antes de qualquer mensagem: a aplicação **declara** o que o agente pode fazer. No laboratório A (ghdaru), isso é o **Catálogo de Ações** — cada ação é um `ActionSpec` com identificador, título, palavras-chave de intenção, classe de risco, `input_schema` (JSON Schema) e rota de UI associada. A regra é literal: *"a IA só invoca ações do catálogo — o que não está declarado, ela não faz"* (`docs/integration/instrucoes-construcao.md` e `docs/integration/guia-integracao.md`, repositório `ghdaru`). No laboratório B (nexxussai-monorepo), o equivalente é o **ScreenRegistry** com a taxonomia `ActionKind` (`navigate`, `fill_fields`, `focus_field`, `submit`, `open_resource`, `clarify`): o registro de telas, compartilhado entre frontend e backend, delimita quais telas, campos e ações existem — o modelo não pode propor o que o registro não conhece.
 
 Dois refinamentos merecem atenção:
 
@@ -124,6 +124,8 @@ Nenhum deles, porém, carrega o pacote completo dos laboratórios: classe de ris
 ### Leitura executiva
 
 Ações governadas são o coração do protocolo app↔harness: o catálogo declarado fecha a superfície executável fora do modelo; a máquina de estados proposta→confirmação→execução→resultado transforma "a IA fez algo" em um objeto com identidade, gate e história; a classe de risco calibra a fricção; idempotência e `context_hash` blindam o gate contra o clique duplo e a tela que mudou; e o traço auditável é o que permite afrouxar a governança com evidência, em vez de fé. A indústria (MCP elicitation, Vercel `needsApproval`, ACP `request_permission`, AG-UI) convergiu para o gate humano como primitiva de protocolo — mas o pacote completo ainda é diferencial de quem constrói. **O que roubar**: derive o catálogo das permissões reais (tenant/módulo), nunca o deixe estático; modele a proposta como entidade com FSM validada em código (roube `awaiting_approval` de um laboratório e `expired`/`denied` do outro); declare o risco no inventário; exija `idempotency_key` e `context_hash` antes de executar qualquer coisa persistente; e rejeite por princípio ação sem traço.
+
+*Contrato de frescor: esta leitura expira se um dos protocolos externos (MCP, AG-UI, ACP ou Vercel AI SDK) padronizar classe de risco declarada no inventário, idempotência de confirmação ou equivalente de `context_hash` — nesse dia, o "pacote completo" deixa de ser diferencial de quem constrói e vira requisito de conformidade.*
 
 ## Verificação
 

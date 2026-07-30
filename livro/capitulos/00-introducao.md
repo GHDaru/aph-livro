@@ -94,7 +94,7 @@ Evidência de **convergência e panorama** pertinente a este capítulo, extraíd
 - `.specify/memory/constitution.md` — Princípio IV (não-negociável) fixa o protocolo por contrato: eventos tipados SSE, FSM (máquina de estados finitos) de ação, catálogo obrigatório, contexto em 3 níveis, separação de camadas contra prompt injection, autorização fora do LLM.
 - `docs/linguagem-ubiqua.md` — o vocabulário do laboratório A: *Snapshot de Contexto*, *Catálogo de Ações*, *Proposta de Ação*, *Comando de UI*, *Classe de Risco*, *Traço de Execução*, *Manifesto de Aplicação*.
 - `apps/api/src/ghdaru_api/conversation/domain/models.py` — `EventKind` (`thought, content, action_proposal, action_result, citation, ui_command, finished, error`), `RiskClass`, FSM de proposta com tabela `_TRANSITIONS`.
-- `apps/api/src/ghdaru_api/conversation/domain/catalog.py` — Catálogo v1; "o que não está declarado, a IA não faz".
+- `apps/api/src/ghdaru_api/conversation/domain/catalog.py` — Catálogo v1 (docstring: "a IA nunca enxerga rota desabilitada"); a regra "o que não está declarado, a IA não faz" está em `docs/integration/instrucoes-construcao.md` e `docs/integration/guia-integracao.md`.
 - `apps/api/src/ghdaru_api/http/chat_router.py` — transporte SSE sobre POST com `seq` + replay (`GET .../events?after=N`).
 - `apps/web/src/features/conversation/domain/events.ts` + `ports/chat-port.ts` — espelho TypeScript do contrato no frontend (`ChatEvent {seq, kind, payload}`).
 - `docs/adr/0003-modelos-integracao-aplicacoes.md` — decisão negativa estruturante: um protocolo de integração *separado* do snapshot/catálogo foi descartado ("duplicaria conceitos que a IA já usa") — semente do cap. 09.

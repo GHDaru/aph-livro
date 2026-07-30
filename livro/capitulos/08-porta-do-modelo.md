@@ -2,6 +2,8 @@
 
 > **Estado da arte capturado em 2026-07** · última revisão 2026-07-30 · [histórico e registro de expiração](../HISTORICO.md)
 
+> **Fase editorial**: estrutura (fase 1 do [GUIA-CAPITULO](../GUIA-CAPITULO.md), spec 012). "O problema" está completo; o estado da arte está em esqueleto de H3 com resumos; o Apêndice já mapeia a evidência por path.
+
 ## Objetivos de aprendizagem
 
 Ao final deste capítulo, você deve ser capaz de:

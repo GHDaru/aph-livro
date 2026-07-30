@@ -118,7 +118,7 @@ AG-UI tem snapshot/delta genéricos, MCP tem resources — nenhum protocolo exte
 | Registro de telas (backend) | `apps/api/app/ai_chat/infrastructure/persistence/screen_registry_seed.py` | Telas seed: `chat`, `files`, `education-catalog`, `admin-users`. |
 | Registro de telas (frontend) | `apps/web/src/features/conversation/model/screenRegistry.ts` | Registry espelhado no cliente. |
 | Descoberta de telas | `specs/014-chat-lateral-contexto/contracts/chat-lateral-api.yaml` | `GET /api/chat/screens` no contrato OpenAPI do protocolo lateral. |
-| Schema fechado do snapshot | `specs/014-chat-lateral-contexto/contracts/screen-context.schema.json` | JSON Schema com `additionalProperties: false` e `context_hash`; payload alvo < 32 KB. |
+| Schema fechado do snapshot | `specs/014-chat-lateral-contexto/contracts/screen-context.schema.json` | JSON Schema com `additionalProperties: false` e `context_hash`. O alvo de payload < 32 KB está em `specs/014-chat-lateral-contexto/plan.md` (Performance Goals). |
 | Alternativas rejeitadas (decisão formal) | `specs/014-chat-lateral-contexto/research.md` | Prompt hardcoded por tela: rejeitado; introspecção do DOM: rejeitada. |
 | Sanitizador de contexto | `apps/api/app/ai_chat/domain/services/screen_context_sanitizer.py` | Remove `token/access_token/refresh_token/password/secret/cookie/jwt/csrf`, campos `sensitive` e campos desconhecidos. |
 | Snapshot no prompt | `apps/api/app/ai_chat/application/use_cases/send_lateral_message.py` | Injeta o contexto **sanitizado** como system message JSON. |

@@ -119,7 +119,7 @@ Lacunas declaradas, em ordem de dependência:
 
 Lacunas declaradas, em ordem de dependência:
 
-- **Tool calling (L4)**: a porta atual só faz `complete/stream` de strings, sem `tools` (`apps/api/app/ai_orchestration/infrastructure/llm/llm_port.py`); `CompletionRequest.tools` existe apenas na especificação `docs/backend-ai-chat-interface.md`.
+- **Tool calling (L4)**: a porta atual só faz `complete/stream` de strings, sem `tools` (`apps/api/app/ai_orchestration/domain/ports/llm_port.py`); `CompletionRequest.tools` existe apenas na especificação `docs/backend-ai-chat-interface.md`.
 - **Proposta sem emissor**: `ActionProposalEvent` definido (`apps/api/app/ai_chat/domain/value_objects/stream_event.py`), com entidade, persistência e endpoints — mas nunca emitido pelo backend (falta o use case `ProposeAction`).
 - **Execução no frontend**: o cliente confirma propostas (`apps/web/src/features/conversation/api/lateralChatService.ts`) mas não as executa (sem `ActionExecutionAdapter`).
 - **MCP**: só superfície — protótipo isolado em `apps/api/app/mcp/server.py`, desconectado da aplicação.
