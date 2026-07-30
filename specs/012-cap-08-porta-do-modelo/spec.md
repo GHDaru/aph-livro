@@ -1,6 +1,6 @@
 # Spec 012 — Capítulo 08: A porta do modelo e o tool calling
 
-**Status**: Implementada (estrutura) · **Data**: 2026-07-30 · **Raia**: plena
+**Status**: Implementada (texto completo) · **Data**: 2026-07-30 · **Raia**: plena
 
 ## O quê
 

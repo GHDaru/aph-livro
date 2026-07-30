@@ -5,3 +5,4 @@
 - [x] T003 — Montar "Fundamentos científicos" (Toolformer 2302.04761 e τ-bench 2406.12045, ambos ⏳, validação declarada como fase 2) e "Fontes da indústria" (function calling OpenAI, fine-grained tool streaming Anthropic, `needsApproval` do Vercel AI SDK — fichas URL + tradução para decisão) (CA-3)
 - [x] T004 — Esqueleto de H3 do estado da arte (1–2 frases por seção, dois movimentos: a porta → o nascimento da intenção) + rascunho da Leitura executiva com referência ao registro de expiração E2 + perguntas de Verificação alinhadas 1:1 aos objetivos (CA-1, CA-4, CA-6)
 - [x] T005 — Popular o Apêndice (`### ghdaru`, `### nexxussai-monorepo`, `### Divergências`) com paths e fatos de `estudos/fonte-base-codigo.md` (porta, chunks, adapters, roteador, catálogo pronto-para-tools, pré-história `flows/`) e conferir os CAs um a um (CA-2, CA-1..CA-7)
+- [x] T006 — Fase 2: prosa integral + ciência ✓ no corpo
