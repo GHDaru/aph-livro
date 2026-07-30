@@ -1,6 +1,6 @@
 # Spec 010 — Capítulo 06: Comandos de UI e slot filling
 
-**Status**: Implementada (estrutura) · **Data**: 2026-07-30 · **Raia**: plena
+**Status**: Implementada (texto completo) · **Data**: 2026-07-30 · **Raia**: plena
 
 ## O quê
 
