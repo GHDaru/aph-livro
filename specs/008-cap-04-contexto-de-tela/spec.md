@@ -1,6 +1,6 @@
 # Spec 008 — Capítulo 04: A voz da aplicação — contexto de tela
 
-**Status**: Implementada (estrutura) · **Data**: 2026-07-30 · **Raia**: plena
+**Status**: Implementada (texto completo) · **Data**: 2026-07-30 · **Raia**: plena
 
 ## O quê
 

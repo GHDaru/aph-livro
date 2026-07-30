@@ -5,3 +5,4 @@
 - [x] T003 — Seções "Fundamentos científicos" (status ⏳ declarado + candidatas) e "Fontes da indústria" (fichas AG-UI, MCP resources, computer use como anti-padrão, com URLs do panorama) (CA-6)
 - [x] T004 — Apêndice de evidência por laboratório: paths + fatos concretos + lacunas (ghdaru: snapshot de interface incompleto; nexxussai: alternativas rejeitadas em `research.md`) + H3 de divergências (CA-4)
 - [x] T005 — Conferência final contra os CAs da spec e o GUIA-CAPITULO (ordem de seções, siglas na 1ª ocorrência, objetivos ↔ verificação alinhados) (CA-1..CA-6)
+- [x] T006 — Fase 2: prosa integral do capítulo
