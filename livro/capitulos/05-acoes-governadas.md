@@ -27,11 +27,9 @@ As restrições em tensão:
 
 ## Fundamentos científicos
 
-> **Validação pendente.** Os papers abaixo são candidatos (⏳) registrados em [`estudos/candidatos-bibliografia.md`](../../estudos/candidatos-bibliografia.md); nenhuma afirmação do corpo deste capítulo depende deles. A rodada de fundamentação científica os validará (✓) ou substituirá em [`bibliografia.md`](../bibliografia.md).
-
-- ⏳ *ToolEmu* ([arXiv 2309.15817](https://arxiv.org/abs/2309.15817)) — emulação de tools para expor riscos de agentes de linguagem antes da execução real; interessa como base empírica da tese "a execução direta é o momento errado de descobrir que a ação era perigosa" — exatamente o que a etapa de *proposta* resolve.
-- ⏳ *AgentDojo* ([arXiv 2406.13352](https://arxiv.org/abs/2406.13352)) — benchmark de ataques de prompt injection contra agentes com tools; interessa como evidência de que a superfície executável precisa ser fechada *fora* do modelo.
-- ⏳ *τ-bench* ([arXiv 2406.12045](https://arxiv.org/abs/2406.12045)) — avaliação de agentes que devem seguir regras de domínio ao executar ações; interessa à discussão de políticas de risco declarativas.
+- ✓ ⭐ *ToolEmu* — Ruan et al., *Identifying the Risks of LM Agents with an LM-Emulated Sandbox* ([arXiv 2309.15817](https://arxiv.org/abs/2309.15817), ICLR 2024 Spotlight) — mostrou, emulando tools em sandbox, que agentes de linguagem cometem falhas de consequência real antes que qualquer humano perceba; é a base empírica da tese deste capítulo: a execução direta é o momento errado de descobrir que a ação era perigosa — por isso toda ação nasce *proposta*, não executada.
+- ✓ *AgentDojo* — Debenedetti et al. ([arXiv 2406.13352](https://arxiv.org/abs/2406.13352), NeurIPS 2024 Datasets & Benchmarks) — mediu ataques de prompt injection contra agentes com tools em ambiente dinâmico; sustenta a decisão de fechar a superfície executável *fora* do modelo: o catálogo declarado limita o que um ataque bem-sucedido consegue invocar.
+- ✓ *τ-bench* — Yao et al. ([arXiv 2406.12045](https://arxiv.org/abs/2406.12045)) — avaliou agentes que devem seguir regras de domínio ao executar ações em interação com usuários; sustenta a prática das políticas de risco declarativas (a regra vive fora do modelo e é verificável), discutida aqui e aprofundada no capítulo 08.
 
 (Bibliografia completa e status de validação: [`livro/bibliografia.md`](../bibliografia.md).)
 
