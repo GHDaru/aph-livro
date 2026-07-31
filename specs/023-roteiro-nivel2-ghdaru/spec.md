@@ -1,6 +1,6 @@
 # Spec 023 — Roteiro de conformidade APH Nível 2 para o ghdaru
 
-**Status**: Em implementação · **Data**: 2026-07-31 · **Raia**: plena (auditoria + handoff; nenhum código alterado)
+**Status**: Implementada · **Data**: 2026-07-31 · **Raia**: plena (auditoria + handoff; nenhum código alterado)
 
 ## O quê
 
@@ -12,10 +12,10 @@ Pedido do Accountable (2026-07-31, "roteiro nível 2"). O padrão existe (v0.2 c
 
 ## Critérios de aceite
 
-- [ ] **CA-1**: todo requisito de Nível 1 e Nível 2 do padrão aparece na auditoria com status e evidência (path do ghdaru ou declaração de ausência com fonte — capítulo/estudo que a registra); nenhum status "de memória".
-- [ ] **CA-2**: as lacunas viram roteiro em etapas com dependências explícitas e critério de pronto por etapa; o que o handoff "integridade da confirmação" já cobre é referenciado, não duplicado.
-- [ ] **CA-3**: o roteiro distingue o que fecha DEVEs (bloqueia a autodeclaração) do que é DEVERIA/🧪 (recomendado); estimativa de esforço relativa (P/M/G) por etapa.
-- [ ] **CA-4**: revisão independente confere a tabela de status contra o código real do ghdaru; CHANGELOG registrado; publicado no site (merge na `main`).
+- [x] **CA-1**: todo requisito de Nível 1 e Nível 2 do padrão aparece na auditoria com status e evidência (path do ghdaru ou declaração de ausência com fonte — capítulo/estudo que a registra); nenhum status "de memória".
+- [x] **CA-2**: as lacunas viram roteiro em etapas com dependências explícitas e critério de pronto por etapa; o que o handoff "integridade da confirmação" já cobre é referenciado, não duplicado.
+- [x] **CA-3**: o roteiro distingue o que fecha DEVEs (bloqueia a autodeclaração) do que é DEVERIA/🧪 (recomendado); estimativa de esforço relativa (P/M/G) por etapa.
+- [x] **CA-4**: revisão independente confere a tabela de status contra o código real do ghdaru; CHANGELOG registrado; publicado no site (merge na `main`).
 
 ## Fora de escopo
 

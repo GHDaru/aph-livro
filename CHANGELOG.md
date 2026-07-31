@@ -26,6 +26,8 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 
 - **Publicação no Vercel** (spec 022): `vercel.json` com os gates no buildCommand (wire + links), CI próprio para os gates em todo push (`ci.yml`), e workflow do Pages rebaixado a alternativa manual. Motivo registrado: Pages inativo (token sem permissão de criar o site + repositório privado no plano gratuito); no Vercel, repo privado + site público funciona no plano Hobby.
 
+- **Roteiro de conformidade APH Nível 2 para o ghdaru** (spec 023): auditoria dos 30+ requisitos dos Níveis 1–2 com evidência por path (conferida linha a linha por revisão independente contra o código real — 3 achados de evidência corrigidos, incl. o "filtro aiActions" que era declaração e não mecanismo), placar honesto (nenhum DEVE do Nível 2 ausente; bloqueio nos DEVEs do Nível 1) e roteiro em 4 etapas com dependências e esforço (`handoffs/ghdaru-roteiro-conformidade-aph-nivel2.md`).
+
 ### Fixed
 
 - Correções da revisão independente da edição 0.01: citação "o que não está declarado, a IA não faz" reatribuída à fonte real (`docs/integration/` do ghdaru) em 5 capítulos; path da porta LLM corrigido no cap. 11; fonte do alvo de 32 KB corrigida no cap. 04; path completo do adapter MCP no cap. 09; contrato de frescor adicionado à Leitura executiva do cap. 05; banner de fase no cap. 08; origem de E1 corrigida no HISTORICO; GUIA ajustado para até uma pergunta de verificação por objetivo.
