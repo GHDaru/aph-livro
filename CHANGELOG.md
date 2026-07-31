@@ -16,6 +16,8 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 
 - **Revisão extraordinária MCP 2026-07-28** (spec 017): repesquisa com verificação primária em `estudos/atualizacao-mcp-2026-07-28.md`; caps. 02/05/06/09/11 com notas datadas e cap. 10 recapturado (matriz, seção MCP, contrato de frescor renovado). Edição 0.03 no `livro/HISTORICO.md`.
 
+- **Padrão APH v0.1** (spec 018): proposta normativa do livro em `livro/padrao-aph.md` — níveis Observador/Operador/Federado, requisitos com maturidade declarada, compatibilidade com a indústria e checklist; revisada em contexto fresco (5 achados corrigidos). Edição 0.04 no `livro/HISTORICO.md`.
+
 ### Fixed
 
 - Correções da revisão independente da edição 0.01: citação "o que não está declarado, a IA não faz" reatribuída à fonte real (`docs/integration/` do ghdaru) em 5 capítulos; path da porta LLM corrigido no cap. 11; fonte do alvo de 32 KB corrigida no cap. 04; path completo do adapter MCP no cap. 09; contrato de frescor adicionado à Leitura executiva do cap. 05; banner de fase no cap. 08; origem de E1 corrigida no HISTORICO; GUIA ajustado para até uma pergunta de verificação por objetivo.

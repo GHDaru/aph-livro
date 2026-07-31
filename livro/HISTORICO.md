@@ -40,6 +40,13 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 ## Edições
 
+### Edição 0.04 — 2026-07-31 · Padrão APH v0.1: a proposta normativa (spec 018)
+
+- **Diagnóstico de bagagem** (pedido do Accountable): régua comprovado→DEVE / desenhado→DEVERIA-experimental / aberto→fora do normativo; limitações declaradas (n=2 laboratórios do mesmo autor, sem suíte de conformidade). Veredito: suficiente para v0.1.
+- **`livro/padrao-aph.md`**: o padrão para aplicações que conversam integralmente com o harness via chat — 3 níveis de conformidade (Observador/Operador/Federado), ~40 requisitos APH-x.y com palavra normativa e maturidade declarada (✅/🧪), FSM de referência unificada, compatibilidade com AG-UI/MCP 2026-07-28/Vercel/ACP, checklist de autoavaliação e contrato de frescor próprio. Sumário do livro ganhou a "Parte normativa".
+- **Verificação**: revisão independente em contexto fresco contra os 12 capítulos — 1 achado crítico (contradição níveis×checklist) e 4 importantes (sobre-afirmação de evidência no §5; citação fora da interseção; checklist incompleto; colisão de nomenclatura nível×requisito), todos corrigidos; os 5 pontos sensíveis (idempotência, `context_hash`, slot filling, tool calling, federação) confirmados como honestamente 🧪.
+- **IA (A3)**: agente **Claude Code (Anthropic)**; diagnóstico e proposta sob curadoria humana (GHDaru); merge na `main` aguarda gate humano.
+
 ### Edição 0.03 — 2026-07-31 · Revisão extraordinária: MCP spec 2026-07-28 (spec 017)
 
 - **Gatilho**: o contrato de frescor do cap. 10 nomeava "o RC de 2026-07-28 virando final" — a spec final do Model Context Protocol foi publicada em 2026-07-28 (detecção via radar do livro-mãe `harness_engineering/radar/diario/2026-07-31.md`; reverificação própria em fonte primária, `estudos/atualizacao-mcp-2026-07-28.md`).

@@ -1,6 +1,6 @@
 # Spec 018 — Padrão APH v0.1 (Aplicação ↔ Harness, perfil chat)
 
-**Status**: Em implementação · **Data**: 2026-07-31 · **Raia**: plena
+**Status**: Implementada · **Data**: 2026-07-31 · **Raia**: plena
 
 ## O quê
 
@@ -19,10 +19,10 @@ Pedido do Accountable (2026-07-31): "sugerir, baseado no que temos, o padrão qu
 
 ## Critérios de aceite
 
-- [ ] **CA-1**: `livro/padrao-aph.md` existe com: convenções normativas, escopo, níveis de conformidade (APH-1 Observador / APH-2 Operador / APH-3 Federado), requisitos por área com identificador estável (APH-x.y), **maturidade declarada por requisito** (comprovado/desenhado), checklist de conformidade e regra de versionamento/frescor do padrão.
-- [ ] **CA-2**: todo requisito DEVE tem evidência dupla (implementação nos laboratórios com path *ou* convergência da indústria com URL — via referência aos capítulos que a carregam); nenhum requisito "aberto" aparece como DEVE.
-- [ ] **CA-3**: tabela de compatibilidade APH ↔ AG-UI / MCP (2026-07-28) / Vercel AI SDK / ACP.
-- [ ] **CA-4**: o padrão não contradiz nenhum capítulo (verificado por revisão independente); sumário do livro atualizado com a nova parte; HISTORICO (edição 0.04) e CHANGELOG registrados.
+- [x] **CA-1**: `livro/padrao-aph.md` existe com: convenções normativas, escopo, níveis de conformidade (APH-1 Observador / APH-2 Operador / APH-3 Federado), requisitos por área com identificador estável (APH-x.y), **maturidade declarada por requisito** (comprovado/desenhado), checklist de conformidade e regra de versionamento/frescor do padrão.
+- [x] **CA-2**: todo requisito DEVE tem evidência dupla (implementação nos laboratórios com path *ou* convergência da indústria com URL — via referência aos capítulos que a carregam); nenhum requisito "aberto" aparece como DEVE.
+- [x] **CA-3**: tabela de compatibilidade APH ↔ AG-UI / MCP (2026-07-28) / Vercel AI SDK / ACP.
+- [x] **CA-4**: o padrão não contradiz nenhum capítulo (verificado por revisão independente); sumário do livro atualizado com a nova parte; HISTORICO (edição 0.04) e CHANGELOG registrados.
 
 ## Fora de escopo
 
