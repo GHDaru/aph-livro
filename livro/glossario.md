@@ -79,4 +79,6 @@ Objetos de apoio: **sanitização de contexto** (remoção, no servidor, de segr
 - **Load balancer / sticky session** — o distribuidor de tráfego entre servidores / e a exigência de que um mesmo usuário caia sempre no mesmo servidor (o que o MCP stateless eliminou por design).
 - **Multi-tenant / tenant** — um mesmo sistema servindo várias organizações isoladas; cada organização é um tenant, e o catálogo de ações é montado por tenant.
 - **Capability** — permissão nomeada e granular (`kb:read`, `chat:use`) derivada do papel do usuário — verificada pela aplicação, nunca decidida pelo modelo.
+- **Wire format** — "formato de fio": a especificação exata, byte a byte, do que trafega entre as partes — os JSON Schemas das mensagens. Requisitos dizem *o que* o protocolo garante; o wire format diz *como as mensagens são escritas* (Anexo A do Padrão APH).
+- **JSON Schema (validável)** — ver §2; no Anexo A, cada schema é um arquivo que um validador executa: exemplo válido tem de passar, exemplo inválido tem de ser rejeitado — verificado automaticamente a cada publicação (gate de CI).
 - **Spec / spec-driven** — especificação: o documento que diz *o quê* e *por quê* antes do código; spec-driven é o método (Maestro) em que nada nasce sem ela.
