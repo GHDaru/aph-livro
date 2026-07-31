@@ -11,6 +11,7 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 - Estrutura do livro: sumário oficial com 12 capítulos e fronteiras explícitas, guia normativo de capítulo (esqueleto v3 adaptado), HISTORICO com registro de expiração, glossário e bibliografia (spec 003).
 - Estruturas dos capítulos 00–04 e 06–11 no esqueleto v3, cada um com sua spec (specs 004–008 e 010–015, ADR 0002); **capítulo 05 — Ações governadas — completo, como piloto do formato** (spec 009). Edição 0.01 no `livro/HISTORICO.md`.
 - Bibliografia validada: 7 papers ✓ com dupla evidência e ⭐ nos âncoras (spec 016).
+- Handoff para o time do ghdaru: spec de correção "Integridade da confirmação de propostas" (`handoffs/ghdaru-spec-integridade-confirmacao.md`) — idempotência, `context_hash` canônico server-side, estados `stale`/`expired` e alinhamento de nomenclatura, com critérios testáveis; decisão registrada: nexxussai não será alterado (raia leve — o documento é o artefato).
 - **Fase 2 — texto completo dos 12 capítulos** (specs 004–015): prosa integral no esqueleto v3, em três ondas com commit por capítulo; caps. 00/05/07/08 com ciência ✓ no corpo. Edição 0.02 no `livro/HISTORICO.md`.
 
 ### Fixed
