@@ -1,0 +1,4 @@
+docs/
+publicar/node_modules/
+publicar/package-lock.json
+.env

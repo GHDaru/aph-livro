@@ -20,6 +20,8 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 
 - **Glossário didático + regra anti-jargão** (spec 019): siglas e termos técnicos explicados em português simples em `livro/glossario.md` (3 camadas); ponteiro no Padrão APH; regra permanente no GUIA (entrada no glossário no mesmo commit). Edição 0.05 no `livro/HISTORICO.md`.
 
+- **Publicação no GitHub Pages** (spec 020): motor estático próprio (`publicar/build.mjs` — 88 páginas, links verificados no build, tema claro/escuro, navegação) + workflow `publicar.yml` (push na `main` = publicar). Etapa manual única: habilitar Pages (Settings → Pages → Source: GitHub Actions).
+
 ### Fixed
 
 - Correções da revisão independente da edição 0.01: citação "o que não está declarado, a IA não faz" reatribuída à fonte real (`docs/integration/` do ghdaru) em 5 capítulos; path da porta LLM corrigido no cap. 11; fonte do alvo de 32 KB corrigida no cap. 04; path completo do adapter MCP no cap. 09; contrato de frescor adicionado à Leitura executiva do cap. 05; banner de fase no cap. 08; origem de E1 corrigida no HISTORICO; GUIA ajustado para até uma pergunta de verificação por objetivo.
