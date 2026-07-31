@@ -24,6 +24,8 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 
 - **Padrão APH v0.2 — Anexo A wire format** (spec 021): 5 JSON Schemas validáveis + exemplos/contraexemplos verificados por gate de CI (ajv, 32 casos), superfície HTTP de referência, códigos de erro e mapeamento APH↔laboratórios; revisado em contexto fresco (4 achados corrigidos). Edição 0.06 no `livro/HISTORICO.md`.
 
+- **Publicação no Vercel** (spec 022): `vercel.json` com os gates no buildCommand (wire + links), CI próprio para os gates em todo push (`ci.yml`), e workflow do Pages rebaixado a alternativa manual. Motivo registrado: Pages inativo (token sem permissão de criar o site + repositório privado no plano gratuito); no Vercel, repo privado + site público funciona no plano Hobby.
+
 ### Fixed
 
 - Correções da revisão independente da edição 0.01: citação "o que não está declarado, a IA não faz" reatribuída à fonte real (`docs/integration/` do ghdaru) em 5 capítulos; path da porta LLM corrigido no cap. 11; fonte do alvo de 32 KB corrigida no cap. 04; path completo do adapter MCP no cap. 09; contrato de frescor adicionado à Leitura executiva do cap. 05; banner de fase no cap. 08; origem de E1 corrigida no HISTORICO; GUIA ajustado para até uma pergunta de verificação por objetivo.
