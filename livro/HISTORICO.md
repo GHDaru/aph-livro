@@ -40,6 +40,13 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 ## Edições
 
+### Edição 0.06 — 2026-07-31 · Padrão APH v0.2: Anexo A, wire format (spec 021)
+
+- **Anexo A** (`livro/padrao/anexo-a-wire-format.md`): o formato exato das mensagens — 5 JSON Schemas draft 2020-12 validáveis (`livro/padrao/schemas/`: evento com payload por kind, snapshot fechado, ação de catálogo, confirmação, erro), superfície HTTP de referência, registro mínimo de 7 códigos de erro, mapeamento nome-APH↔laboratórios e regras de versionamento do fio.
+- **Enforcement**: `publicar/valida-wire.mjs` (ajv) valida 32 casos — exemplos válidos aceitos e contraexemplos rejeitados (incl. `senha_vazada` barrado pelo snapshot fechado) — como **gate de CI**: a publicação do site falha se o wire quebrar. A sequência de exemplo do anexo é literalmente os casos do gate.
+- **Verificação**: revisão independente com execução própria dos gates e leitura direta dos laboratórios — 4 achados importantes corrigidos, incluindo um na direção inversa da usual: `expired` estava rebaixado a 🧪 quando o laboratório B o implementa (promovido a ✅); `captured_at` rebaixado a opcional (sem base para required); `context_hash` adicionado à confirmação (o contrato do laboratório B o exige — APH-5.4); exemplo do texto sincronizado verbatim com o gate.
+- **IA (A3)**: agente **Claude Code (Anthropic)**; decisão da v0.2 e curadoria humanas (GHDaru).
+
 ### Edição 0.05 — 2026-07-31 · Glossário didático e regra anti-jargão (spec 019)
 
 - **`livro/glossario.md`** reescrito em três camadas: os sete objetos do protocolo · ~30 siglas por extenso **e em palavras simples** · ~30 termos técnicos explicados em português claro com analogias (harness = "o carro em volta do motor"; hash = "impressão digital"; iframe sandboxado = "janela dentro da janela, de mãos amarradas"). Ambiguidade *token* (credencial × unidade de texto) explicitada.
