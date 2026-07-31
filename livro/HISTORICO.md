@@ -40,6 +40,12 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 ## Edições
 
+### Edição 0.05 — 2026-07-31 · Glossário didático e regra anti-jargão (spec 019)
+
+- **`livro/glossario.md`** reescrito em três camadas: os sete objetos do protocolo · ~30 siglas por extenso **e em palavras simples** · ~30 termos técnicos explicados em português claro com analogias (harness = "o carro em volta do motor"; hash = "impressão digital"; iframe sandboxado = "janela dentro da janela, de mãos amarradas"). Ambiguidade *token* (credencial × unidade de texto) explicitada.
+- **Regra editorial permanente** (retro → regra versionada, Maestro): todo termo/sigla usado no livro DEVE ter entrada no glossário criada no mesmo commit; jargão órfão é defeito de revisão (GUIA-CAPITULO). Padrão APH ganhou ponteiro didático no cabeçalho.
+- **IA (A3)**: agente **Claude Code (Anthropic)**; pedido e curadoria humanos (GHDaru).
+
 ### Edição 0.04 — 2026-07-31 · Padrão APH v0.1: a proposta normativa (spec 018)
 
 - **Diagnóstico de bagagem** (pedido do Accountable): régua comprovado→DEVE / desenhado→DEVERIA-experimental / aberto→fora do normativo; limitações declaradas (n=2 laboratórios do mesmo autor, sem suíte de conformidade). Veredito: suficiente para v0.1.

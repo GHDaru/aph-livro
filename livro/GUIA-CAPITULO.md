@@ -26,7 +26,7 @@ Formato normativo de todo capítulo deste livro (Constituição, Princípio III)
 - Afirmação científica → citação inline `([arXiv NNNN.NNNNN](https://arxiv.org/abs/NNNN.NNNNN))` com status ✓ na bibliografia.
 - Afirmação de indústria → URL verificável, formato "tradução para decisão".
 - Exemplo de payload → valores fictícios evidentes (`"token": "exemplo-ficticio"` jamais um valor plausível real).
-- Sigla → por extenso na 1ª ocorrência do capítulo. Termos técnicos consagrados sem tradução.
+- Sigla → por extenso na 1ª ocorrência do capítulo. Termos técnicos consagrados sem tradução — mas **todo termo técnico ou sigla usados em qualquer texto do livro DEVEM ter entrada no [glossário](glossario.md) (§2 siglas, §3 termos), criada no mesmo commit que os introduz**; jargão órfão (sem entrada) é defeito de revisão.
 - Evitar absolutos atemporais; o capítulo inteiro está sob a data de captura do cabeçalho.
 
 ## Estrutura antes do conteúdo
