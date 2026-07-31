@@ -23,6 +23,12 @@ Como escrever um capítulo: [`GUIA-CAPITULO.md`](GUIA-CAPITULO.md) · Termos: [`
 | 10 | [O estado da arte externo](capitulos/10-estado-da-arte-externo.md) | AG-UI, MCP (apps/elicitation), ACP, Vercel AI SDK e OpenAI Apps SDK atacam a mesma fronteira; a matriz comparativa mostra o que já padronizou e o que segue aberto. | `estudos/panorama-industria.md` | 014 |
 | 11 | [Convergências — o protocolo unificado](capitulos/11-convergencias.md) | Síntese normativa: o que as duas bases + a indústria permitem afirmar como núcleo do protocolo app↔harness, as lacunas, e o roadmap de adoção. | todos os anteriores | 015 |
 
+## Parte normativa
+
+| Documento | O que é | Spec |
+|---|---|---|
+| [Padrão APH v0.1](padrao-aph.md) | A proposta prescritiva do livro: o que uma aplicação DEVE adotar para conversar integralmente com o harness via chat — níveis de conformidade (Observador/Operador/Federado), requisitos com maturidade declarada, compatibilidade com a indústria e checklist. | 018 |
+
 ## Fronteiras entre capítulos (o que entra onde)
 
 - **02 × 03**: o cap. 02 trata do *canal* (HTTP, SSE, sessão, reconexão, cancelamento, erros de transporte); o cap. 03 trata do *vocabulário* que trafega no canal (tipos de evento e sua semântica). O envelope (`seq`, `kind`, `payload`) pertence ao 03; a entrega e reentrega dele, ao 02.
