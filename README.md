@@ -1,6 +1,8 @@
 # Protocolo de Comunicação Aplicação ↔ Harness
 
 > *"A aplicação conversando com a IA. E a IA conversando com a aplicação."*
+>
+> 📖 **Leia online**: https://protocolos-livid.vercel.app/ (publicado automaticamente a cada merge na `main`)
 
 Livro vivo sobre o protocolo da fronteira **aplicação ↔ agente de IA embutido**: como uma aplicação de produto descreve seu estado e suas capacidades ao agente (contexto de tela, catálogo de ações), e como o agente fala de volta (eventos tipados em streaming, propostas de ação governadas, comandos de UI declarativos) — com a segurança e a governança que essa fronteira exige.
 

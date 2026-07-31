@@ -1,6 +1,6 @@
 # Spec 022 — Publicação no Vercel
 
-**Status**: Implementada (aguardando a etapa manual do Accountable) · **Data**: 2026-07-31 · **Raia**: infra (reversível — desconectar o projeto no Vercel despublica)
+**Status**: Implementada · **Data**: 2026-07-31 · **Raia**: infra (reversível — desconectar o projeto no Vercel despublica)
 
 ## O quê
 
@@ -15,7 +15,7 @@ Decisão do Accountable (2026-07-31) após a confirmação de que o Pages **não
 - [x] **CA-1**: `vercel.json` na raiz com `buildCommand` executando o gate do wire format e o build (falha em schema/exemplo/link quebrado ⇒ deploy falha), `outputDirectory: docs` e `cleanUrls`.
 - [x] **CA-2**: `.github/workflows/ci.yml` roda os dois gates em todo push/PR — o enforcement do Maestro não depende do provedor de hospedagem.
 - [x] **CA-3**: `.github/workflows/publicar.yml` (Pages) só dispara manualmente, com o racional comentado — sem X vermelho a cada push enquanto o Pages não for habilitado.
-- [ ] **CA-4** (etapa do Accountable): projeto importado em vercel.com (Add New → Project → GHDaru/protocolos; as configurações vêm do `vercel.json`) e primeiro deploy verde com o site acessível.
+- [x] **CA-4** (etapa do Accountable, concluída em 2026-07-31): projeto importado em vercel.com e primeiro deploy verde — site no ar em https://protocolos-livid.vercel.app/ (verificado: home, Padrão APH, Anexo A e cap. 05 respondendo 200 com títulos corretos).
 
 ## Fora de escopo
 
