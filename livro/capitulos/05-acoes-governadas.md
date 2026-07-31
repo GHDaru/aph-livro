@@ -1,6 +1,6 @@
 # 05 — Ações governadas
 
-> **Estado da arte capturado em 2026-07** · última revisão 2026-07-30 · [histórico e registro de expiração](../HISTORICO.md)
+> **Estado da arte capturado em 2026-07** · última revisão 2026-07-31 · [histórico e registro de expiração](../HISTORICO.md)
 
 ## Objetivos de aprendizagem
 
@@ -35,7 +35,7 @@ As restrições em tensão:
 
 ## Fontes da indústria
 
-- **[MCP — Elicitation (spec 2025-06-18)](https://modelcontextprotocol.io/specification/2025-06-18/client/elicitation)** (Model Context Protocol, oficial): o servidor pode pausar uma operação e **pedir input estruturado ao usuário** via cliente, com schema. Tradução para decisão: o padrão "a ação para e pergunta" virou primitiva de protocolo — a Proposta de Ação dos laboratórios é a mesma ideia com estado persistente.
+- **[MCP — Elicitation (spec 2025-06-18)](https://modelcontextprotocol.io/specification/2025-06-18/client/elicitation)** (Model Context Protocol, oficial): o servidor pode pausar uma operação e **pedir input estruturado ao usuário** via cliente, com schema. Tradução para decisão: o padrão "a ação para e pergunta" virou primitiva de protocolo — a Proposta de Ação dos laboratórios é a mesma ideia com estado persistente. *Atualização (evento de 2026-07-28)*: a spec final do MCP re-encanou a elicitation sobre MRTR — a operação devolve `resultType: "input_required"` e o cliente retenta com as respostas, correlacionando por `requestState` ([changelog](https://modelcontextprotocol.io/specification/2026-07-28/changelog)); o padrão sobreviveu à reescrita da mecânica, e o `requestState` aproxima o desenho ainda mais da proposta com estado deste capítulo.
 - **[Tool approvals — Vercel AI SDK](https://ai-sdk.dev/docs/agents/tool-approvals)** e **[Human-in-the-loop cookbook](https://ai-sdk.dev/cookbook/next/human-in-the-loop)** (Vercel, oficial): tools podem declarar `needsApproval`; a execução fica suspensa até `addToolApprovalResponse`. Tradução para decisão: a confirmação humana é atributo **da tool no catálogo**, não lógica espalhada na UI — igual ao `risk` do `ActionSpec` e ao `requires_confirmation` do laboratório B.
 - **[Agent Client Protocol — `session/request_permission`](https://agentclientprotocol.github.io/python-sdk/)** (Zed/ACP, SDK oficial): o agente solicita permissão ao cliente antes de operações sensíveis, como primitiva JSON-RPC do protocolo. Tradução para decisão: mesmo em protocolos agente↔editor, o gate de permissão é mensagem tipada de primeira classe — não um "você tem certeza?" renderizado ad hoc.
 - **[OWASP Top 10 for LLM Applications 2025 — LLM06: Excessive Agency](https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf)** (OWASP, oficial): mitigação recomendada para agência excessiva: *least privilege* nas tools e **aprovação humana para ações de alto risco**. Tradução para decisão: a taxonomia de risco com gate proporcional não é preferência de design — é a recomendação normativa de segurança.
@@ -112,7 +112,7 @@ A validação externa do desenho dos laboratórios é a convergência de quatro 
 
 | Ecossistema | Primitiva | Mecânica |
 |---|---|---|
-| Model Context Protocol (MCP) | *elicitation* | servidor pausa a operação e pede input estruturado (com schema) ao usuário via cliente |
+| Model Context Protocol (MCP) | *elicitation* (via MRTR desde 2026-07-28) | a operação devolve `input_required` com schema; o cliente pergunta ao humano e retenta com as respostas |
 | Vercel AI SDK | `needsApproval` / `addToolApprovalResponse` | tool declara que precisa de aprovação; execução suspensa até resposta |
 | Agent Client Protocol (ACP) | `session/request_permission` | agente pede permissão ao cliente como mensagem JSON-RPC tipada |
 | AG-UI | ciclo `ToolCall*` + frontend tools | ação como eventos tipados; execução no frontend sob controle do host |

@@ -1,6 +1,6 @@
 # Spec 017 — Revisão extraordinária: MCP spec 2026-07-28
 
-**Status**: Em implementação · **Data**: 2026-07-31 · **Raia**: plena (revisão extraordinária, cross-capítulo)
+**Status**: Implementada · **Data**: 2026-07-31 · **Raia**: plena (revisão extraordinária, cross-capítulo)
 
 ## O quê
 
@@ -12,11 +12,11 @@ O **contrato de frescor do cap. 10** nomeava explicitamente "o RC de 2026-07-28 
 
 ## Critérios de aceite
 
-- [ ] **CA-1**: `estudos/atualizacao-mcp-2026-07-28.md` existe com os fatos verificados em fonte primária própria (URLs), o que não mudou, e o mapa de impacto por capítulo.
-- [ ] **CA-2**: cada capítulo com impacto A ou B recebe a atualização **datada no texto** (evento 2026-07-28), sem sobrescrever a história: a mecânica antiga é descrita como "até a spec 2025-06-18 / janela de depreciação", a nova como vigente.
-- [ ] **CA-3**: o contrato de frescor do cap. 10 é renovado (novo gatilho), e a "última revisão" dos capítulos tocados vai a 2026-07-31.
-- [ ] **CA-4**: `HISTORICO.md` ganha a edição 0.03 (revisão extraordinária, com o gatilho nomeado) e o snapshot atualiza as datas de revisão dos capítulos tocados; CHANGELOG atualizado.
-- [ ] **CA-5**: nenhuma afirmação nova sem URL; o argumento central dos caps. 05/06 (gate humano como primitiva de protocolo) é reavaliado explicitamente à luz do MRTR.
+- [x] **CA-1**: `estudos/atualizacao-mcp-2026-07-28.md` existe com os fatos verificados em fonte primária própria (URLs), o que não mudou, e o mapa de impacto por capítulo.
+- [x] **CA-2**: cada capítulo com impacto A ou B recebe a atualização **datada no texto** (evento 2026-07-28), sem sobrescrever a história: a mecânica antiga é descrita como "até a spec 2025-06-18 / janela de depreciação", a nova como vigente.
+- [x] **CA-3**: o contrato de frescor do cap. 10 é renovado (novo gatilho), e a "última revisão" dos capítulos tocados vai a 2026-07-31.
+- [x] **CA-4**: `HISTORICO.md` ganha a edição 0.03 (revisão extraordinária, com o gatilho nomeado) e o snapshot atualiza as datas de revisão dos capítulos tocados; CHANGELOG atualizado.
+- [x] **CA-5**: nenhuma afirmação nova sem URL; o argumento central dos caps. 05/06 (gate humano como primitiva de protocolo) é reavaliado explicitamente à luz do MRTR.
 
 ## Fora de escopo
 

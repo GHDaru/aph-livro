@@ -1,6 +1,6 @@
 # 09 — Federação e composição
 
-> **Estado da arte capturado em 2026-07** · última revisão 2026-07-30 · [histórico e registro de expiração](../HISTORICO.md)
+> **Estado da arte capturado em 2026-07** · última revisão 2026-07-31 · [histórico e registro de expiração](../HISTORICO.md)
 
 ## Objetivos de aprendizagem
 
@@ -146,7 +146,7 @@ O estado real, porém, precisa ser dito com a honestidade que a Constituição d
 
 ### O movimento inverso da indústria: MCP Apps e MCP-UI
 
-Enquanto os laboratórios projetam o catálogo *para fora*, a indústria de 2025–2026 percorreu a mesma ponte no sentido contrário: embutir UI de terceiros *para dentro* de hosts de agente. O MCP Apps (SEP-1865) — extensão oficial escrita em conjunto por maintainers da OpenAI e da Anthropic — permite que um servidor MCP declare recursos de UI com o esquema `ui://`, renderizados pelo host em **iframes sandboxados**, com comunicação UI↔host por JSON-RPC sobre postMessage e **aprovação explícita do usuário** para tool calls iniciadas pela UI ([spec 2026-01-26](https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx); [MCP Blog](https://blog.modelcontextprotocol.io/posts/2025-11-21-mcp-apps/)). O precursor comunitário MCP-UI havia estabelecido a taxonomia mínima do canal: do iframe para o host fluem intents tipados — `tool`, `intent`, `prompt`, `notify`, `link` — e o host permanece o único executor ([repo](https://github.com/idosal/mcp-ui)).
+Enquanto os laboratórios projetam o catálogo *para fora*, a indústria de 2025–2026 percorreu a mesma ponte no sentido contrário: embutir UI de terceiros *para dentro* de hosts de agente. O MCP Apps (SEP-1865) — extensão oficial escrita em conjunto por maintainers da OpenAI e da Anthropic — permite que um servidor MCP declare recursos de UI com o esquema `ui://`, renderizados pelo host em **iframes sandboxados**, com comunicação UI↔host por JSON-RPC sobre postMessage e **aprovação explícita do usuário** para tool calls iniciadas pela UI ([spec 2026-01-26](https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx); [MCP Blog](https://blog.modelcontextprotocol.io/posts/2025-11-21-mcp-apps/)). O precursor comunitário MCP-UI havia estabelecido a taxonomia mínima do canal: do iframe para o host fluem intents tipados — `tool`, `intent`, `prompt`, `notify`, `link` — e o host permanece o único executor ([repo](https://github.com/idosal/mcp-ui)). *Atualização (evento de 2026-07-28)*: a spec final do MCP formalizou o framework de extensões — MCP Apps passa a ser negociada pelo campo `extensions` ([overview](https://modelcontextprotocol.io/docs/extensions/overview)) — e a mecânica iframe + postMessage segue intacta (o contrato de frescor deste capítulo **não** disparou). Bônus para a projeção catálogo→tools MCP: com o núcleo stateless (fim do handshake e do `Mcp-Session-Id` — [changelog](https://modelcontextprotocol.io/specification/2026-07-28/changelog)), um servidor que projeta o catálogo não precisa manter sessão nenhuma.
 
 A simetria com o handshake `ghd.*` é ponto a ponto:
 

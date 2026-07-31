@@ -1,6 +1,6 @@
 # 02 — Transporte e sessão
 
-> **Estado da arte capturado em 2026-07** · última revisão 2026-07-30 · [histórico e registro de expiração](../HISTORICO.md)
+> **Estado da arte capturado em 2026-07** · última revisão 2026-07-31 · [histórico e registro de expiração](../HISTORICO.md)
 
 ## Objetivos de aprendizagem
 
@@ -121,6 +121,8 @@ GET /chat/sessions/sessao-exemplo-ficticio/events?after=5
 O cliente só precisou lembrar de duas coisas: o id da sessão e o último `seq` visto. É a metade ghdaru do ciclo. A metade nexxussai cobre o outro desfecho: o usuário desiste no meio da geração → `AbortSignal` libera o cliente, `DELETE /api/chat/stream/{stream_id}` avisa o servidor, o stream fecha com `STREAM_CANCELLED` e estado terminal — **e a sessão segue viva** para a próxima mensagem (paths na seção de cancelamento).
 
 O dado empírico mais interessante do capítulo é a lacuna espelhada: **nenhum dos dois laboratórios implementou as duas metades**. O ghdaru tem `seq` + replay e nenhum cancelamento (nenhum registro de streams ativos, nenhum endpoint, nenhum `AbortSignal` no adapter); o nexxussai tem o cancelamento completo e nenhum `seq` por sessão nem endpoint de replay — se a conexão cair no meio de uma resposta, não há reentrega (síntese nº 2 de [`estudos/fonte-base-codigo.md`](../../estudos/fonte-base-codigo.md); ausências detalhadas no Apêndice). Cada base construiu a metade que seu produto exigiu primeiro — e a existência independente das duas metades, encaixando sem sobreposição, é o melhor argumento de que ambas pertencem ao mesmo todo. A recomendação normativa deste capítulo é a composição: uma sessão robusta oferece **retomada** (para a conexão que cai) e **desistência limpa** (para o usuário que muda de ideia), sobre o mesmo transporte.
+
+**Contraste datado (evento de 2026-07-28).** A spec final do MCP tomou a decisão *oposta* à dos laboratórios: aboliu a resumabilidade do stream — sem `Last-Event-ID`, sem reentrega; stream quebrado significa re-emitir a requisição inteira, porque o núcleo virou stateless para escalar atrás de load balancers ([changelog](https://modelcontextprotocol.io/specification/2026-07-28/changelog)). Não é contradição com este capítulo — é a mesma pergunta com outra resposta certa: no MCP, o que trafega é RPC recomputável (repetir a chamada custa pouco); no chat embutido, o que trafega é a *conversa*, que é o produto — perder eventos é perder história, e por isso `seq`+replay. A escolha de robustez segue o que flui no canal, não a moda do transporte.
 
 ### Leitura executiva
 

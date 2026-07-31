@@ -1,6 +1,6 @@
 # 11 — Convergências: o protocolo unificado
 
-> **Estado da arte capturado em 2026-07** · última revisão 2026-07-30 · [histórico e registro de expiração](../HISTORICO.md)
+> **Estado da arte capturado em 2026-07** · última revisão 2026-07-31 · [histórico e registro de expiração](../HISTORICO.md)
 
 ## Objetivos de aprendizagem
 
@@ -39,7 +39,7 @@ Quando uma frase deste capítulo precisar de ciência, a citação está no cap�
 *Fichas restritas às fontes que evidenciam a **convergência**; o tratamento individual de cada protocolo é do cap. [10](10-estado-da-arte-externo.md). URLs conferidas em [`estudos/panorama-industria.md`](../../estudos/panorama-industria.md) (captura 2026-07-30).*
 
 - **[AG-UI Protocol — repositório oficial](https://github.com/ag-ui-protocol/ag-ui)**: o precedente externo mais próximo do protocolo completo — Server-Sent Events (SSE) como default, trincas start/content/end, estado por snapshot+delta; confirma N1 e N2, mas não padroniza contexto de tela (L1).
-- **[MCP — elicitation (spec 2025-06-18)](https://modelcontextprotocol.io/specification/2025-06-18/client/elicitation)**: "pergunte ao humano com schema" com aprovação no cliente; confirma N3/N4 e é o espelho externo do slot filling (passo 2 do roadmap).
+- **[MCP — elicitation (spec 2025-06-18)](https://modelcontextprotocol.io/specification/2025-06-18/client/elicitation)**: "pergunte ao humano com schema" com aprovação no cliente; confirma N3/N4 e é o espelho externo do slot filling (passo 2 do roadmap). Em 2026-07-28 a spec final re-encanou a mecânica (MRTR) **mantendo a semântica** ([changelog](https://modelcontextprotocol.io/specification/2026-07-28/changelog)) — um padrão que atravessa a reescrita da própria spec que o carrega é a confirmação mais forte que N3 poderia receber.
 - **[ACP — Agent Client Protocol](https://kiro.dev/docs/cli/acp/)**: `session/request_permission` fora do agente + catálogo de capacidades exposto pelo cliente; confirma N1, N3 e N4 em outra fronteira (editor↔agente).
 - **[Vercel AI SDK — Tool Approvals](https://ai-sdk.dev/docs/agents/tool-approvals)**: aprovação de tool como **estado do protocolo** (`approval-requested`), não como prompt; confirma N3 no ecossistema de maior adoção web.
 - **[OWASP Top 10 for LLM Applications 2025](https://owasp.org/www-project-top-10-for-large-language-model-applications/assets/PDF/OWASP-Top-10-for-LLMs-v2025.pdf)**: o Open Worldwide Application Security Project dá a justificativa normativa de N4 e N5 (LLM01 Prompt Injection, LLM06 Excessive Agency) — LLM = Large Language Model.

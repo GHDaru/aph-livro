@@ -16,16 +16,16 @@ Reavaliar = nova rodada com nova data, nunca sobrescrever a história.
 |---|---|---|---|
 | 00 — Introdução | 2026-07 | texto completo | 2026-07-30 |
 | 01 — Fundamentos e vocabulário | 2026-07 | texto completo | 2026-07-30 |
-| 02 — Transporte e sessão | 2026-07 | texto completo | 2026-07-30 |
+| 02 — Transporte e sessão | 2026-07 | texto completo | 2026-07-31 |
 | 03 — A voz da IA: eventos tipados | 2026-07 | texto completo | 2026-07-30 |
 | 04 — A voz da aplicação: contexto de tela | 2026-07 | texto completo | 2026-07-30 |
-| 05 — Ações governadas | 2026-07 | texto completo (piloto) | 2026-07-30 |
-| 06 — Comandos de UI e slot filling | 2026-07 | texto completo | 2026-07-30 |
+| 05 — Ações governadas | 2026-07 | texto completo (piloto) | 2026-07-31 |
+| 06 — Comandos de UI e slot filling | 2026-07 | texto completo | 2026-07-31 |
 | 07 — Segurança do protocolo | 2026-07 | texto completo | 2026-07-30 |
 | 08 — A porta do modelo e o tool calling | 2026-07 | texto completo | 2026-07-30 |
-| 09 — Federação e composição | 2026-07 | texto completo | 2026-07-30 |
-| 10 — O estado da arte externo | 2026-07 | texto completo | 2026-07-30 |
-| 11 — Convergências | 2026-07 | texto completo | 2026-07-30 |
+| 09 — Federação e composição | 2026-07 | texto completo | 2026-07-31 |
+| 10 — O estado da arte externo | 2026-07 | texto completo | 2026-07-31 |
+| 11 — Convergências | 2026-07 | texto completo | 2026-07-31 |
 
 *Estágios (GUIA-CAPITULO §"Estrutura antes do conteúdo"): estrutura → texto completo.*
 
@@ -39,6 +39,14 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 | E2 | As duas bases-laboratório implementarão tool calling real (catálogo→tools) antes de adotarem qualquer protocolo externo de UI. | cap. 08 (estrutura) | 🔵 | — |
 
 ## Edições
+
+### Edição 0.03 — 2026-07-31 · Revisão extraordinária: MCP spec 2026-07-28 (spec 017)
+
+- **Gatilho**: o contrato de frescor do cap. 10 nomeava "o RC de 2026-07-28 virando final" — a spec final do Model Context Protocol foi publicada em 2026-07-28 (detecção via radar do livro-mãe `harness_engineering/radar/diario/2026-07-31.md`; reverificação própria em fonte primária, `estudos/atualizacao-mcp-2026-07-28.md`).
+- **O que mudou no MCP**: núcleo stateless (fim do handshake/`Mcp-Session-Id`), MRTR substituindo requisições iniciadas pelo servidor (elicitation sobrevive re-encanada; **sampling depreciado**), headers de roteamento, cache declarativo, framework formal de extensões (MCP Apps via `extensions`), política de depreciação com janela de 12 meses, e — achado que o radar não destacou — **remoção da resumabilidade SSE** (`Last-Event-ID`), antítese do `seq`+replay do laboratório A.
+- **Capítulos atualizados (com datação do evento no texto)**: 10 (impacto A — seção MCP, matriz, leitura executiva e **contrato de frescor renovado**); 02, 05, 06, 09 e 11 (impacto B — notas datadas; o argumento central do gate humano saiu *reforçado*: o padrão sobreviveu à reescrita da spec que o carrega).
+- **Verificação**: fatos confirmados em fonte primária (blog oficial, changelog 2026-07-28, página de elicitation da spec nova, releases no GitHub); links relativos conferidos.
+- **IA (A3)**: agente **Claude Code (Anthropic)**; gatilho reportado pelo humano; merge na `main` autorizado pelo humano em 2026-07-31.
 
 ### Edição 0.02 — 2026-07-30 · Fase 2: texto completo dos 12 capítulos (specs 004–016)
 
