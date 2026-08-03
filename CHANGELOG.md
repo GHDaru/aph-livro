@@ -28,6 +28,8 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 
 - **Roteiro de conformidade APH Nível 2 para o ghdaru** (spec 023): auditoria dos 30+ requisitos dos Níveis 1–2 com evidência por path (conferida linha a linha por revisão independente contra o código real — 3 achados de evidência corrigidos, incl. o "filtro aiActions" que era declaração e não mecanismo), placar honesto (nenhum DEVE do Nível 2 ausente; bloqueio nos DEVEs do Nível 1) e roteiro em 4 etapas com dependências e esforço (`handoffs/ghdaru-roteiro-conformidade-aph-nivel2.md`).
 
+- **Estudo de caso: Traycer × APH** (spec 024): primeiro caso de autor externo avaliado contra o padrão (`estudos/caso-traycer.md`) — afinidade por família com paths (41 eventos tipados, gate humano em dupla fila, capacidades declaradas, porta de 18 harnesses), divergências justificadas (WebSocket pela cláusula do APH-1.1; entrega confiável via CRDT) e 8 candidatos de aprendizado para o padrão (emendas APH-1.3/2.2, DEVERIAs de gate, evidência para E1, contraexemplo A2A).
+
 ### Fixed
 
 - Correções da revisão independente da edição 0.01: citação "o que não está declarado, a IA não faz" reatribuída à fonte real (`docs/integration/` do ghdaru) em 5 capítulos; path da porta LLM corrigido no cap. 11; fonte do alvo de 32 KB corrigida no cap. 04; path completo do adapter MCP no cap. 09; contrato de frescor adicionado à Leitura executiva do cap. 05; banner de fase no cap. 08; origem de E1 corrigida no HISTORICO; GUIA ajustado para até uma pergunta de verificação por objetivo.

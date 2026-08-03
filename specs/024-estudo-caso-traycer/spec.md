@@ -1,6 +1,6 @@
 # Spec 024 — Estudo de caso: Traycer × Padrão APH
 
-**Status**: Em implementação · **Data**: 2026-07-31 · **Raia**: plena (estudo; nenhum código alterado)
+**Status**: Implementada · **Data**: 2026-07-31 · **Raia**: plena (estudo; nenhum código alterado)
 
 ## O quê
 
@@ -12,11 +12,11 @@ Pedido do Accountable (2026-07-31): "avalie este caso para nosso protocolo". É 
 
 ## Critérios de aceite
 
-- [ ] **CA-1**: toda afirmação sobre o Traycer tem path no clone (`/workspace/traycer`, commit registrado); o que não foi conferido é marcado ⏳.
-- [ ] **CA-2**: a avaliação distingue explicitamente o que está na fronteira do APH (app↔agente, UI de chat) do que está fora (orquestração harness↔harness, colaboração multiusuário) — sem esticar o escopo do padrão.
-- [ ] **CA-3**: tabela de afinidade por família APH (1–8) com veredito honesto (conforme/parcial/divergente/fora de escopo) e o *porquê* de cada divergência.
-- [ ] **CA-4**: seção "o que o APH aprende" com candidatos concretos (requisito novo? maturidade a revisar? linha nova na matriz do cap. 10? evidência para E1/E2?) — decisões de incorporação ficam para specs futuras, não nesta.
-- [ ] **CA-5**: CHANGELOG registrado; publicado no site (merge na `main`).
+- [x] **CA-1**: toda afirmação sobre o Traycer tem path no clone (`/workspace/traycer`, commit registrado); o que não foi conferido é marcado ⏳.
+- [x] **CA-2**: a avaliação distingue explicitamente o que está na fronteira do APH (app↔agente, UI de chat) do que está fora (orquestração harness↔harness, colaboração multiusuário) — sem esticar o escopo do padrão.
+- [x] **CA-3**: tabela de afinidade por família APH (1–8) com veredito honesto (conforme/parcial/divergente/fora de escopo) e o *porquê* de cada divergência.
+- [x] **CA-4**: seção "o que o APH aprende" com candidatos concretos (requisito novo? maturidade a revisar? linha nova na matriz do cap. 10? evidência para E1/E2?) — decisões de incorporação ficam para specs futuras, não nesta.
+- [x] **CA-5**: CHANGELOG registrado; publicado no site (merge na `main`).
 
 ## Fora de escopo
 
