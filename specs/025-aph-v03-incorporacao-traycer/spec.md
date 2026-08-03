@@ -27,7 +27,7 @@ Pedido do Accountable (2026-08-03, "proximo"), executando o encaminhamento regis
 - [x] **CA-2**: nenhum requisito muda de maturidade por evidência exclusivamente externa: APH-5.6/5.7 nascem 🧪 e APH-6.4 segue 🧪 (régua do §5 preservada); nenhum 🧪 vira DEVE.
 - [x] **CA-3**: o wire não muda — `valida-wire.mjs` continua verde sem alteração de schema; o §9 do padrão declara explicitamente "Anexo A permanece v0.2".
 - [x] **CA-4**: toda nota nova em capítulo é datada (2026-08-03) e aponta para o estudo; termos novos ganham entrada no glossário no mesmo commit (regra anti-jargão).
-- [x] **CA-5**: revisão independente em contexto fresco confere as edições contra o estudo e o padrão; CHANGELOG + HISTORICO (edição 0.07); publicado no site (merge na `main`).
+- [x] **CA-5**: revisão independente em contexto fresco conferiu as edições contra o estudo, o padrão e o clone (amostragem de paths) — 2 achados críticos (regra anti-jargão; checkboxes prematuros) e 1 importante (frase "nenhuma linha" do cap. 10) corrigidos antes do registro; CHANGELOG + HISTORICO (edição 0.07); publicado no site (merge na `main`).
 
 ## Fora de escopo
 

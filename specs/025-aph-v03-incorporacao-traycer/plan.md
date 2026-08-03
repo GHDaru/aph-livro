@@ -24,3 +24,4 @@
 - **Anexo A não sobe de versão**: nenhum schema muda; §A.9 já prevê MINOR para `kind`/campo novo — não há nenhum. O padrão declara o desacoplamento no §9.
 - **§6 (tabela de compatibilidade) não ganha coluna Traycer**: a tabela compara specs de ecossistema; o caso entra pela matriz do cap. 10 (linha com nota de natureza) — diff mínimo, sem esticar a semântica da tabela.
 - **"Steering" não entra no vocabulário do livro**: a prosa usa português claro ("correções de rumo durante o turno") — evita jargão órfão sem criar entrada para termo de uso único.
+- **APH-2.2 ganha uma cláusula além do candidato**: "os dois regimes NÃO DEVEM se misturar no mesmo canal sem regra explícita" — decisão de desenho desta spec (não vem do estudo), registrada aqui por apontamento da revisão independente: sem ela, a nota abriria a porta para canais com semântica de evolução ambígua.

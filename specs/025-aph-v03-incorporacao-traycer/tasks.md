@@ -10,5 +10,5 @@
 - [x] T8 — `livro/HISTORICO.md`: snapshot, evidência E1 (🔵), edição 0.07.
 - [x] T9 — `publicar/build.mjs` (rótulo) + `livro/README.md` (linha do padrão).
 - [x] T10 — Gates: `valida-wire.mjs` + `build.mjs` verdes.
-- [x] T11 — Revisão independente em contexto fresco; achados corrigidos.
+- [x] T11 — Revisão independente em contexto fresco; 2 críticos (glossário: replace-latest/deadlock/fail-closed; checkboxes prematuros) e 1 importante (cap. 10 "nenhuma linha") corrigidos; menores atendidos (ordem do CHANGELOG, README 018·021·025, precisão do cap. 05, decisão APH-2.2 registrada no plan).
 - [x] T12 — CHANGELOG; commit; push; merge na `main` (publica).
