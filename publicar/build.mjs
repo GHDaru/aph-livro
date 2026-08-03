@@ -44,7 +44,7 @@ const NAV = [
     rot: p.replace("livro/capitulos/", "").replace(".md", "").replace(/^(\d+)-/, "$1 · ").replaceAll("-", " "),
     arq: p, sub: true,
   })),
-  { rot: "★ Padrão APH v0.2", arq: "livro/padrao-aph.md" },
+  { rot: "★ Padrão APH v0.3", arq: "livro/padrao-aph.md" },
   { rot: "Anexo A · wire format", arq: "livro/padrao/anexo-a-wire-format.md", sub: true },
   { rot: "Glossário", arq: "livro/glossario.md" },
   { rot: "Bibliografia", arq: "livro/bibliografia.md" },

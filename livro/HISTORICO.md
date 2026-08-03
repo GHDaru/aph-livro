@@ -17,15 +17,15 @@ Reavaliar = nova rodada com nova data, nunca sobrescrever a história.
 | 00 — Introdução | 2026-07 | texto completo | 2026-07-30 |
 | 01 — Fundamentos e vocabulário | 2026-07 | texto completo | 2026-07-30 |
 | 02 — Transporte e sessão | 2026-07 | texto completo | 2026-07-31 |
-| 03 — A voz da IA: eventos tipados | 2026-07 | texto completo | 2026-07-30 |
+| 03 — A voz da IA: eventos tipados | 2026-07 | texto completo | 2026-08-03 |
 | 04 — A voz da aplicação: contexto de tela | 2026-07 | texto completo | 2026-07-30 |
-| 05 — Ações governadas | 2026-07 | texto completo (piloto) | 2026-07-31 |
+| 05 — Ações governadas | 2026-07 | texto completo (piloto) | 2026-08-03 |
 | 06 — Comandos de UI e slot filling | 2026-07 | texto completo | 2026-07-31 |
-| 07 — Segurança do protocolo | 2026-07 | texto completo | 2026-07-30 |
+| 07 — Segurança do protocolo | 2026-07 | texto completo | 2026-08-03 |
 | 08 — A porta do modelo e o tool calling | 2026-07 | texto completo | 2026-07-30 |
 | 09 — Federação e composição | 2026-07 | texto completo | 2026-07-31 |
-| 10 — O estado da arte externo | 2026-07 | texto completo | 2026-07-31 |
-| 11 — Convergências | 2026-07 | texto completo | 2026-07-31 |
+| 10 — O estado da arte externo | 2026-07 | texto completo | 2026-08-03 |
+| 11 — Convergências | 2026-07 | texto completo | 2026-08-03 |
 
 *Estágios (GUIA-CAPITULO §"Estrutura antes do conteúdo"): estrutura → texto completo.*
 
@@ -35,10 +35,17 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 | # | Afirmação | Origem | Estado | Evidência |
 |---|---|---|---|---|
-| E1 | A fronteira app↔agente embutido não terá protocolo dominante único antes de 2027; a padronização virá por composição (eventos tipados + tools + confirmação humana) e não por um spec vencedor. | cap. 11 (estrutura) | 🔵 | — |
+| E1 | A fronteira app↔agente embutido não terá protocolo dominante único antes de 2027; a padronização virá por composição (eventos tipados + tools + confirmação humana) e não por um spec vencedor. | cap. 11 (estrutura) | 🔵 | 2026-08-03: +1 convergência independente — o caso externo Traycer (`estudos/caso-traycer.md`) compõe vocabulário fechado de eventos + gate humano como estado, sem adotar spec único. Evidência acumulada; pontuação só em janela. |
 | E2 | As duas bases-laboratório implementarão tool calling real (catálogo→tools) antes de adotarem qualquer protocolo externo de UI. | cap. 08 (estrutura) | 🔵 | — |
 
 ## Edições
+
+### Edição 0.07 — 2026-08-03 · Padrão APH v0.3: incorporação do caso Traycer (spec 025)
+
+- **`livro/padrao-aph.md` → v0.3**, incorporando os 8 candidatos do estudo da spec 024 (`estudos/caso-traycer.md`): emenda no APH-1.3 (mecanismo equivalente de entrega — snapshot + deltas com fonte durável/CRDT, com a garantia "não perder a conversa" como critério); nota no APH-2.2 (segundo regime de evolução: versionamento negociado por método, fail-closed); **APH-5.6 e APH-5.7 novos** (🧪 DEVERIA — gates pendentes sobrevivem à reconexão; fila de aprovação separada por classe de ação); evidência externa registrada no APH-6.4 (terceira implementação independente de slot filling). Regra preservada: evidência de caso externo **não promove** requisito a ✅ — nenhum 🧪 virou DEVE.
+- **O fio não mudou**: nenhum schema alterado; Anexo A permanece v0.2 (declarado no §9); gate de wire segue verde sem edição.
+- **Notas datadas (2026-08-03)** nos caps. 03 e 05 ("o que roubar": `retryable`, progresso *replace-latest*, sumário/detalhe de tool pré-computados, sentinelas de capacidade; APH-5.6/5.7), 07 (contraexemplo A2A — cautela não-herdada e deadlock de supervisão como fronteira do argumento), 10 (linha Traycer na matriz + nota sobre a natureza da linha) e 11 (L2 confirmada pelo caso; nenhuma lacuna muda de estado). Evidência registrada em E1 (🔵 mantido). Glossário: entrada CRDT.
+- **IA (A3)**: agente **Claude Code (Anthropic)**; pedido ("proximo") e curadoria humanos (GHDaru).
 
 ### Edição 0.06 — 2026-07-31 · Padrão APH v0.2: Anexo A, wire format (spec 021)
 

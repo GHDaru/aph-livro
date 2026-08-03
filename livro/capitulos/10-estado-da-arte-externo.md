@@ -1,6 +1,6 @@
 # 10 — O estado da arte externo
 
-> **Estado da arte capturado em 2026-07** · última revisão 2026-07-31 · [histórico e registro de expiração](../HISTORICO.md)
+> **Estado da arte capturado em 2026-07** · última revisão 2026-08-03 (linha Traycer na matriz — estudo da spec 024) · [histórico e registro de expiração](../HISTORICO.md)
 
 ## Objetivos de aprendizagem
 
@@ -108,6 +108,9 @@ Fatos enumeráveis em tabela (adaptada da tabela final de [`estudos/panorama-ind
 | [assistant-ui / LangGraph](https://www.assistant-ui.com/docs/runtimes/langgraph/overview) | SSE/HTTP (LangGraph server) | Message chunks, subgraph events, UI messages, interrupts, metadata | Bidirecional (stream + resume) | Sim — interrupts para aprovação/input humano | assistant-ui + [agent-chat-ui](https://github.com/langchain-ai/agent-chat-ui) de referência |
 | [OpenAI Apps SDK / ChatKit](https://developers.openai.com/apps-sdk/reference) | MCP + `window.openai` (`postMessage` no host) | `toolOutput`, `callTool`, `sendFollowUpMessage`, `setWidgetState` | Bidirecional widget↔host↔modelo | Host medeia tool calls; diretório com revisão de apps | Preview; apps no ChatGPT ([anúncio](https://openai.com/index/introducing-apps-in-chatgpt/)) |
 | [Anthropic Messages API](https://platform.claude.com/docs/en/build-with-claude/streaming) | SSE | `message_*`, `content_block_*`, `input_json_delta`, `ping`, `error` | Agente→app (stream); app→agente por request | Tool use: app executa e devolve `tool_result` (fora do modelo) | GA (*general availability*); base de inúmeros harnesses |
+| [Traycer](https://github.com/traycerai/traycer) *(linha adicionada em 2026-08 — [estudo do caso](../../estudos/caso-traycer.md))* | WebSocket local em duas superfícies (unária + streaming), com versionamento negociado por método (`{major, minor}`) | `runtimeEventSchema`: 41 variantes discriminadas (texto, raciocínio, tool call, aprovação, entrevista, plano, fim de turno com `usage`) | Bidirecional contínua (correções de rumo e decisões de aprovação fluem durante o turno) | Sim — dupla fila de aprovação (geral + edições de arquivo com `paths[]`); gates pendentes no snapshot de reconexão | App de produto open-source com protocolo publicado em pacote (host fechado ⏳); porta para 18+ harnesses |
+
+> **Nota datada (2026-08-03)** — a linha do Traycer entrou nesta revisão, vinda do primeiro caso de autor externo avaliado contra o padrão do livro ([estudo da spec 024](../../estudos/caso-traycer.md)). Ela é de natureza diferente das nove anteriores: é uma **aplicação de produto** com protocolo publicado, não uma spec de ecossistema — e é a única linha em que o WebSocket é o transporte principal, exatamente no cenário que a cláusula de exceção prevê (bidirecionalidade real contínua, canal local de desktop). A leitura por colunas abaixo foi escrita sobre as nove linhas de spec/framework; a décima não a contradiz — ela testa a cláusula.
 
 **Transporte.** A coluna se parte em duas famílias, e a divisão não é acidente: onde a fronteira atravessa a rede, venceu **SSE sobre HTTP** (AG-UI default, Vercel, Anthropic, LangGraph); onde a fronteira é local ou embutida — subprocesso, iframe — venceu **JSON-RPC sobre um canal confiável** (stdio no ACP e no MCP clássico; `postMessage` no MCP Apps, MCP-UI e Apps SDK). O transporte segue a topologia de confiança da fronteira, não a moda: nenhuma linha faz do WebSocket o default do chat ([panorama, tabela final](../../estudos/panorama-industria.md)).
 

@@ -27,7 +27,7 @@ Como escrever um capítulo: [`GUIA-CAPITULO.md`](GUIA-CAPITULO.md) · Termos: [`
 
 | Documento | O que é | Spec |
 |---|---|---|
-| [Padrão APH v0.2](padrao-aph.md) | A proposta prescritiva do livro: o que uma aplicação DEVE adotar para conversar integralmente com o harness via chat — níveis de conformidade (Observador/Operador/Federado), requisitos com maturidade declarada, compatibilidade com a indústria e checklist. | 018 |
+| [Padrão APH v0.3](padrao-aph.md) | A proposta prescritiva do livro: o que uma aplicação DEVE adotar para conversar integralmente com o harness via chat — níveis de conformidade (Observador/Operador/Federado), requisitos com maturidade declarada, compatibilidade com a indústria e checklist. | 018 · 025 |
 | [Anexo A — wire format](padrao/anexo-a-wire-format.md) | O formato exato das mensagens: JSON Schemas validáveis (evento, snapshot, catálogo, confirmação, erro), superfície HTTP de referência, códigos de erro e mapeamento para os laboratórios — com exemplos verificados por gate de CI. | 021 |
 
 ## Fronteiras entre capítulos (o que entra onde)
