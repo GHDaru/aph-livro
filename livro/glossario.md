@@ -81,6 +81,8 @@ Objetos de apoio: **sanitização de contexto** (remoção, no servidor, de segr
 - **Caixa-preta (teste de)** — testar um sistema só pelo que se vê de fora (mandar pedidos, observar respostas), sem olhar o código nem o interior. É o método da suíte de conformidade: o que a caixa-preta não alcança (ex.: o que chega ao modelo), a suíte declara em vez de fingir testar.
 - **Servidor de referência** — uma implementação mínima e aberta do padrão, feita para servir de exemplo executável e de cobaia dos testes — não para ir a produção. O da suíte implementa o Nível 1 em memória, sem LLM.
 - **Sabotagem (teste de mutação)** — quebrar de propósito uma cópia do sistema (um defeito por variante) para provar que os testes percebem. Se o teste passa com o defeito plantado, o defeituoso é o teste. É como o autoteste da suíte garante que ela detecta o que promete.
+- **Exit code** — o número que um programa devolve ao terminar: `0` = deu certo; qualquer outro = deu errado. É como ferramentas conversam entre si sem ler texto — o CI decide "passou/falhou" olhando só esse número.
+- **npm** — o instalador de pacotes do ecossistema Node.js: `npm install` baixa as bibliotecas que um programa declara precisar (no arquivo `package.json`).
 - **stdio** — standard input/output: comunicação entre programas na mesma máquina por entrada/saída de texto (transporte usado pelo ACP e por servidores MCP locais).
 - **Cache** — guardar uma resposta para não recalculá-la; `ttlMs` diz por quantos milissegundos ela vale.
 - **Load balancer / sticky session** — o distribuidor de tráfego entre servidores / e a exigência de que um mesmo usuário caia sempre no mesmo servidor (o que o MCP stateless eliminou por design).
