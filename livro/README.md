@@ -29,6 +29,7 @@ Como escrever um capítulo: [`GUIA-CAPITULO.md`](GUIA-CAPITULO.md) · Termos: [`
 |---|---|---|
 | [Padrão APH v0.3](padrao-aph.md) | A proposta prescritiva do livro: o que uma aplicação DEVE adotar para conversar integralmente com o harness via chat — níveis de conformidade (Observador/Operador/Federado), requisitos com maturidade declarada, compatibilidade com a indústria e checklist. | 018 · 021 · 025 |
 | [Anexo A — wire format](padrao/anexo-a-wire-format.md) | O formato exato das mensagens: JSON Schemas validáveis (evento, snapshot, catálogo, confirmação, erro), superfície HTTP de referência, códigos de erro e mapeamento para os laboratórios — com exemplos verificados por gate de CI. | 021 |
+| [Suíte de conformidade — Nível 1](../conformidade/README.md) | O examinador executável: testa de fora (caixa-preta) se uma aplicação cumpre o Nível 1 — 11 checks contra os schemas reais + lista do que autodeclarar; autotestada por sabotagens no CI (Gate 3). | 026 |
 
 ## Fronteiras entre capítulos (o que entra onde)
 

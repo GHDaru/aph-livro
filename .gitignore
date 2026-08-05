@@ -2,3 +2,5 @@ docs/
 publicar/node_modules/
 publicar/package-lock.json
 .env
+conformidade/node_modules/
+conformidade/package-lock.json

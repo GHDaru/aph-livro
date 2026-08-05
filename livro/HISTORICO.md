@@ -40,6 +40,14 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 ## Edições
 
+### Edição 0.08 — 2026-08-05 · Suíte de conformidade executável: Nível 1 (spec 026)
+
+- **`conformidade/`** — a primeira feature de código do repositório: `suite.mjs` (11 checks caixa-preta contra a superfície de referência do Anexo A §A.2, validando eventos contra os **schemas reais** de `livro/padrao/schemas/`; relatório VERIFICADO/FALHOU/AVISO/DECLARADO com veredito e exit code), `servidor-referencia.mjs` (Nível 1 em memória, sem LLM — exemplo executável do padrão) e `autoteste.mjs` (**Gate 3 do CI**: íntegro passa em tudo; cada uma das 6 sabotagens — seq duplicado, replay que perde evento, cancelamento silencioso, evento malformado, erro sem código, content-type errado — é detectada pelo check certo).
+- **Honestidade de método**: os 7 itens do Nível 1 que a caixa-preta não alcança (sanitização server-side, separação de camadas, registry, normalizador, regras do cliente) são **listados como DECLARADO com o porquê** — a suíte não finge cobertura. DEVERIA reprova como AVISO, nunca como FALHOU (APH-3.5).
+- **Padrão segue v0.3** (a suíte verifica, não normatiza; fio segue v0.2): §0 atualiza a limitação declarada ("sem suíte" → "suíte cobre só o Nível 1"), §7 aponta a suíte, §8 restringe o item futuro aos Níveis 2–3. Página da suíte publicada no site (`conformidade/README.md`), na navegação e na Parte normativa do sumário. Glossário: caixa-preta, servidor de referência, sabotagem (teste de mutação).
+- **Verificação**: autoteste verde (11/11 íntegro; 6/6 sabotagens detectadas) + wire + build com links; revisão independente em contexto fresco com execução própria dos gates — achados corrigidos antes do registro (detalhe na spec 026).
+- **IA (A3)**: agente **Claude Code (Anthropic)**; pedido ("pode ir para 026") e curadoria humanos (GHDaru).
+
 ### Edição 0.07 — 2026-08-03 · Padrão APH v0.3: incorporação do caso Traycer (spec 025)
 
 - **`livro/padrao-aph.md` → v0.3**, incorporando os 8 candidatos do estudo da spec 024 (`estudos/caso-traycer.md`): emenda no APH-1.3 (mecanismo equivalente de entrega — snapshot + deltas com fonte durável/CRDT, com a garantia "não perder a conversa" como critério); nota no APH-2.2 (segundo regime de evolução: versionamento negociado por método, fail-closed); **APH-5.6 e APH-5.7 novos** (🧪 DEVERIA — gates pendentes sobrevivem à reconexão; fila de aprovação separada por classe de ação); evidência externa registrada no APH-6.4 (terceira implementação independente de slot filling). Regra preservada: evidência de caso externo **não promove** requisito a ✅ — nenhum 🧪 virou DEVE.
