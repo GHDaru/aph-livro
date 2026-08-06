@@ -40,6 +40,14 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 ## Edições
 
+### Edição 0.09 — 2026-08-06 · A suíte encontra o laboratório: perfis de adaptação e a primeira medição (spec 027)
+
+- **Camada de perfis** (`conformidade/perfis/`): o padrão permite paths (DEVERIA) e nomes locais (PODE); um perfil traduz operações, campos, nomes de `kind`, formato do replay e autenticação do alvo para o canônico. **Regra de integridade**: perfil é dicionário, não isenção — declarar operação ausente faz o check **falhar**, nunca ser pulado. O Gate 3 passou a provar as três propriedades da camada (traduz / é necessária / não isenta), com um modo "dialeto local" no servidor de referência como alvo conforme de teste.
+- **Primeira medição de uma aplicação real** (`conformidade/execucoes/2026-08-06-ghdaru.md`): a API do `ghdaru` foi subida localmente em modo offline (sem chave de provedor → adapter fake) e exercitada pela suíte. Resultado: **NÃO APTO ao Nível 1 — 8/11 verificados, 1 aviso, 2 falhas** (cancelamento inexistente, APH-1.4; envelope de erro sem código estável, APH-1.5/A.7), com causa de cada desvio apontada por path e receita de reprodução completa. Determinismo conferido em duas execuções; o laboratório permaneceu **byte a byte intacto** (venv fora do repositório, bytecode desligado, `git status` vazio ao fim); credenciais só por variável de ambiente, nenhuma em arquivo.
+- **Execução calibra leitura**: o confronto com a auditoria por leitura (spec 023) divergiu em dois pontos, em direções opostas — APH-1.5 estava generoso (🟡 → ❌: crédito parcial premiava a intenção, e o requisito existe para o cliente discriminar por código) e APH-3.5 estava severo (❌ → 🟡: é DEVERIA, e a escala plana da auditoria perdia a distinção). O handoff do roteiro Nível 2 recebeu a seção "o que a medição mudou" e critérios de pronto amarrados aos checks. Achado a favor do laboratório: o campo sensível do teste **não chega ao modelo** (`sanitize.py:4`) — o APH-3.3 tem evidência, ainda que o schema não seja fechado.
+- **Nada de normativo mudou**: padrão segue v0.3, Anexo A v0.2, schemas intocados.
+- **IA (A3)**: agente **Claude Code (Anthropic)**; pedido e curadoria humanos (GHDaru).
+
 ### Edição 0.08 — 2026-08-05 · Suíte de conformidade executável: Nível 1 (spec 026)
 
 - **`conformidade/`** — a primeira feature de código do repositório: `suite.mjs` (11 checks caixa-preta contra a superfície de referência do Anexo A §A.2, validando eventos contra os **schemas reais** de `livro/padrao/schemas/`; relatório VERIFICADO/FALHOU/AVISO/DECLARADO com veredito e exit code), `servidor-referencia.mjs` (Nível 1 em memória, sem LLM — exemplo executável do padrão) e `autoteste.mjs` (**Gate 3 do CI**: íntegro passa em tudo; **11 sabotagens**, uma por check no mínimo, cada uma detectada pelo check certo com o status esperado — a do snapshot furado exercita o caminho AVISO de ponta a ponta).
