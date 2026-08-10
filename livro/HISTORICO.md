@@ -40,6 +40,21 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 ## Edições
 
+### Edição 0.10 — 2026-08-10 · ADR 0005: refinamentos APH do laboratório ghdaru (R5/R6), candidatos a v0.4
+
+- **`adr/0005-refinamentos-aph-do-laboratorio-ghdaru-r5-r6.md`**: decisão + evidência a partir dos rounds R5
+  (anexo efêmero) e R6 (`ui.submit` governado) do épico Chat-OS do `ghdaru`, conduzidos com comitê + security
+  review. Quatro refinamentos aditivos: **P1** proveniência na família *citação* (novo APH-2.6; único que toca o
+  fio — `provenance` opcional no Anexo A); **P2** invariante read×mutação com guarda **fail-closed** no executor
+  direto (novo APH-6.6; contraexemplo de laboratório: executor cego a risco executando `session.logout` mutador
+  direto); **P3** `context_hash` = **frescor, não autz** + valores de campo **server-authoritative** para
+  mutação (refina APH-3.4; promove **APH-5.4** a ✅-lab via `STALE_CONTEXT`); **P4** camada **não-confiável
+  explícita** para anexo/conteúdo do usuário (reforça APH-7.1).
+- **Evidência**: paths verificáveis no `ghdaru` (ADRs 0017/0018, spec 030, `wire.py`, `agent_turn.py`,
+  `screen_registry.py`, `context.py`) — Constituição §1; laboratório somente-leitura §2. Nada mudou no normativo
+  ainda: a subida ao `livro/padrao-aph.md` (candidato v0.4) segue por spec própria com gate humano.
+- **IA (A3)**: agente **Claude Code (Anthropic)**; a decisão de normatizar é gate humano (GHDaru).
+
 ### Edição 0.09 — 2026-08-06 · A suíte encontra o laboratório: perfis de adaptação e a primeira medição (spec 027)
 
 - **Camada de perfis** (`conformidade/perfis/`): o padrão permite paths (DEVERIA) e nomes locais (PODE); um perfil traduz operações, campos, nomes de `kind`, formato do replay e autenticação do alvo para o canônico. **Regra de integridade**: perfil é dicionário, não isenção — não há campo de isenção (operação ausente faz o check **falhar**), o mapa de nomes é **validado na carga** e toda tradução aplicada sai no relatório. O Gate 3 passou a provar quatro propriedades (traduz / é necessária / não isenta nas operações / não isenta no vocabulário), com um modo "dialeto local" no servidor de referência como alvo conforme de teste.

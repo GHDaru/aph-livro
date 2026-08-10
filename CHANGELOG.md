@@ -6,6 +6,13 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 
 ### Added
 
+- **ADR 0005 — refinamentos APH do laboratório ghdaru (R5/R6), candidatos a v0.4** (`adr/0005-*`): quatro
+  refinamentos aditivos ancorados em evidência de path no `ghdaru` (ADRs 0017/0018, spec 030) — P1 proveniência
+  na família citação (novo APH-2.6, único que toca o fio), P2 guarda fail-closed read×mutação no executor direto
+  (novo APH-6.6, contraexemplo `session.logout`), P3 `context_hash` frescor-não-autz + valor de campo
+  server-authoritative (refina APH-3.4, promove APH-5.4 a ✅-lab), P4 camada não-confiável explícita para anexo
+  (reforça APH-7.1). Edição 0.10 no HISTORICO. A subida ao normativo (`livro/padrao-aph.md`, candidato v0.4)
+  segue por spec própria com gate humano.
 - **Divisão em dois repositórios — fase 1: decisão e ferramenta** (spec 028, [ADR 0004](adr/0004-divisao-em-dois-repositorios.md)): `protocolos` passa a ser **a especificação do Padrão APH** (norma + o necessário para usá-la) e o livro vivo migra para repositório próprio. O único acoplamento de código entre as metades (suíte e gate de wire lendo `livro/padrao/schemas/`) foi resolvido pela regra do Accountable — *"o livro não pode linkar?"*: os schemas ficam com a especificação e o livro referencia por URL; nenhum código atravessa a fronteira. `migracao/` traz a ferramenta completa e **ensaiada de ponta a ponta**: extração do livro com histórico (`git-filter-repo`, 50 commits preservados, 102 páginas construídas, zero links quebrados), reescrita dos links da fronteira, e transformação da especificação (gates verdes, zero resíduo, `$id` dos schemas corrigido — apontavam para um GitHub Pages inexistente). Nada saiu do lugar nesta fase: a execução aguarda gate humano, na ordem segura (livro no ar e Vercel reapontado **antes** de limpar a especificação, para não quebrar os links absolutos dos handoffs já entregues).
 
 - Fundação do repositório: constituição v1.0.0, CLAUDE.md, README, estrutura de diretórios, ADRs 0001–0003 (spec 001).
