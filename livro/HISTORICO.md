@@ -40,6 +40,14 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 ## Edições
 
+### Edição 0.12 — 2026-08-10 · Padrão APH v0.5: nível experimental e obrigação condicional (spec 031)
+
+- **A dívida que a revisão da 029 apontou está fechada** — e ela era real: o §4.9 usava **DEVE** em requisitos **🧪** desde a v0.1, violando a régua do próprio §0. A varredura mostrou que a violação era pontual (2 de 11 requisitos 🧪; os outros nove já usavam DEVERIA).
+- **A correção óbvia estava errada.** Rebaixar `APH-9.1`/`APH-9.2` para DEVERIA deixaria o Nível 3 com **zero obrigações** (o `APH-9.3` já era DEVERIA) — um nível de conformidade que não separa quem cumpre de quem declara. Pior: o que se perderia seriam justamente as duas travas de segurança da federação (verificar `origin` nos dois lados, validar token por introspecção).
+- **O que a régua misturava**: a maturidade do *requisito* e a maturidade do *nível que o exige*. O §0 fora escrito presumindo que todo requisito vive em nível já provado — e o Nível 3 é inteiramente experimental. Decisão ([ADR 0006](../adr/0006-nivel-experimental-e-obrigacao-condicional.md)): o **Nível 3 passa a ser declarado experimental** (🧪), e dentro de um nível experimental requisito 🧪 PODE usar DEVE, porque a obrigação é **condicional** — não obriga a federar, obriga quem federar. O aviso de maturidade fica no nível, onde o leitor decide.
+- **Nada afrouxou**: nenhum DEVE virou DEVERIA, nenhum requisito saiu, o fio segue v0.3. Uma implementação conforme à v0.4 segue conforme à v0.5 — o que mudou é que declarar Nível 3 agora declara também que se está construindo à frente da evidência.
+- **IA (A3)**: agente **Claude Code (Anthropic)**; decisão de norma sob gate humano (GHDaru).
+
 ### Edição 0.11 — 2026-08-10 · Padrão APH v0.4 e fio v0.3: os refinamentos sobem ao normativo (spec 029)
 
 - **`livro/padrao-aph.md` → v0.4**, aplicando o [ADR 0005](../adr/0005-refinamentos-aph-do-laboratorio-ghdaru-r5-r6.md): **APH-2.6** (🧪 proveniência na citação — separa fonte curada de anexo não-confiável, para que a distinção do APH-7.1 não se perca na tela); **APH-6.6** (executor de comando de UI recusa *fail-closed* verbo mutador; `submit` no APH-6.1 designa a proposta, não a execução); **APH-5.8** (🧪 valores server-authoritative para ação mutadora, com construção fail-closed); **APH-3.4 refinado** (`context_hash` é frescor, **não** autorização); **APH-5.4 promovido a ✅**; **APH-7.1 reforçado** (camada não-confiável demarcada no contrato de contexto, antes do primeiro conteúdo injetado).
