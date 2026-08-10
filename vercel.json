@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd publicar && npm install --no-audit --no-fund && node valida-wire.mjs && node build.mjs",
+  "buildCommand": "cd publicar && npm install --no-audit --no-fund && node build.mjs",
   "outputDirectory": "docs",
   "cleanUrls": true,
   "trailingSlash": false

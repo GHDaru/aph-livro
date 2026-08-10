@@ -27,10 +27,10 @@ Como escrever um capítulo: [`GUIA-CAPITULO.md`](GUIA-CAPITULO.md) · Termos: [`
 
 | Documento | O que é | Spec |
 |---|---|---|
-| [Padrão APH v0.5](padrao-aph.md) | A proposta prescritiva do livro: o que uma aplicação DEVE adotar para conversar integralmente com o harness via chat — níveis de conformidade (Observador/Operador/Federado), requisitos com maturidade declarada, compatibilidade com a indústria e checklist. | 018 · 021 · 025 · 029 · 031 |
-| [Anexo A — wire format](padrao/anexo-a-wire-format.md) | O formato exato das mensagens: JSON Schemas validáveis (evento, snapshot, catálogo, confirmação, erro), superfície HTTP de referência, códigos de erro e mapeamento para os laboratórios — com exemplos verificados por gate de CI. | 021 · 029 |
-| [Suíte de conformidade — Nível 1](../conformidade/README.md) | O examinador executável: testa de fora (caixa-preta) se uma aplicação cumpre o Nível 1 — 11 checks contra os schemas reais + lista do que autodeclarar; autotestada por sabotagens no CI (Gate 3). | 026 · 027 |
-| [Skills de adoção](../skills.md) | Duas skills para agentes de código que cobrem o que a caixa-preta não alcança: `aph-avaliar` (auditoria por leitura com evidência por path) e `aph-sugerir` (roteiro de mudança com critério de pronto verificável). | 030 |
+| [Padrão APH v0.5](https://github.com/GHDaru/protocolos/blob/main/padrao/padrao-aph.md) | A proposta prescritiva do livro: o que uma aplicação DEVE adotar para conversar integralmente com o harness via chat — níveis de conformidade (Observador/Operador/Federado), requisitos com maturidade declarada, compatibilidade com a indústria e checklist. | 018 · 021 · 025 · 029 · 031 |
+| [Anexo A — wire format](https://github.com/GHDaru/protocolos/blob/main/padrao/anexo-a-wire-format.md) | O formato exato das mensagens: JSON Schemas validáveis (evento, snapshot, catálogo, confirmação, erro), superfície HTTP de referência, códigos de erro e mapeamento para os laboratórios — com exemplos verificados por gate de CI. | 021 · 029 |
+| [Suíte de conformidade — Nível 1](https://github.com/GHDaru/protocolos/blob/main/conformidade/README.md) | O examinador executável: testa de fora (caixa-preta) se uma aplicação cumpre o Nível 1 — 11 checks contra os schemas reais + lista do que autodeclarar; autotestada por sabotagens no CI (Gate 3). | 026 · 027 |
+| [Skills de adoção](https://github.com/GHDaru/protocolos/blob/main/skills.md) | Duas skills para agentes de código que cobrem o que a caixa-preta não alcança: `aph-avaliar` (auditoria por leitura com evidência por path) e `aph-sugerir` (roteiro de mudança com critério de pronto verificável). | 030 |
 
 ## Fronteiras entre capítulos (o que entra onde)
 

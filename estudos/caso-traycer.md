@@ -1,6 +1,6 @@
 # Estudo de caso — Traycer × Padrão APH
 
-> **Estudo da spec 024** · 2026-07-31 · fonte: clone somente-leitura de `ghdaru/traycer` (fork de `traycerai/traycer`), commit `65fc3d7` · avaliado contra o [Padrão APH v0.2](../livro/padrao-aph.md) e o [Anexo A](../livro/padrao/anexo-a-wire-format.md) · termos no [glossário](../livro/glossario.md)
+> **Estudo da spec 024** · 2026-07-31 · fonte: clone somente-leitura de `ghdaru/traycer` (fork de `traycerai/traycer`), commit `65fc3d7` · avaliado contra o [Padrão APH v0.2](https://github.com/GHDaru/protocolos/blob/main/padrao/padrao-aph.md) e o [Anexo A](https://github.com/GHDaru/protocolos/blob/main/padrao/anexo-a-wire-format.md) · termos no [glossário](../livro/glossario.md)
 >
 > **Por que este caso importa**: é o primeiro caso de **autor externo** avaliado contra o APH — o antídoto direto para a limitação declarada na v0.1 ("dois laboratórios de um mesmo autor"). E é um espécime raro: uma aplicação de produto (desktop + CLI) cujo negócio *é* conversar com harnesses (Claude Code, Codex, Cursor, OpenCode e +14, "Bring Your Own Agent"), com o contrato publicado como pacote formal (`protocol/`, TypeScript + Zod, testado).
 

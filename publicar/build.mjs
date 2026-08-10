@@ -15,7 +15,7 @@ import anchor from "markdown-it-anchor";
 const AQUI = dirname(fileURLToPath(import.meta.url));
 const RAIZ = resolve(AQUI, "..");
 const SAIDA = resolve(RAIZ, "docs");
-const GITHUB = "https://github.com/GHDaru/protocolos/blob/main/";
+const GITHUB = "https://github.com/GHDaru/aph-livro/blob/main/";
 const IGNORAR = new Set([".git", ".specify", ".github", "node_modules", "docs", "publicar"]);
 
 const md = new MarkdownIt({ html: true, linkify: true, typographer: false }).use(anchor, { level: [2, 3] });
@@ -109,7 +109,7 @@ function casca(arquivo, corpoHtml, tit) {
 <title>${tit} — Protocolo App ↔ Harness</title><style>${CSS}</style></head><body>
 <button class="menu-btn" onclick="document.querySelector('nav').classList.toggle('aberta')">☰ menu</button>
 <div class="wrap"><nav><div class="titulo">Protocolo de Comunicação<br>Aplicação ↔ Harness</div>${navHtml}
-<div style="margin-top:1rem"><a href="https://github.com/GHDaru/protocolos">Repositório ↗</a></div></nav>
+<div style="margin-top:1rem"><a href="https://github.com/GHDaru/aph-livro">Repositório ↗</a></div></nav>
 <main>${corpoHtml}
 <footer>Livro vivo · <a href="${GITHUB}${arquivo}">fonte desta página ↗</a> · co-escrito com agente de IA sob curadoria humana · governança: metodologia Maestro</footer>
 </main></div></body></html>`;

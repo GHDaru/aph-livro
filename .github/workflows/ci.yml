@@ -1,0 +1,27 @@
+name: CI (gate do livro)
+
+# Gate único do livro: o build verifica todos os links internos e falha em link
+# quebrado (Princípio I). O gate de wire e a suíte de conformidade vivem no
+# repositório da especificação (ADR 0004 da divisão).
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar dependências do motor
+        run: npm install --no-audit --no-fund
+        working-directory: publicar
+      - name: Gate — build do site (links verificados)
+        run: node build.mjs
+        working-directory: publicar
