@@ -114,6 +114,8 @@ Registradas aqui à medida que aparecem, com o documento que as levantou. Cada u
 
 Não são lacunas: são pontos em que o texto do anexo **descreve errado** o que os laboratórios fazem. Reportadas ao repositório da norma; este livro não as corrige por conta própria.
 
+> **As oito foram corrigidas na norma pela spec 037** (2026-08-13, `GHDaru/protocolos`), em um lote. Duas mudaram de forma na reverificação contra o código, e vale registrar aqui porque o achado é do livro: **D2** é mais grave do que este registro dizia — o §A.7 usava a emissão de `UNAUTHORIZED` como **lastro de maturidade**, e o lastro não existe, porque a situação que a norma atribui ao código não tem emissor medido; a maturidade ficou como spec própria. **D4** também: a divergência não é só no truncamento do hash, é também na **entrada** dele, o que encosta na lacuna 14 desta mesma página.
+
 | # | Deriva | Onde apareceu |
 |---|---|---|
 | D1 | O bloco de exemplo do §A.3 imprime dois eventos com o mesmo número de sequência, contra o APH-1.2. O JSON de referência está correto | J08 |

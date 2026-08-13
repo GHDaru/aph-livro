@@ -4,6 +4,14 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) · Versiona
 
 ## [Unreleased]
 
+### Fixed
+
+- **As oito derivas que as jornadas encontraram foram corrigidas na norma** (spec 037 de `GHDaru/protocolos`, 2026-08-13). O registro em `livro/jornadas/README.md` sai de "reportada" para resolvida, e guarda as **duas que mudaram de forma** quando a norma as reverificou contra o código — porque o achado é deste lado e a correção do enunciado também. **D2**: o §A.7 do Anexo A não só descrevia mal a emissão de `UNAUTHORIZED`, ele a usava como **lastro de maturidade** — o argumento de por que aquele código não é 🧪. A situação que a norma atribui ao código não tem emissor medido em laboratório nenhum, então o lastro não existia; a norma corrigiu a afirmação e deixou a maturidade para spec própria, porque tirar o código do registro obrigatório é contrato para quem já implementou. **D4**: a divergência do `context_hash` não é só no truncamento (32 × 16), é também na **entrada** — um laboratório inclui os parâmetros da ação, o outro não —, o que a encosta na lacuna 14 desta mesma página, ainda aberta.
+
+### Dívida registrada
+
+- **2026-08-13 · o livro anuncia o Padrão APH v0.6; a norma está na v0.7.** Acusado por `conformidade/valida-espelho.mjs --livro`. A dívida é da **spec 036** (proposta em lote, APH-5.9), que declarou a verificação do Princípio VIII no plano e não a executou: o cap. 05 não conhece o APH-5.9, e nem este CHANGELOG nem o da norma registraram a passagem. Encontrada pela revisão independente retroativa da 036, e registrada dos dois lados no mesmo dia, conforme o Princípio VIII manda quando a deriva não é corrigida na hora.
+
 ### Added
 
 - **Princípio VIII da constituição: "Dois repositórios, uma norma"** (v1.1.0, emenda vinda da spec 035 de `GHDaru/protocolos`). Mudança no normativo passa a **obrigar** a verificação deste livro, com o resultado registrado mesmo quando for "nada a mudar"; o livro não contradiz a norma; e deriva encontrada e não corrigida vira dívida com data no CHANGELOG e no HISTORICO. A regra nasceu de uma constatação: entre as specs 032 e 034 o normativo mudou quatro vezes e o livro não foi tocado nenhuma.
