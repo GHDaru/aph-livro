@@ -27,13 +27,13 @@ Três convenções valem em todas:
 | [J03](j03-cancelamento.md) | O usuário manda parar: cancelamento cooperativo | Parar é protocolo, não silêncio | APH-1.4, 1.5 | ✅ escrita |
 | [J04](j04-porta-do-modelo.md) | Por trás da porta: chunk de provedor vira evento canônico | Onde o formato do fornecedor morre | APH-2.3, 8.1, 8.2🧪, 1.5 | ✅ escrita |
 | [J05](j05-citacao-e-proveniencia.md) | Resposta com fontes: citação e proveniência | Por que o anexo de agora não vale o documento curado | APH-2.1, 2.6🧪, 7.1 | ✅ escrita |
-| J06 | O fio evolui: tipo desconhecido, campo novo, versão | Como mudar sem quebrar quem já implementou | APH-2.2, §A.9, B.2.5 | ⏳ |
+| [J06](j06-o-fio-evolui.md) | O fio evolui: tipo desconhecido, campo novo, versão | Como mudar sem quebrar quem já implementou | APH-2.2, §A.9, B.2.5 | ✅ escrita |
 
 ### Bloco 2 — Nível 2 (Operador): a ação governada
 
 | # | Jornada | Em uma frase | Requisitos | Estado |
 |---|---|---|---|---|
-| J07 | O que a aplicação sabe fazer: catálogo, risco e tools | A única superfície executável | APH-4.1–4.4🧪, 7.2 | ⏳ |
+| [J07](j07-catalogo.md) | O que a aplicação sabe fazer: catálogo, risco e tools | A única superfície executável | APH-4.1–4.4🧪, 7.2 | ✅ escrita |
 | J08 | Ação de leitura: proposta que executa direto | O caminho curto, e por que ele ainda é proposta | APH-5.1, 5.2, 6.1–6.3, 6.6⚗️ | ⏳ |
 | J09 | Ação mutadora: proposta, gate humano, execução, traço | O eixo do bloco: a máquina de estados inteira | APH-5.1–5.5, 5.8🧪, 7.2, 7.4 | ⏳ |
 | J10 | A tela mudou entre propor e confirmar | Frescor não é autorização | APH-5.4, 3.4🧪 | ⏳ |
