@@ -62,7 +62,7 @@ O catálogo é a **única superfície executável**. Não é a principal, nem a 
 
 Isso é mais restritivo do que parece à primeira vista, e é a restrição que faz o resto do padrão funcionar. Se houvesse um segundo caminho — um endpoint genérico, uma execução de consulta, uma ferramenta de propósito geral —, todas as garantias construídas nas jornadas seguintes teriam uma porta dos fundos: a classe de risco, o gate humano, o traço, a autorização.
 
-Cada ação declara quatro coisas: identificador, título, schema de entrada e **classe de risco**. As três primeiras são óbvias; a quarta é o que permite ao servidor decidir, sem perguntar ao modelo, se aquilo executa direto ou para num gate humano ([J08](README.md) e [J09](README.md)).
+Cada ação declara quatro coisas: identificador, título, schema de entrada e **classe de risco**. As três primeiras são óbvias; a quarta é o que permite ao servidor decidir, sem perguntar ao modelo, se aquilo executa direto ou para num gate humano ([J08](j08-acao-de-leitura.md) e [J09](README.md)).
 
 ### 2. Ausência é melhor fronteira que recusa
 
