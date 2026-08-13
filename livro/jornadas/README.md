@@ -45,7 +45,7 @@ Três convenções valem em todas:
 
 | # | Jornada | Em uma frase | Requisitos | Estado |
 |---|---|---|---|---|
-| J14 | Recusa por autoridade | Ausência é melhor fronteira que recusa | APH-4.1, 4.3, 7.2, 5.5 | ⏳ |
+| [J14](j14-recusa-por-autoridade.md) | Recusa por autoridade | Três camadas, e só uma delas aparece no fio | APH-4.1, 4.3, 7.2, 7.4, 5.5 | ✅ escrita |
 | J15 | Injeção barrada | O texto hostil que chega pela tela | APH-3.3, 3.5, 7.1, 7.3 | ⏳ |
 
 ### Bloco 4 — Nível 3 (Federado): a junta
@@ -100,6 +100,7 @@ Registradas aqui à medida que aparecem, com o documento que as levantou. Cada u
 | 15 | O schema da ação de catálogo é **fechado** e rejeita um campo de atomicidade de lote: quem obedecer ao APH-5.9(a) reprova no gate da própria norma | J11 (§A.5, APH-5.9) | a registrar |
 | 16 | A confirmação é fechada em três campos: a decisão de um lote de oito é **idêntica** à de um alvo único, e o servidor não pode verificar que o confirmado é o que foi mostrado | J11 (§A.6, APH-5.9) | a registrar |
 | 17 | A norma não diz qual estado terminal vai num lote parcialmente executado, e o gate não cruza estado com desfechos. O consumidor da versão anterior do fio vê só o estado, e recebe a mentira que o campo novo admite existir | J11 (§A.3, APH-5.9) | a registrar |
+| 18 | **A recusa por política não atravessa o fio** quando acontece antes de a proposta nascer: sem identificador, sem estado, sem evento. E quando acontece na execução, chega como falha genérica classificada por heurística de texto. O APH-5.5 exige traço também para as recusadas | J14 (APH-5.5, 7.2, §A.7) | a registrar |
 
 ### Derivas do Anexo A encontradas pelo caminho
 
