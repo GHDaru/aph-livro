@@ -25,8 +25,8 @@ Três convenções valem em todas:
 | [J01](j01-primeira-pergunta.md) | Primeira pergunta: sessão, snapshot e resposta | A espinha: a tela vira contexto e a resposta chega em pedaços | APH-1.1, 1.2, 2.1, 3.1–3.3, 3.5, 7.1, 7.3 | ✅ escrita |
 | [J02](j02-conexao-cai.md) | A conexão cai: replay sem perda nem duplicação | O que garante que a conversa não se perde | APH-1.3, 1.2, 2.5 | ✅ escrita |
 | [J03](j03-cancelamento.md) | O usuário manda parar: cancelamento cooperativo | Parar é protocolo, não silêncio | APH-1.4, 1.5 | ✅ escrita |
-| J04 | Por trás da porta: chunk de provedor vira evento canônico | Onde o formato do fornecedor morre | APH-2.3, 8.1, 8.2🧪, 1.5 | ⏳ |
-| J05 | Resposta com fontes: citação e proveniência | Por que o anexo de agora não vale o documento curado | APH-2.1, 2.6🧪, 7.1 | ⏳ |
+| [J04](j04-porta-do-modelo.md) | Por trás da porta: chunk de provedor vira evento canônico | Onde o formato do fornecedor morre | APH-2.3, 8.1, 8.2🧪, 1.5 | ✅ escrita |
+| [J05](j05-citacao-e-proveniencia.md) | Resposta com fontes: citação e proveniência | Por que o anexo de agora não vale o documento curado | APH-2.1, 2.6🧪, 7.1 | ✅ escrita |
 | J06 | O fio evolui: tipo desconhecido, campo novo, versão | Como mudar sem quebrar quem já implementou | APH-2.2, §A.9, B.2.5 | ⏳ |
 
 ### Bloco 2 — Nível 2 (Operador): a ação governada
