@@ -13,3 +13,4 @@ Decisões relevantes do projeto, registradas no formato: **contexto → decisão
 | [0007](0007-sincronizacao-obrigatoria-entre-norma-e-livro.md) | Sincronização obrigatória entre a norma e o livro | 2026-08-13 | Aceito |
 | [0008](0008-jornadas-do-protocolo.md) | Jornadas do protocolo: diagrama de sequência, tabela normativa e o que não se desenha | 2026-08-13 | Aceito |
 | [0009](0009-ui-command-e-perna-de-efeito.md) | O comando de interface é a perna de efeito de uma proposta, não um canal paralelo | 2026-08-13 | Aceito |
+| [0010](0010-diagrama-de-estados-so-com-lastro.md) | Diagrama de estados nas jornadas: um por laboratório, e só com lastro | 2026-08-13 | Aceito |
