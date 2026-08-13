@@ -35,6 +35,10 @@ Como escrever um capítulo: [`GUIA-CAPITULO.md`](GUIA-CAPITULO.md) · Termos: [`
 | [Suíte da federação e matriz por lado](https://github.com/GHDaru/protocolos/blob/main/conformidade/README-federacao.md) | O mesmo examinador para o lado hospedeiro da junta, com 10 checks e 13 sabotagens, e a matriz que diz de quem é cada uma das 49 obrigações e como cada uma se verifica. | 034 |
 | [Skills de adoção](https://github.com/GHDaru/protocolos/blob/main/skills.md) | Duas skills para agentes de código que cobrem o que a caixa-preta não alcança: `aph-avaliar` (auditoria por leitura com evidência por path) e `aph-sugerir` (roteiro de mudança com critério de pronto verificável). | 030 |
 
+## Jornadas do protocolo
+
+Os capítulos explicam o que cada peça é. As [**jornadas**](jornadas/README.md) mostram a conversa acontecendo: quem fala com quem, em que ordem, e o que atravessa o fio. São dezenove, em quatro blocos, com diagrama de sequência e tabela de trocas ([ADR 0008](../adr/0008-jornadas-do-protocolo.md)).
+
 ## Fronteiras entre capítulos (o que entra onde)
 
 - **02 × 03**: o cap. 02 trata do *canal* (HTTP, SSE, sessão, reconexão, cancelamento, erros de transporte); o cap. 03 trata do *vocabulário* que trafega no canal (tipos de evento e sua semântica). O envelope (`seq`, `kind`, `payload`) pertence ao 03; a entrega e reentrega dele, ao 02.
