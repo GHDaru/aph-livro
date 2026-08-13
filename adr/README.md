@@ -16,3 +16,4 @@ Decisões relevantes do projeto, registradas no formato: **contexto → decisão
 | [0010](0010-diagrama-de-estados-so-com-lastro.md) | Diagrama de estados nas jornadas: um por laboratório, e só com lastro | 2026-08-13 | Aceito |
 | [0011](0011-tres-recusas-tres-perguntas.md) | Três recusas, três perguntas: a divisão entre J10, J14 e J15 | 2026-08-13 | Aceito |
 | [0012](0012-classes-de-evidencia-fora-dos-laboratorios.md) | Classes de evidência fora dos laboratórios: onde entra a aplicação federada | 2026-08-13 | Aceito |
+| [0013](0013-jornada-sem-fio-e-o-bloco-federado.md) | Jornada sem fio, e a forma do bloco federado | 2026-08-13 | Aceito |

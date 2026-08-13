@@ -54,10 +54,14 @@ Três convenções valem em todas:
 
 | # | Jornada | Em uma frase | Requisitos | Estado |
 |---|---|---|---|---|
-| J16 | Admissão de uma aplicação federada | O que precisa estar acordado antes do primeiro embarque | APH-9.1🧪, B.4, B.5, B.10 | ⏳ |
-| J17 | Embarque e handshake | Quem fala primeiro, e por que a credencial não é a sessão | APH-9.2🧪, 9.4a, 9.5🧪, B.1–B.3, B.6 | ⏳ |
-| J18 | A aplicação federada propõe (nunca executa) | O contrato da IA reinstanciado para terceiros | APH-9.4b🧪, 4.1, 5.1, B.3.3, B.7, B.9 | ⏳ |
-| J19 | O embarque é recusado | Três recusas, três decisores, um estado honesto | APH-9.2🧪, B.1.2, B.2.3, B.6.5 | ⏳ |
+| [J16](j16-admissao.md) | Admissão de uma aplicação federada | A jornada que **não tem fio**, e por quê | APH-9.1🧪, B.4, B.5, B.10 | ✅ escrita |
+| [J17](j17-embarque-handshake.md) | Embarque e handshake | Quem fala primeiro, e por que a credencial não é a sessão | APH-9.2🧪, 9.4a, 9.5🧪, B.1–B.3, B.6, B.8 | ✅ escrita |
+| [J18](j18-app-federada-propoe.md) | A aplicação federada propõe (nunca executa) | O contrato da IA reinstanciado para terceiros | APH-9.4b🧪, 4.1, 5.1, B.3.3, B.7, B.9 | ✅ escrita |
+| [J19](j19-embarque-recusado.md) | O embarque é recusado | Três decisores, uma tese: a recusa não entrega oráculo | APH-9.2🧪, B.1.2, B.2.3, B.3.1, B.6.5 | ✅ escrita |
+
+> **Duas notas de forma neste bloco**, decididas no [ADR 0013](../../adr/0013-jornada-sem-fio-e-o-bloco-federado.md): a J16 **não tem diagrama de sequência**, porque o contrato de admissão chega por configuração e nunca por mensagem — desenhá-la promoveria a contrato rotas que a norma não fixou. E a J19 reúne as três recusas num documento só, com três momentos, porque a tese é uma.
+>
+> **Prova de cobertura do canal**: o vocabulário tem quatro mensagens. `ghd.ready` e `ghd.handshake` estão na J17; `ghd.ready` reaparece na J19 como mensagem descartada; `ghd.action_result` e `ghd.resource_changed` estão na J18. Nenhuma sobra.
 
 ## O que não tem jornada, e por quê
 
@@ -89,7 +93,11 @@ Registradas aqui à medida que aparecem, com o documento que as levantou. Cada u
 | 4 | O estado canônico `stale` não tem implementação; o laboratório encerra como `cancelled` e chama o erro de `STALE_CONTEXT` | J10 (APH-5.4) | conhecido, mapeado no §A.8 |
 | 5 | O mecanismo equivalente ao replay (fonte durável) não tem fio especificado, só a obrigação de registrar a escolha | J02 (APH-1.3) | a registrar |
 | 6 | O regime de versionamento negociado por método é reconhecido pela norma, que não especifica handshake nenhum para ele | J06 (APH-2.2) | a registrar |
-| 7 | Nenhum laboratório publica a lista de prefixos de rota reservados | J16 (B.10.2) | a registrar |
+| 7 | Nenhum laboratório publica a lista de prefixos de rota reservados, e o hospedeiro recusa a colisão sem dizer de antemão contra o quê | J16 (B.10.2) | a registrar |
+| 19 | **Nenhuma rota da admissão é normativa** — manifesto, emissão do grant, introspecção. O que existe é convenção do laboratório, inclusive dentro da suíte | J16 (B.4, B.5, B.6) | a registrar |
+| 20 | **A requisição de introspecção não tem forma normativa**: só a resposta tem. Rota, método e autenticação do chamador não estão no anexo | J17 (B.6.3, B.6.6) | a registrar |
+| 21 | **A autoridade efetiva não é a interseção com o usuário** em lado nenhum: a aplicação federada pode exceder quem abriu o embarque. A credencial de aplicação é emitida e nunca verificada, não há revogação por aplicação, e a aplicação atuante não entra no traço | J17, J18 (B.6.7, APH-9.4b) | a registrar |
+| 22 | A obrigação de re-sanitizar o snapshot vindo do quadro **depende** da camada não-confiável, que não existe e não tem onde existir | J18, J15 (B.9.3, APH-7.1) | a registrar |
 | 8 | O comando de interface **não tem correlação no fio** com a proposta que o autorizou: o payload exige só o comando, sem identificador de proposta, de ação ou classe de risco. O check fail-closed do APH-6.6 fica sem insumo | J08 (APH-6.6, §A.3) | a registrar |
 | 9 | *Deriva editorial, não lacuna*: o bloco de exemplo do §A.3 imprime dois eventos com o mesmo número de sequência, contra o APH-1.2. O JSON de referência está correto, e por isso nenhum gate pega | J08 (§A.3) | a reportar |
 | 10 | O APH-5.1 manda as transições fora da tabela falharem, e **a norma não publica tabela nenhuma**. As arestas `proposed → executing`, `proposed → denied`, `proposed → expired` e `confirmed → denied` existem em código e em nenhum lugar da norma | J09 (APH-5.1) | a registrar |
@@ -114,3 +122,5 @@ Não são lacunas: são pontos em que o texto do anexo **descreve errado** o que
 | D4 | O §A.4 fixa o hash truncado em 16 caracteres; um laboratório trunca em 32, o que refuta o "uma definição só" do APH-3.4 | J10 |
 | D5 | O §A.0 enumera os elementos 🧪 do fio e **omite `outcomes`**, que é justamente o 🧪 que a versão do anexo introduziu | J11 |
 | D6 | O §A.9 diz que o anexo está na v0.3, enquanto o título e a nota de mudança dizem v0.4 | J11 |
+| D7 | A tabela dos cinco parâmetros do §B.4 é prosa **sem número de cláusula**: a matriz de obrigações só tem as três subcláusulas seguintes, então "o hospedeiro deve entregar antes do primeiro embarque" não tem dono atribuído | J16 |
+| D8 | O check de introspecção da suíte derruba resposta fora da faixa de sucesso, o que decorre do §B.6.3 mas **não está literal** no §B.6.5 | J19 |
