@@ -46,7 +46,7 @@ Três convenções valem em todas:
 | # | Jornada | Em uma frase | Requisitos | Estado |
 |---|---|---|---|---|
 | [J14](j14-recusa-por-autoridade.md) | Recusa por autoridade | Três camadas, e só uma delas aparece no fio | APH-4.1, 4.3, 7.2, 7.4, 5.5 | ✅ escrita |
-| J15 | Injeção barrada | O texto hostil que chega pela tela | APH-3.3, 3.5, 7.1, 7.3 | ⏳ |
+| [J15](j15-injecao-barrada.md) | Injeção barrada | A sanitização protege o que sai, não o que entra | APH-3.3, 3.5, 7.1, 7.3 | ✅ escrita |
 
 ### Bloco 4 — Nível 3 (Federado): a junta
 
