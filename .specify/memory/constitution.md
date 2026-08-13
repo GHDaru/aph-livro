@@ -1,6 +1,6 @@
 # Constituição — Protocolo de Comunicação Aplicação ↔ Harness
 
-**Versão 1.0.0** · Ratificada em 2026-07-30 · Emendas via ADR + SemVer (MAJOR: remoção/redefinição de princípio · MINOR: novo princípio · PATCH: clarificação)
+**Versão 1.1.0** · Ratificada em 2026-07-30 · Última emenda em 2026-08-13 (Princípio VIII, spec 035 de `GHDaru/protocolos`) · Emendas via ADR e SemVer (MAJOR: remoção ou redefinição de princípio · MINOR: princípio novo · PATCH: clarificação)
 
 Este repositório abriga o livro vivo **"Protocolo de Comunicação Aplicação ↔ Harness"** — *"a aplicação conversando com a IA, e a IA conversando com a aplicação"*. A constituição é a fonte de verdade: em conflito com qualquer pedido pontual, ela prevalece ou o conflito é explicitado ao humano antes de agir.
 
@@ -47,6 +47,18 @@ Todo trabalho segue o fluxo Maestro na raia adequada:
 - **CHANGELOG como forcing function**: toda entrega adiciona entrada em `[Unreleased]`.
 - **Gates humanos proporcionais ao risco**: decisões reversíveis são registradas (ADR) e seguem sem bloquear; decisões irreversíveis ou de escopo (merge para main, publicação, mudança de tese do livro) exigem aprovação humana explícita.
 - **Revisão independente em contexto fresco** antes de dar um lote por pronto.
+
+### VIII. Dois repositórios, uma norma (NÃO-NEGOCIÁVEL)
+
+A especificação do Padrão APH vive em [`GHDaru/protocolos`](https://github.com/GHDaru/protocolos) e este livro a fundamenta. A divisão (ADR 0004) separou os artefatos, e não a verdade: **os dois precisam contar a mesma história**.
+
+Daí a obrigação, nos dois sentidos:
+
+- **Mudança no normativo obriga a verificar este livro.** Nenhuma entrega que altere `padrao/` em `GHDaru/protocolos` (padrão, anexos, schemas ou glossário) fecha sem uma verificação explícita de quais capítulos, glossário ou estudos ficaram desatualizados. A verificação é parte da Definition of Done da entrega, e o seu resultado é registrado, mesmo quando ele for "nada a mudar".
+- **O livro não contradiz a norma.** Onde os dois falam do mesmo termo ou do mesmo requisito, a norma manda. O livro explica, contextualiza e discorda em voz alta quando for o caso, e nunca descreve como vigente um requisito que a norma já mudou.
+- **Deriva é dívida com data.** Divergência encontrada e não corrigida na hora vira entrada no `CHANGELOG` e no `HISTORICO`, com o que ficou pendente. Divergência não registrada é falha de processo, não descuido.
+
+A razão de isto ser princípio, e não convenção: entre as specs 032 e 034 o normativo mudou quatro vezes, e o livro não foi tocado nenhuma. A divergência ainda era pequena quando foi notada. Esta regra existe para que a próxima seja notada do mesmo tamanho.
 
 ## Governança
 
