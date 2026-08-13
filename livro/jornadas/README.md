@@ -34,7 +34,7 @@ Três convenções valem em todas:
 | # | Jornada | Em uma frase | Requisitos | Estado |
 |---|---|---|---|---|
 | [J07](j07-catalogo.md) | O que a aplicação sabe fazer: catálogo, risco e tools | A única superfície executável | APH-4.1–4.4🧪, 7.2 | ✅ escrita |
-| J08 | Ação de leitura: proposta que executa direto | O caminho curto, e por que ele ainda é proposta | APH-5.1, 5.2, 6.1–6.3, 6.6⚗️ | ⏳ |
+| [J08](j08-acao-de-leitura.md) | Ação de leitura: a proposta que executa direto | O caminho curto, e por que ele ainda é proposta | APH-5.1, 5.2, 5.5, 6.1–6.3, 6.6⚗️ | ✅ escrita |
 | J09 | Ação mutadora: proposta, gate humano, execução, traço | O eixo do bloco: a máquina de estados inteira | APH-5.1–5.5, 5.8🧪, 7.2, 7.4 | ⏳ |
 | J10 | A tela mudou entre propor e confirmar | Frescor não é autorização | APH-5.4, 3.4🧪 | ⏳ |
 | J11 | Um lote, uma confirmação: N alvos, desfecho por alvo | Oito confirmações idênticas ensinam a clicar sem ler | APH-5.9🧪, 5.5, 5.2 | ⏳ |
@@ -88,3 +88,5 @@ Registradas aqui à medida que aparecem, com o documento que as levantou. Cada u
 | 5 | O mecanismo equivalente ao replay (fonte durável) não tem fio especificado, só a obrigação de registrar a escolha | J02 (APH-1.3) | a registrar |
 | 6 | O regime de versionamento negociado por método é reconhecido pela norma, que não especifica handshake nenhum para ele | J06 (APH-2.2) | a registrar |
 | 7 | Nenhum laboratório publica a lista de prefixos de rota reservados | J16 (B.10.2) | a registrar |
+| 8 | O comando de interface **não tem correlação no fio** com a proposta que o autorizou: o payload exige só o comando, sem identificador de proposta, de ação ou classe de risco. O check fail-closed do APH-6.6 fica sem insumo | J08 (APH-6.6, §A.3) | a registrar |
+| 9 | *Deriva editorial, não lacuna*: o bloco de exemplo do §A.3 imprime dois eventos com o mesmo número de sequência, contra o APH-1.2. O JSON de referência está correto, e por isso nenhum gate pega | J08 (§A.3) | a reportar |
