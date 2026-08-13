@@ -37,7 +37,7 @@ Três convenções valem em todas:
 | [J08](j08-acao-de-leitura.md) | Ação de leitura: a proposta que executa direto | O caminho curto, e por que ele ainda é proposta | APH-5.1, 5.2, 5.5, 6.1–6.3, 6.6⚗️ | ✅ escrita |
 | [J09](j09-acao-mutadora.md) | Ação mutadora: proposta, gate humano, execução, traço | O eixo do bloco: a máquina de estados inteira | APH-5.1, 5.2, 5.3🧪, 5.5, 5.8🧪, 7.2, 7.4 | ✅ escrita |
 | [J10](j10-tela-mudou.md) | A tela mudou entre propor e confirmar | Frescor não é autorização | APH-5.4, 3.4🧪, 5.8🧪 | ✅ escrita |
-| J11 | Um lote, uma confirmação: N alvos, desfecho por alvo | Oito confirmações idênticas ensinam a clicar sem ler | APH-5.9🧪, 5.5, 5.2 | ⏳ |
+| [J11](j11-lote.md) | Um lote, uma confirmação: N alvos, desfecho por alvo | Oito confirmações idênticas ensinam a clicar sem ler | APH-5.9🧪, 5.5, 5.2 | ✅ escrita |
 | J12 | Falta um dado: slot filling estruturado | E a lacuna: não existe evento para pedir | APH-6.4🧪, 6.1, 6.5 | ⏳ |
 | J13 | Reconexão com aprovação pendente | Perder um gate é perda de governança | APH-5.6🧪, 5.7🧪, 1.3 | ⏳ |
 
@@ -95,6 +95,9 @@ Registradas aqui à medida que aparecem, com o documento que as levantou. Cada u
 | 12 | A permissão usada na confirmação é a **congelada** no momento de propor: revogar acesso entre propor e confirmar não fecha o gate, e a norma não diz que deveria | J09 (APH-7.2) | a registrar |
 | 13 | A recusa por contexto obsoleto **não é auditável**: sem estado dedicado e sem evento, é indistinguível da recusa humana — e o APH-5.5 exige traço também para a recusa | J10 (APH-5.4, 5.5) | a registrar |
 | 14 | A norma não diz se os parâmetros da ação entram no `context_hash`. Duas implementações conformes produzem hashes incomparáveis | J10 (§A.4, APH-3.4) | a registrar |
+| 15 | O schema da ação de catálogo é **fechado** e rejeita um campo de atomicidade de lote: quem obedecer ao APH-5.9(a) reprova no gate da própria norma | J11 (§A.5, APH-5.9) | a registrar |
+| 16 | A confirmação é fechada em três campos: a decisão de um lote de oito é **idêntica** à de um alvo único, e o servidor não pode verificar que o confirmado é o que foi mostrado | J11 (§A.6, APH-5.9) | a registrar |
+| 17 | A norma não diz qual estado terminal vai num lote parcialmente executado, e o gate não cruza estado com desfechos. O consumidor da versão anterior do fio vê só o estado, e recebe a mentira que o campo novo admite existir | J11 (§A.3, APH-5.9) | a registrar |
 
 ### Derivas do Anexo A encontradas pelo caminho
 
@@ -106,3 +109,5 @@ Não são lacunas: são pontos em que o texto do anexo **descreve errado** o que
 | D2 | O §A.7 diz que o laboratório A emite o código de negação por política literalmente; ele o emite para falha de **autenticação** | J09 |
 | D3 | O §A.6 diz que o contrato de confirmação do laboratório B exige o `context_hash`; ele exige a chave de idempotência, e não compara hash nenhum | J09, J10 |
 | D4 | O §A.4 fixa o hash truncado em 16 caracteres; um laboratório trunca em 32, o que refuta o "uma definição só" do APH-3.4 | J10 |
+| D5 | O §A.0 enumera os elementos 🧪 do fio e **omite `outcomes`**, que é justamente o 🧪 que a versão do anexo introduziu | J11 |
+| D6 | O §A.9 diz que o anexo está na v0.3, enquanto o título e a nota de mudança dizem v0.4 | J11 |
