@@ -4,8 +4,8 @@
 
 **Capítulos**: [05 — Ações governadas](../capitulos/05-acoes-governadas.md) · [07 — Segurança](../capitulos/07-seguranca.md)
 **Norma**: APH-5.1, 5.2, 5.3🧪, 5.5, 5.8🧪 · 7.2, 7.4 · [Anexo A §A.2, §A.3, §A.6, §A.7](https://github.com/GHDaru/protocolos/blob/main/padrao/anexo-a-wire-format.md)
-**Laboratórios**: `ghdaru` caminho completo, com seis guardas em ordem · `nexxussai-monorepo` máquina de estados própria, com dois terminais que o outro não tem, e **porta de autorização em stub**
-**Maturidade do fio**: ✅ no fio, no gate e no traço; 🧪 na deduplicação por chave (APH-5.3) e no valor server-authoritative como requisito **geral** (APH-5.8), que está verificado para uma classe de ação só
+**Laboratórios**: `ghdaru` tem **dois caminhos mutadores distintos**, e só um deles tem as seis guardas · `nexxussai-monorepo` tem a máquina de estados mais rica e durável dos dois, e **nada que crie proposta em produção**
+**Maturidade do fio**: ✅ no fio, no gate e no traço da execução; 🧪 na deduplicação por chave (APH-5.3) e no valor server-authoritative como requisito **geral** (APH-5.8). O traço da **recusa** é parcial, e é um achado desta jornada
 **Pressupõe**: [J07](j07-catalogo.md), [J08](j08-acao-de-leitura.md) · **Decisões de forma**: [ADR 0009](../../adr/0009-ui-command-e-perna-de-efeito.md), [ADR 0010](../../adr/0010-diagrama-de-estados-so-com-lastro.md) · **Índice**: [jornadas](README.md)
 
 ## Em uma frase
@@ -48,12 +48,12 @@ sequenceDiagram
     M-->>S: intenção: projeto.arquivar
     S->>S: risk no catálogo: confirm
     S->>S: proposta: proposed → awaiting_approval
-    S-->>C: action_proposal { requires_confirmation: true, context_hash }
+    S-->>C: action_proposal { requires_confirmation: true, 🧪context_hash }
     S-->>C: done
     Note over C,S: o fluxo acaba sem executar nada
     C->>U: cartão da proposta
     U->>C: confirma
-    C->>S: POST .../proposals/{proposal_id}<br/>{ approved: true, context_hash }
+    C->>S: POST .../proposals/{proposal_id}<br/>{ approved: true, 🧪context_hash }
     S->>S: seis guardas, em ordem
     S->>S: confirmed → executing
     S->>S: executa e escreve o traço
@@ -67,16 +67,18 @@ sequenceDiagram
 |---|---|---|---|
 | 1–2 | Usuário → Cliente → Servidor | pedido | texto, mais o snapshot da tela |
 | 3–4 | Servidor → Modelo | geração | prompt em camadas, catálogo projetado |
-| 5–6 | Servidor → si | classificação e transição | classe de risco `confirm`; `proposed → awaiting_approval` |
+| 5–6 | Servidor → si | classificação e transição | classe de risco `confirm`; `proposed → awaiting_approval`. **No caminho do motor, o `risk` do fio é literal**: a proporcionalidade real está na permissão declarada na composição do catálogo, não no campo emitido |
 | 7 | Servidor → Cliente | proposta | `{proposal_id, action_id, risk, requires_confirmation: true}`, mais `args`, `title`, `rationale` e 🧪`context_hash` |
 | 8 | Servidor → Cliente | terminador | o fluxo acaba **sem** `action_result` |
 | 9–10 | Cliente → Usuário → Cliente | decisão | o cartão, e o clique |
-| 11 | Cliente → Servidor | confirmação | `{approved}`, mais 🧪`idempotency_key` e 🧪`context_hash` |
+| 11 | Cliente → Servidor | confirmação | `{approved}`, mais 🧪`idempotency_key` e 🧪`context_hash`. **O hash não é emitido por laboratório nenhum**: no laboratório A a confirmação carrega o snapshot inteiro, e o servidor recalcula. É a [J10](README.md) |
 | 12–14 | Servidor → si | guardas, transição e execução | seis verificações em ordem; `confirmed → executing` |
 | 15 | Servidor → Cliente | resultado | `{proposal_id, status: "executed"}` e o traço |
 | 16–18 | Servidor → Modelo → Cliente | reinjeção | o resultado volta ao modelo, e a conversa continua |
 
 Repare no passo 8, que é o que separa esta jornada da anterior: **o fluxo termina sem executar**. A proposta fica viva no servidor, aguardando, e a decisão chega por uma requisição própria, em outro momento, possivelmente em outra conexão. É por isso que a reconexão com aprovação pendente é um problema de verdade, e tem jornada própria ([J13](README.md)).
+
+Uma ressalva de leitura antes de seguir. O laboratório A tem **dois caminhos mutadores**, e o diagrama acima é o segundo. No primeiro, a intenção nasce de um roteamento determinístico por palavra-chave ([J04](j04-porta-do-modelo.md)), a classe de risco vem do catálogo, e o efeito sai como comando de interface depois do gate. No segundo, o modelo chama uma ferramenta, o motor para no fim do turno, e é ele que tem as seis guardas, os valores reconstruídos no servidor e o cache de resultado. Os dois compartilham o endereço de decisão e divergem em quase todo o resto — inclusive no código de erro devolvido ao confirmar duas vezes. A divergência está registrada nas lacunas.
 
 ### 1. O gate é um estado, e é por isso que ele é observável
 
@@ -152,7 +154,9 @@ A confirmação chega ao endereço da proposta, e o servidor não a executa: apl
 
 A guarda 2 vem antes da 3 de propósito: uma proposta já executada e cuja janela de prazo passou depois deve devolver o resultado, não um erro de expiração. Invertidas, uma retentativa legítima de rede viraria falha. A guarda 4 vem antes da 5 porque recusar uma proposta cuja tela mudou continua sendo uma recusa válida — não faz sentido responder "o contexto mudou" a quem disse não.
 
-E há uma assimetria de canal que vale registrar, porque confunde quem implementa o cliente: **as guardas 1, 3 e 5 respondem por código HTTP, e não por evento no fio**. Só a recusa humana e o desfecho da execução viram `action_result`. Um cliente que só escute o fluxo não vê a expiração acontecer.
+E há uma assimetria de canal que vale registrar, porque é mais grave do que parece: **as guardas 1, 3 e 5 respondem por código HTTP, e não por evento no fio**. Só a recusa humana e a recusa por valores irreconstruíveis viram `action_result`. As outras três levantam o erro sem escrever nada no log de eventos.
+
+A consequência não é de experiência: é de conformidade. O APH-5.5 exige que as ações recusadas por política deixem traço **visível na conversa e auditável no servidor**. Duas das cinco recusas cumprem as duas coisas; três deixam traço só na tela — e o evento que o usuário vê ali é **fabricado no cliente**, com número de sequência zero, a partir do código HTTP. Ele não existe no log, não sai no replay, e some quando a aba fecha. Está registrado nas lacunas, e é o achado mais desconfortável desta jornada.
 
 ### 3. Os valores gravados vêm do servidor, e a falha é fechada
 
@@ -164,7 +168,7 @@ O laboratório A faz isso para submissão, e o detalhe que importa está no que 
 
 Fechar a falha aqui é barato e esquecê-lo é caro, porque o modo fail-open **funciona**. Ele passa em todos os testes de caminho feliz e só aparece no dia em que alguém consegue mudar o que o modelo propõe.
 
-O requisito segue 🧪 por honestidade de escopo: está verificado para uma classe de ação, não para todas.
+O requisito segue 🧪 por honestidade de escopo, e o escopo é mais estreito do que a frase sugere: a trava protege **uma** ferramenta, a de submissão, e ela está atrás de um sinalizador desligado por padrão. Todas as outras ações mutadoras do mesmo laboratório executam com os argumentos que o modelo produziu. O comportamento padrão do executor, sem a trava, é usar os argumentos do modelo — ou seja, o desenho de base é fail-open, e a trava é a exceção.
 
 ### 4. Confirmar duas vezes: o que a máquina protege, e o que ela não
 
@@ -184,7 +188,15 @@ E o traço é uma camada de **segurança**, não de conformidade regulatória. A
 
 Um detalhe do laboratório A que vale roubar: o traço passa por limpeza de segredos antes de ser persistido e reinjetado. A lista de campos visíveis à inteligência artificial já barra segredo na submissão; a limpeza é a segunda camada, para qualquer saída de ação governada.
 
-Por fim, a autorização. Nada nesta jornada é decidido pelo modelo: a classe de risco vem do catálogo, a permissão vem de política pura verificada nos casos de uso, e a confirmação vem de uma pessoa. O contraexemplo está documentado e é honesto: no laboratório B, a porta de permissão existe, os casos de uso a consultam, e a implementação registrada devolve verdadeiro incondicionalmente. Isso não invalida a camada — confirma a categoria. A diferença entre esse stub e a ausência de desenho é a diferença entre faltar apertar um parafuso e não haver onde apertá-lo.
+Por fim, a autorização. Nada nesta jornada é decidido pelo modelo: a classe de risco vem do catálogo, a permissão vem de política pura verificada **nos casos de uso**, e a confirmação vem de uma pessoa. Auditar isso pela camada de rota devolve resposta errada — na rota há autenticação, posse da sessão e composição do catálogo, e nenhuma das três é verificação de permissão. É o falso positivo que a [J07](j07-catalogo.md) já avisou.
+
+Duas ressalvas que a leitura do código impôs, e que valem mais que o elogio.
+
+A primeira: **a permissão usada na confirmação é a de quando a proposta foi criada, não a de agora**. O conjunto de ferramentas habilitadas é congelado no momento de propor e lido de volta na confirmação. Revogar um módulo, um papel ou uma permissão entre a proposta e a decisão **não fecha o gate**: a ação executa com o conjunto antigo, e a janela é o prazo de validade da proposta. Não é bug de implementação — é uma pergunta que a norma não responde, e está nas lacunas.
+
+A segunda: a recusa por permissão, quando acontece, **não vira o código de erro que a norma diz que ela vira**. Ela é capturada dentro do executor, volta como texto, e o servidor a classifica como falha por uma heurística sobre o prefixo da mensagem. O código canônico de negação existe no laboratório e é emitido só para falha de autenticação. É deriva do Anexo A, e está registrada abaixo.
+
+Sobre o contraexemplo do outro laboratório, a leitura precisa ser mais dura do que a do capítulo. A porta de permissão existe e a implementação registrada devolve verdadeiro incondicionalmente — mas ela **nunca é instanciada nem chamada**. A única autorização efetiva no caminho de confirmação de lá é o filtro do repositório por usuário e cliente, que é posse e inquilino, não permissão. A categoria continua confirmada: o ponto de decisão está reservado, e trocá-lo por uma política real é edição local. O que não se pode dizer é que os casos de uso o consultam.
 
 ## Quando o fio quebra
 
@@ -218,8 +230,15 @@ Da suíte de conformidade, **nada disto é verificado de fora**: não existe per
 | O prazo de validade da proposta não é dito pela norma: nem o valor, nem quem dispara a expiração, nem por qual mensagem. No laboratório A ele é **descoberto na tentativa de confirmar**, e ninguém é avisado antes | APH-5.1, §A.7 | aberta | quando alguém precisar mostrar "expirada" na tela sem tentar confirmar |
 | A deduplicação real por chave de idempotência não existe em laboratório nenhum. O que existe é a proteção da máquina de estados, que é outra coisa | APH-5.3 | aberta | primeira implementação |
 | O valor server-authoritative está verificado para uma classe de ação, não para todas | APH-5.8 | aberta | segunda classe verificada |
-| A porta de autorização do laboratório B devolve verdadeiro incondicionalmente | APH-7.2 | **conhecida e declarada** pelo próprio laboratório | trocar o stub pela política real |
-| Guardas que respondem por código HTTP não aparecem no fio: um cliente que só escute o fluxo não vê expiração nem contexto desatualizado acontecerem | §A.3, §A.7 | aberta | quando alguém medir o caso em produção |
+| A porta de autorização do laboratório B devolve verdadeiro incondicionalmente — e **nunca é chamada** | APH-7.2 | **conhecida e declarada** pelo próprio laboratório | trocar o stub pela política real, e ligá-la ao caminho |
+| Três das cinco recusas não escrevem evento nenhum no log: respondem por código HTTP, e o que o usuário vê é um evento **fabricado no cliente**, com sequência zero. O APH-5.5 pede traço visível **e** auditável, e aqui só o visível existe | APH-5.5, §A.3 | **aberta**, candidata a spec na norma | dizer na norma por qual mensagem a recusa por guarda atravessa o fio |
+| A permissão usada na confirmação é a **congelada** no momento de propor. Revogar acesso entre propor e confirmar não fecha o gate, e a norma não diz que deveria | APH-7.2, APH-5.1 | **aberta**, candidata a spec na norma | decidir se a autoridade é a do momento da proposta ou a da decisão |
+| Os dois caminhos mutadores do mesmo laboratório devolvem códigos diferentes para a mesma situação: confirmar duas vezes dá `INVALID_TRANSITION` num e "não encontrado" no outro, e só um tem cache de resultado | APH-5.1, §A.7 | conhecida | unificar os caminhos, ou declarar a divergência |
+| *Deriva do Anexo A*: o §A.7 diz que o código de negação é "ação negada pela política" e que o laboratório A o emite literalmente. Ele o emite literalmente, mas **para falha de autenticação**; negação de permissão em ação governada vira falha por heurística de texto | §A.7 | **deriva**, reportada à norma | correção no repositório do padrão |
+| *Deriva do Anexo A*: o §A.6 diz que o contrato do laboratório B exige o hash de contexto na confirmação. O que ele exige é a **chave de idempotência**; o hash não está no corpo e nada o compara lá | §A.6 | **deriva**, reportada à norma | correção no repositório do padrão |
+| *Deriva do Anexo A*: o §A.4 fixa o hash canônico truncado a 16 caracteres; o laboratório A trunca a 32 | §A.4, APH-3.4 | **deriva**, a confirmar na J10 | correção, ou registro no mapeamento do §A.8 |
+| No laboratório B **nada cria proposta em produção**: o evento de proposta existe no vocabulário e nunca é emitido, a política de risco não é injetada em caso de uso nenhum, e a confirmação não executa. O desfecho só chegaria por uma rota que o cliente preencheria | APH-5.1, APH-5.5 | conhecida | a primeira proposta emitida de verdade |
+| O resultado de ação do laboratório A é um objeto fechado de três campos: o identificador da ação só existe **dentro do texto** do traço, não como campo consultável | §A.3 | aberta | quando alguém precisar consultar traço por ação |
 
 **O que promoveria o APH-5.3 e o APH-5.8 a ✅**: uma implementação de deduplicação por chave que devolva a mesma resposta a chamadas repetidas, e uma segunda classe de ação com valores reconstruídos no servidor — em qualquer laboratório, com teste.
 
@@ -252,13 +271,17 @@ Superfície capturada no commit `a02cb12`, que é o que a norma cita.
 
 ### `nexxussai-monorepo`
 
-| Momento | Onde |
-|---|---|
-| Máquina de estados, com `denied` e `expired` | `apps/api/app/ai_chat/domain/entities/action_proposal.py` |
-| Política de risco e confirmação, server-side | `apps/api/app/ai_chat/domain/services/action_proposal_policy_service.py` |
-| Traço como entidade, com escopo por sessão | `apps/api/app/ai_chat/domain/entities/execution_trace.py` |
-| Resultado só encontrado com usuário e cliente conferindo | `apps/api/app/ai_chat/application/use_cases/record_tool_result.py` |
-| Porta de autorização em stub, devolvendo verdadeiro | `apps/api/app/ai_chat/infrastructure/http/lateral_chat_router.py` |
+A leitura de código deste laboratório mudou entre a J08 e esta jornada, e a versão correta é a de baixo: quase tudo existe, e quase nada está no caminho.
+
+| Momento | Onde | Estado real |
+|---|---|---|
+| Máquina de estados, com `denied` e `expired`, e persistência real | `apps/api/app/ai_chat/domain/entities/action_proposal.py` e a migração correspondente | **viva**, e mais rica que a do outro laboratório |
+| Política de risco e confirmação | `apps/api/app/ai_chat/domain/services/action_proposal_policy_service.py` | **código morto**: bem escrita, referenciada só em teste, não injetada em caso de uso nenhum |
+| Evento de proposta no vocabulário | `apps/api/app/ai_chat/domain/value_objects/stream_event.py` | definido e **nunca emitido** |
+| Rota de confirmação | `apps/api/app/ai_chat/infrastructure/http/lateral_chat_router.py` | existe, e **não executa nada**: transiciona e devolve o estado |
+| Desfecho da ação | `apps/api/app/ai_chat/application/use_cases/record_tool_result.py` | só alcançável por uma rota que o **cliente** preencheria, e que nenhum código do cliente chama |
+| Porta de autorização em stub | mesma rota | devolve verdadeiro, e **nunca é instanciada nem chamada** |
+| Chave de idempotência | do contrato ao banco | guardada e **nunca consultada**: repetir a mesma chave levanta erro em vez de devolver a resposta idêntica |
 
 ### Onde isto está na norma
 

@@ -188,7 +188,7 @@ Da suíte de conformidade, nada disto é verificado de fora: **não existe perfi
 | Momento | Onde |
 |---|---|
 | Verbo de interface como campo da proposta | `apps/api/app/ai_chat/domain/value_objects/action_kind.py` |
-| Política de reversibilidade, server-side, por tipo | `apps/api/app/ai_chat/domain/services/action_proposal_policy_service.py` |
+| Política de reversibilidade, por tipo — **escrita, e fora do caminho**: só referenciada em teste, não injetada em caso de uso nenhum ([J09](j09-acao-mutadora.md)) | `apps/api/app/ai_chat/domain/services/action_proposal_policy_service.py` |
 | Cartão da proposta, com cor por risco | `apps/web/src/components/chat/lateral/ActionCard.tsx` |
 | Executor | **não existe**: o cartão morto |
 
