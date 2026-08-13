@@ -38,7 +38,7 @@ Três convenções valem em todas:
 | [J09](j09-acao-mutadora.md) | Ação mutadora: proposta, gate humano, execução, traço | O eixo do bloco: a máquina de estados inteira | APH-5.1, 5.2, 5.3🧪, 5.5, 5.8🧪, 7.2, 7.4 | ✅ escrita |
 | [J10](j10-tela-mudou.md) | A tela mudou entre propor e confirmar | Frescor não é autorização | APH-5.4, 3.4🧪, 5.8🧪 | ✅ escrita |
 | [J11](j11-lote.md) | Um lote, uma confirmação: N alvos, desfecho por alvo | Oito confirmações idênticas ensinam a clicar sem ler | APH-5.9🧪, 5.5, 5.2 | ✅ escrita |
-| J12 | Falta um dado: slot filling estruturado | E a lacuna: não existe evento para pedir | APH-6.4🧪, 6.1, 6.5 | ⏳ |
+| [J12](j12-slot-filling.md) | Falta um dado: slot filling estruturado | E a lacuna: não há como pedir, nem como receber de volta | APH-6.4🧪, 6.1, 6.2, 6.5 | ✅ escrita |
 | J13 | Reconexão com aprovação pendente | Perder um gate é perda de governança | APH-5.6🧪, 5.7🧪, 1.3 | ⏳ |
 
 ### Bloco 3 — As recusas
@@ -81,7 +81,8 @@ Registradas aqui à medida que aparecem, com o documento que as levantou. Cada u
 
 | # | Lacuna | Onde apareceu | Estado |
 |---|---|---|---|
-| 1 | Não existe tipo de evento para **pedido estruturado de dados**: o vocabulário fechado tem oito, e o mais próximo é o comando `clarify`. A resposta do usuário ao formulário não tem forma no fio | J12 (APH-6.4) | a registrar |
+| 1 | Não existe tipo de evento para **pedido estruturado de dados**: o vocabulário fechado tem oito, e o mais próximo é o comando `clarify`, que a norma cita uma vez e nunca define | J12 (APH-6.4, 6.1) | a registrar |
+| 1b | **E não existe corpo capaz de carregar a resposta**: a superfície tem dois corpos aplicação→IA, mensagem com texto e confirmação com booleano. Um nono tipo de evento sozinho não resolveria — é a metade mais grave da lacuna 1 | J12 (§A.2, APH-6.4) | a registrar |
 | 2 | Aprovações pendentes não têm campo no schema de snapshot nem endpoint de estado inicial | J13 (APH-5.6) | a registrar |
 | 3 | O prazo de validade de uma proposta não é dito pela norma: nem o valor, nem quem dispara a expiração, nem por qual mensagem. No laboratório A ele é descoberto só na tentativa de confirmar | J09 (APH-5.1) | a registrar |
 | 4 | O estado canônico `stale` não tem implementação; o laboratório encerra como `cancelled` e chama o erro de `STALE_CONTEXT` | J10 (APH-5.4) | conhecido, mapeado no §A.8 |
