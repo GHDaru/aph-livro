@@ -1,6 +1,6 @@
 # Constituição — Protocolo de Comunicação Aplicação ↔ Harness
 
-**Versão 1.1.0** · Ratificada em 2026-07-30 · Última emenda em 2026-08-13 (Princípio VIII, spec 035 de `GHDaru/protocolos`) · Emendas via ADR e SemVer (MAJOR: remoção ou redefinição de princípio · MINOR: princípio novo · PATCH: clarificação)
+**Versão 1.2.0** · Ratificada em 2026-07-30 · Última emenda em 2026-08-13 (Princípio I, quarta classe de evidência, [ADR 0012](../../adr/0012-classes-de-evidencia-fora-dos-laboratorios.md)) · Emenda anterior em 2026-08-13 (Princípio VIII, spec 035 de `GHDaru/protocolos`) · Emendas via ADR e SemVer (MAJOR: remoção ou redefinição de princípio · MINOR: princípio novo · PATCH: clarificação)
 
 Este repositório abriga o livro vivo **"Protocolo de Comunicação Aplicação ↔ Harness"** — *"a aplicação conversando com a IA, e a IA conversando com a aplicação"*. A constituição é a fonte de verdade: em conflito com qualquer pedido pontual, ela prevalece ou o conflito é explicitado ao humano antes de agir.
 
@@ -12,9 +12,18 @@ Nenhuma afirmação entra no corpo do livro sem evidência verificável:
 
 - afirmação sobre implementação exige **caminho de arquivo** em backticks no repositório-fonte (`ghdaru` ou `nexxussai-monorepo`), com o repositório identificado;
 - citação científica exige entrada em `livro/bibliografia.md` com **status ✓ validada** (ID↔título confirmado por fonte independente); não confirmada é marcada ⏳ e não sustenta afirmação do corpo;
-- fonte da indústria exige **URL verificável**, no formato "tradução para decisão" (o vendor recomenda X porque Y — e isso implica Z para o protocolo).
+- fonte da indústria exige **URL verificável**, no formato "tradução para decisão" (o vendor recomenda X porque Y — e isso implica Z para o protocolo);
+- **procedência de desenho** (novo na v1.2.0) exige **caminho de arquivo** numa fonte que não é laboratório — tipicamente a aplicação federada — e serve **apenas** para dizer de onde veio a forma de um requisito. Ela **não promove maturidade**: uma fonte desta classe não move nada de 🧪 para ✅, sozinha nem somada a outra.
 
 READMEs prometem; código e fontes primárias entregam.
+
+Sobre a quarta classe valem três regras de uso, decididas no [ADR 0012](../../adr/0012-classes-de-evidencia-fora-dos-laboratorios.md):
+
+1. **Nunca divide tabela com laboratório.** Ela aparece em seção própria, sob cabeçalho que declara o que a fonte é e o que ela **não** prova.
+2. **Cada linha declara qual obrigação toca.** Sem isso, "duas fontes independentes" é lido como cobertura do requisito inteiro, quando o estado real pode ser uma obrigação com duas fontes e duas com nenhuma.
+3. **Onde a maioria dos momentos não tem path, uma seção "o que não tem lastro nenhum" é obrigatória.** A denúncia por omissão funciona com um ou dois silêncios; com quinze, deixa de funcionar.
+
+Não se cria glifo de maturidade para esta classe: maturidade é sobre **verificação**, e não sobre origem.
 
 ### II. A fonte-base é o código
 
