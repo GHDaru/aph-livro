@@ -40,6 +40,32 @@ Previsões e afirmações sensíveis ao tempo, pontuadas contra a realidade a ca
 
 ## Edições
 
+### Edição 0.16 — 2026-08-13 · Linguagem humana, glossário e a regra de sincronização (spec 035 de `GHDaru/protocolos`)
+
+- **Os três documentos normativos foram reescritos**, por motivo editorial: o texto carregava marcas de escrita de máquina que cobravam caro de quem lê para implementar. Travessões **de prosa** caíram de 174 para **zero** nos três somados (contando também títulos e tabelas, de 245 para 18), cada sigla passou a vir por extenso na primeira ocorrência, e os parágrafos-monólito viraram parágrafos.
+- **A norma não mudou**, e isso é verificado por gate. Um instantâneo dos 89 requisitos, tirado **antes** da primeira edição, registra maturidade e força de cada obrigação; qualquer divergência derruba o CI. O gate pegou duas mudanças normativas silenciosas durante a reescrita: um `DEVE` a mais no APH-1.4 e outro no APH-9.4b, os dois introduzidos ao quebrar frases em duas. As duas endureciam a norma sem revisão.
+- **O que o gate não pegou, a revisão independente pegou, e ela era contra este livro.** A reescrita afirmou que o item LLM06 do OWASP é "vazamento de informação sensível"; ele é *Excessive Agency*, agência excessiva. O texto normativo anterior citava `LLM01/LLM06` sem dizer o que eram, e a reescrita inventou o conteúdo, na base normativa declarada de um requisito ✅. **Seis passagens deste livro já traziam a versão certa**, com a fonte no cap. 07 (PDF do OWASP Top 10 for LLM Applications v2025). A norma foi corrigida. É a demonstração mais clara do porquê do Princípio VIII: os dois lados se conferem, e desta vez foi o livro que segurou a norma.
+- **A especificação ganhou glossário próprio** (`padrao/glossario.md`), com 41 siglas e os termos técnicos. O motivo é o teste de aptidão que o próprio Anexo B fixou: quem clona só a especificação precisa entender o contrato sem sair dela. O glossário **deste livro** continua sendo o didático, e ganhou uma seção sobre os termos que chegaram com a federação.
+- **Emenda à constituição: Princípio VIII, "Dois repositórios, uma norma"** (v1.1.0). Mudança no normativo passa a obrigar a verificação deste livro, com resultado registrado mesmo quando for "nada a mudar". A regra nasceu de uma constatação incômoda: entre as specs 032 e 034 o normativo mudou quatro vezes e o livro não foi tocado nenhuma. Esta edição é a primeira aplicação da regra, e o que ela encontrou está nas três edições abaixo.
+
+### Edição 0.15 — 2026-08-13 · Matriz de obrigação por lado e o hospedeiro sob suíte (spec 034)
+
+- **Anexo B v0.2**: as 49 obrigações da federação (44 cláusulas do anexo e os 5 requisitos do §4.9) passaram a declarar **de que lado caem** — hospedeiro, aplicação ou ambos — em arquivo de dados com gate próprio, e não em tabela de markdown, que envelhece em silêncio.
+- **O lado hospedeiro da junta ganhou suíte executável**: 10 checks de caixa-preta sobre manifesto, fronteiras de embarque, grant e introspecção, com 13 sabotagens. O lado da aplicação continua sem suíte, porque o canal `postMessage` exige navegador, e isso está dito em vez de disfarçado.
+- **Três hospedeiros adversários, construídos pela revisão independente, recebiam APTO violando cláusula dada como verificada.** O mais instrutivo: a suíte lia resposta HTTP fora de 2xx como `null`, e `null` como conformidade. A lição ficou no ADR 0009: sabotar o servidor de referência prova que o check reage; só um adversário independente prova que ele não pode ser contornado.
+
+### Edição 0.14 — 2026-08-12 · Anexo B: o contrato da junta federada (spec 033)
+
+- **Anexo B v0.1**, o fio da federação, fechando cinco lacunas de contrato relatadas pelos dois times que constroem a junta: canal, envelope `ghd.*` e sequência, contrato de admissão, schema do manifesto, grant e introspecção, capability, modo embarcado, confiança assimétrica e rota canônica.
+- **A lacuna não era hipótese.** Ao ler os dois lados para escrever o anexo, os envelopes se mostraram incompatíveis: o hospedeiro exige `{protocol, v, type, payload}` e descarta o resto; a aplicação emite `{tipo, versao}`. Ligados hoje, o `ghd.ready` cairia no descarte e o handshake nunca sairia.
+- **Segundo achado, do mesmo tipo**: a aplicação posta `ghd.ready` com `targetOrigin: "*"` tendo a origem do hospedeiro em mãos por configuração.
+
+### Edição 0.13 — 2026-08-12 · Padrão APH v0.6: a primeira correção de texto normativo publicado (spec 032)
+
+- **O APH-9.2 estava errado, e dois times descobriram implementando.** Ele prescrevia `sandbox` mais verificação de origem nos dois lados, o que é autocontraditório: sem `allow-same-origin` a origem é opaca, `event.origin` chega `"null"` e o `targetOrigin` é forçado a `"*"`. A norma empurrava para a insegurança que ela mesma queria evitar. A v0.6 prescreve a configuração correta e acrescenta a exigência de **site distinto** (eTLD+1), porque origem distinta não impede um subdomínio irmão de ler os cookies do hospedeiro.
+- **APH-9.4 novo, ⚗️, com as metades declaradas**: a credencial própria do embarque é ✅; a interseção com as capabilities do usuário, cobrada por rota, nasce 🧪. A primeira redação dizia que o requisito inteiro era ✅, e a revisão independente mostrou que a maturidade estava **invertida** — o que estava provado ficara 🧪 e o que não estava, ✅. O handoff chegou a dizer ao time do hospedeiro que ele já cumpria o que não tinha implementado.
+- **APH-9.5 novo** (a introspecção autentica o chamador) e APH-7.4 com remissão em vez de obrigação nova.
+
 ### Edição 0.12 — 2026-08-10 · Padrão APH v0.5: nível experimental e obrigação condicional (spec 031)
 
 - **A dívida que a revisão da 029 apontou está fechada** — e ela era real: o §4.9 usava **DEVE** em requisitos **🧪** desde a v0.1, violando a régua do próprio §0. A varredura mostrou que a violação era pontual (2 de 11 requisitos 🧪; os outros nove já usavam DEVERIA).

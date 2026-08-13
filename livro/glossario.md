@@ -16,6 +16,8 @@ Este glossário tem três camadas: os **sete objetos do protocolo** (§1, o voca
 
 Objetos de apoio: **sanitização de contexto** (remoção, no servidor, de segredos e campos sensíveis do snapshot antes de chegar ao modelo), **porta do modelo** (a interface única que esconde qual provedor de IA está por trás), **manifesto de aplicação** (o documento com que uma aplicação de terceiro se apresenta à plataforma) e **harness** (ver §3).
 
+> **Onde este glossário se encaixa.** Ele é o didático: explica em palavras simples, com analogias. A especificação tem o seu, em [`padrao/glossario.md`](https://github.com/GHDaru/protocolos/blob/main/padrao/glossario.md), que define os mesmos termos como a norma os usa. Onde os dois falarem do mesmo termo, **o da norma manda** (Princípio VIII da constituição).
+
 ## 2. Siglas — por extenso e em palavras simples
 
 | Sigla | Por extenso | Em palavras simples |
@@ -34,7 +36,7 @@ Objetos de apoio: **sanitização de contexto** (remoção, no servidor, de segr
 | **DOM** | Document Object Model | a estrutura interna da página web (a "árvore" de elementos que o navegador monta). "Não mexer no DOM" = a IA não enxerga nem clica na página por dentro; ela pede, e a aplicação faz. |
 | **MCP** | Model Context Protocol | protocolo aberto (criado pela Anthropic, hoje padrão de mercado) para conectar modelos de IA a ferramentas e dados externos. Versão vigente: 2026-07-28. |
 | **MRTR** | Multi Round-Trip Requests | mecânica introduzida no MCP 2026-07-28: quando uma operação precisa de mais informação (ex.: falta um dado do usuário), ela **não** fica pendurada — responde "preciso de input" (`input_required`) e o cliente refaz a chamada trazendo as respostas. |
-| **AG-UI** | Agent–User Interaction Protocol | protocolo aberto (comunidade CopilotKit) que padroniza os *eventos* trocados entre um agente de IA e a interface do usuário. |
+| **AG-UI** | Agent-User Interaction Protocol | protocolo aberto (comunidade CopilotKit) que padroniza os *eventos* trocados entre um agente de IA e a interface do usuário. |
 | **ACP** | Agent Client Protocol | protocolo da Zed que padroniza a conversa entre um *editor de código* e um agente de IA. Aparece no livro como espelho da nossa fronteira em outro domínio. |
 | **A2A** | Agent2Agent | protocolo (Google → Linux Foundation) para *agentes conversarem entre si*, entre organizações. Fronteira vizinha, não a deste livro. |
 | **RAG** | Retrieval-Augmented Generation | técnica em que, antes de responder, o sistema busca trechos relevantes numa base de conhecimento e os entrega ao modelo — é o que permite respostas "com fonte" (as citações). |
@@ -95,3 +97,15 @@ Objetos de apoio: **sanitização de contexto** (remoção, no servidor, de segr
 - **Wire format** — "formato de fio": a especificação exata, byte a byte, do que trafega entre as partes — os JSON Schemas das mensagens. Requisitos dizem *o que* o protocolo garante; o wire format diz *como as mensagens são escritas* (Anexo A do Padrão APH).
 - **JSON Schema (validável)** — ver §2; no Anexo A, cada schema é um arquivo que um validador executa: exemplo válido tem de passar, exemplo inválido tem de ser rejeitado — verificado automaticamente a cada publicação (gate de CI).
 - **Spec / spec-driven** — especificação: o documento que diz *o quê* e *por quê* antes do código; spec-driven é o método (Maestro) em que nada nasce sem ela.
+
+## 4. Termos que entraram com a federação (v0.6 e Anexo B)
+
+Estes vieram das specs 032 a 034, quando a federação saiu do papel. A definição normativa está em [`padrao/glossario.md`](https://github.com/GHDaru/protocolos/blob/main/padrao/glossario.md); aqui vai a versão em palavras simples.
+
+| Termo | Em palavras simples |
+|---|---|
+| **eTLD+1**, ou site | o "sobrenome" de um endereço: `exemplo.com.br`. Dois endereços com o mesmo sobrenome dividem cookies, mesmo sendo subdomínios diferentes. Por isso a aplicação federada precisa vir de outro sobrenome, e não só de outro endereço. |
+| **Grant de embarque** | um crachá de visitante: vale pouco tempo, serve uma vez, e não abre porta nenhuma sozinho. É o contrário de emprestar o crachá do funcionário, que é o que o padrão proíbe. |
+| **Origem opaca** | quando o navegador entrega um documento sem identidade: ele se apresenta como `"null"`, e todo mundo sem identidade se apresenta assim. Não dá para saber com quem se está falando. |
+| **Delegado confuso** (*confused deputy*) | o porteiro que tem a chave-mestra e abre a porta porque alguém pediu, sem checar se aquele alguém podia pedir. O risco não é o visitante ficar mais poderoso: é o porteiro usar o próprio poder a mando dele. |
+| **Introspecção** | perguntar ao emissor "este crachá é válido, e de quem é?", em vez de acreditar no que está escrito nele. |
