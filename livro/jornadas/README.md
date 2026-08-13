@@ -36,7 +36,7 @@ Três convenções valem em todas:
 | [J07](j07-catalogo.md) | O que a aplicação sabe fazer: catálogo, risco e tools | A única superfície executável | APH-4.1–4.4🧪, 7.2 | ✅ escrita |
 | [J08](j08-acao-de-leitura.md) | Ação de leitura: a proposta que executa direto | O caminho curto, e por que ele ainda é proposta | APH-5.1, 5.2, 5.5, 6.1–6.3, 6.6⚗️ | ✅ escrita |
 | [J09](j09-acao-mutadora.md) | Ação mutadora: proposta, gate humano, execução, traço | O eixo do bloco: a máquina de estados inteira | APH-5.1, 5.2, 5.3🧪, 5.5, 5.8🧪, 7.2, 7.4 | ✅ escrita |
-| J10 | A tela mudou entre propor e confirmar | Frescor não é autorização | APH-5.4, 3.4🧪 | ⏳ |
+| [J10](j10-tela-mudou.md) | A tela mudou entre propor e confirmar | Frescor não é autorização | APH-5.4, 3.4🧪, 5.8🧪 | ✅ escrita |
 | J11 | Um lote, uma confirmação: N alvos, desfecho por alvo | Oito confirmações idênticas ensinam a clicar sem ler | APH-5.9🧪, 5.5, 5.2 | ⏳ |
 | J12 | Falta um dado: slot filling estruturado | E a lacuna: não existe evento para pedir | APH-6.4🧪, 6.1, 6.5 | ⏳ |
 | J13 | Reconexão com aprovação pendente | Perder um gate é perda de governança | APH-5.6🧪, 5.7🧪, 1.3 | ⏳ |
@@ -91,4 +91,18 @@ Registradas aqui à medida que aparecem, com o documento que as levantou. Cada u
 | 8 | O comando de interface **não tem correlação no fio** com a proposta que o autorizou: o payload exige só o comando, sem identificador de proposta, de ação ou classe de risco. O check fail-closed do APH-6.6 fica sem insumo | J08 (APH-6.6, §A.3) | a registrar |
 | 9 | *Deriva editorial, não lacuna*: o bloco de exemplo do §A.3 imprime dois eventos com o mesmo número de sequência, contra o APH-1.2. O JSON de referência está correto, e por isso nenhum gate pega | J08 (§A.3) | a reportar |
 | 10 | O APH-5.1 manda as transições fora da tabela falharem, e **a norma não publica tabela nenhuma**. As arestas `proposed → executing`, `proposed → denied`, `proposed → expired` e `confirmed → denied` existem em código e em nenhum lugar da norma | J09 (APH-5.1) | a registrar |
-| 11 | Guardas que respondem por código HTTP não aparecem no fio: quem só escuta o fluxo não vê expiração nem contexto desatualizado acontecerem | J09 (§A.3, §A.7) | a registrar |
+| 11 | Guardas que respondem por código HTTP não aparecem no fio: quem só escuta o fluxo não vê expiração nem contexto desatualizado acontecerem. O que o usuário vê é fabricado no cliente, com sequência zero | J09 (§A.3, §A.7) | a registrar |
+| 12 | A permissão usada na confirmação é a **congelada** no momento de propor: revogar acesso entre propor e confirmar não fecha o gate, e a norma não diz que deveria | J09 (APH-7.2) | a registrar |
+| 13 | A recusa por contexto obsoleto **não é auditável**: sem estado dedicado e sem evento, é indistinguível da recusa humana — e o APH-5.5 exige traço também para a recusa | J10 (APH-5.4, 5.5) | a registrar |
+| 14 | A norma não diz se os parâmetros da ação entram no `context_hash`. Duas implementações conformes produzem hashes incomparáveis | J10 (§A.4, APH-3.4) | a registrar |
+
+### Derivas do Anexo A encontradas pelo caminho
+
+Não são lacunas: são pontos em que o texto do anexo **descreve errado** o que os laboratórios fazem. Reportadas ao repositório da norma; este livro não as corrige por conta própria.
+
+| # | Deriva | Onde apareceu |
+|---|---|---|
+| D1 | O bloco de exemplo do §A.3 imprime dois eventos com o mesmo número de sequência, contra o APH-1.2. O JSON de referência está correto | J08 |
+| D2 | O §A.7 diz que o laboratório A emite o código de negação por política literalmente; ele o emite para falha de **autenticação** | J09 |
+| D3 | O §A.6 diz que o contrato de confirmação do laboratório B exige o `context_hash`; ele exige a chave de idempotência, e não compara hash nenhum | J09, J10 |
+| D4 | O §A.4 fixa o hash truncado em 16 caracteres; um laboratório trunca em 32, o que refuta o "uma definição só" do APH-3.4 | J10 |
