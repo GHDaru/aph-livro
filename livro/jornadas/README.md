@@ -35,7 +35,7 @@ Três convenções valem em todas:
 |---|---|---|---|---|
 | [J07](j07-catalogo.md) | O que a aplicação sabe fazer: catálogo, risco e tools | A única superfície executável | APH-4.1–4.4🧪, 7.2 | ✅ escrita |
 | [J08](j08-acao-de-leitura.md) | Ação de leitura: a proposta que executa direto | O caminho curto, e por que ele ainda é proposta | APH-5.1, 5.2, 5.5, 6.1–6.3, 6.6⚗️ | ✅ escrita |
-| J09 | Ação mutadora: proposta, gate humano, execução, traço | O eixo do bloco: a máquina de estados inteira | APH-5.1–5.5, 5.8🧪, 7.2, 7.4 | ⏳ |
+| [J09](j09-acao-mutadora.md) | Ação mutadora: proposta, gate humano, execução, traço | O eixo do bloco: a máquina de estados inteira | APH-5.1, 5.2, 5.3🧪, 5.5, 5.8🧪, 7.2, 7.4 | ✅ escrita |
 | J10 | A tela mudou entre propor e confirmar | Frescor não é autorização | APH-5.4, 3.4🧪 | ⏳ |
 | J11 | Um lote, uma confirmação: N alvos, desfecho por alvo | Oito confirmações idênticas ensinam a clicar sem ler | APH-5.9🧪, 5.5, 5.2 | ⏳ |
 | J12 | Falta um dado: slot filling estruturado | E a lacuna: não existe evento para pedir | APH-6.4🧪, 6.1, 6.5 | ⏳ |
@@ -83,10 +83,12 @@ Registradas aqui à medida que aparecem, com o documento que as levantou. Cada u
 |---|---|---|---|
 | 1 | Não existe tipo de evento para **pedido estruturado de dados**: o vocabulário fechado tem oito, e o mais próximo é o comando `clarify`. A resposta do usuário ao formulário não tem forma no fio | J12 (APH-6.4) | a registrar |
 | 2 | Aprovações pendentes não têm campo no schema de snapshot nem endpoint de estado inicial | J13 (APH-5.6) | a registrar |
-| 3 | O prazo de validade de uma proposta não é dito pela norma: nem o valor, nem quem dispara a expiração, nem por qual mensagem | J09 (APH-5.1) | a registrar |
+| 3 | O prazo de validade de uma proposta não é dito pela norma: nem o valor, nem quem dispara a expiração, nem por qual mensagem. No laboratório A ele é descoberto só na tentativa de confirmar | J09 (APH-5.1) | a registrar |
 | 4 | O estado canônico `stale` não tem implementação; o laboratório encerra como `cancelled` e chama o erro de `STALE_CONTEXT` | J10 (APH-5.4) | conhecido, mapeado no §A.8 |
 | 5 | O mecanismo equivalente ao replay (fonte durável) não tem fio especificado, só a obrigação de registrar a escolha | J02 (APH-1.3) | a registrar |
 | 6 | O regime de versionamento negociado por método é reconhecido pela norma, que não especifica handshake nenhum para ele | J06 (APH-2.2) | a registrar |
 | 7 | Nenhum laboratório publica a lista de prefixos de rota reservados | J16 (B.10.2) | a registrar |
 | 8 | O comando de interface **não tem correlação no fio** com a proposta que o autorizou: o payload exige só o comando, sem identificador de proposta, de ação ou classe de risco. O check fail-closed do APH-6.6 fica sem insumo | J08 (APH-6.6, §A.3) | a registrar |
 | 9 | *Deriva editorial, não lacuna*: o bloco de exemplo do §A.3 imprime dois eventos com o mesmo número de sequência, contra o APH-1.2. O JSON de referência está correto, e por isso nenhum gate pega | J08 (§A.3) | a reportar |
+| 10 | O APH-5.1 manda as transições fora da tabela falharem, e **a norma não publica tabela nenhuma**. As arestas `proposed → executing`, `proposed → denied`, `proposed → expired` e `confirmed → denied` existem em código e em nenhum lugar da norma | J09 (APH-5.1) | a registrar |
+| 11 | Guardas que respondem por código HTTP não aparecem no fio: quem só escuta o fluxo não vê expiração nem contexto desatualizado acontecerem | J09 (§A.3, §A.7) | a registrar |
